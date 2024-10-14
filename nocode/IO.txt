@@ -1,0 +1,5 @@
+IR-Sensor
+6 rs-232
+1 pin carrera
+1 pin read carrera
+reeeeleee

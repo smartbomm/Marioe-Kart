@@ -1,18 +1,9 @@
-class carrera
+class Carrera
 {
 private:
     /* data */
 public:
-    
-(/* args */);
-    ~
-();
+    Carrera();
+    int getId();
 };
 
-::(/* args */)
-{
-}
-
-::~()
-{
-}
