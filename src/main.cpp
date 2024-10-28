@@ -1,47 +1,32 @@
 #include <Arduino.h>
-#include "LED.h"
-#include "CarDetection.h"
 
-
-
-
-// put function declarations here:
-#define LED_BUILTIN 2
-volatile int interruptCounter;
-int totalInterruptCounter;
-hw_timer_t * timer = NULL;
-portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
-
-void IRAM_ATTR onTimer() {
-  portENTER_CRITICAL_ISR(&timerMux);
-  interruptCounter++;
-  portEXIT_CRITICAL_ISR(&timerMux);
- 
+int cnt = 0;
+int myTime;
+void isr() {
+    cnt++;
 }
 
- LED led(2);
-
-
 void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
-  timer = timerBegin(0, 80, true);
-  timerAttachInterrupt(timer, &onTimer, true);
-  timerAlarmWrite(timer, 1000000, true);
-  timerAlarmEnable(timer);
+Serial.begin(9600);
+delay(3000);
+Serial.println("Start:");
+pinMode(13, INPUT);
+pinMode(7, OUTPUT);
+attachInterrupt(13, isr, RISING);
+myTime = micros();
+
 }
 
 void loop() {
-  if (interruptCounter > 0) {
- 
-    portENTER_CRITICAL(&timerMux);
-    interruptCounter--;
-    portEXIT_CRITICAL(&timerMux);
- 
-    totalInterruptCounter++;
+    digitalWrite(7, !digitalRead(7));
+    if(cnt>=15000) {
+        int duration = micros()-myTime;
+        float frequency = 15/duration;
+        Serial.printf("15000 Impulse; Dauer: %5d ms; Frequenz: %5.3f Hz\n", duration, frequency);
+        cnt = 0;
+        myTime = micros();
 
-    led.toggle();
+    }
 
-  }
 
 }
-
