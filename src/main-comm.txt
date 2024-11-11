@@ -1,0 +1,29 @@
+#include <Arduino.h>
+
+#define RXD2 17
+#define TXD2 16
+
+HardwareSerial sps(1);
+
+void setup() {
+    sps.begin(9600, SERIAL_8N1 , RXD2, TXD2);
+    Serial.begin(9600);
+    Serial.println("START");
+    while (sps.available() >0) sps.read();
+
+}
+
+void loop() {
+    bool received = false;
+    if (sps.available()>0) {
+        Serial.print(sps.read());
+        Serial.print(sps.read());
+        Serial.println(); 
+        sps.write(102);
+        sps.write(69);
+
+    }
+    delay(1000);
+    
+
+}
