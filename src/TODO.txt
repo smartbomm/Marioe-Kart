@@ -1,0 +1,1 @@
+2024-11-11: Initialisierung Kom SPS. Wenn falscher Wert im Lifewort kommt, kommt die Logik durcheinander
