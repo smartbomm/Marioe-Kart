@@ -1,27 +1,29 @@
-#include "CommunicationSPS.h"
-#include "esp32s2/rom/uart.h"
-#include <Settings.h>
+#include <CommunicationSPS/CommunicationSPS.h>
 
-byte receivedBuffer[5 * SPS_UART_RxPacketLength]; // Buffer for received Commands with space for 5 Packets
-uint8_t receivedBufferIndex = 0;
-bool newDataReceived;
-uint32_t timeDataReceived;
 
-byte sendBuffer[5 * SPS_UART_TxPacketLength] = {0}; // Buffer for received Commands with space for 5 Packets
-uint8_t sendBufferIndex = 0;
-byte send_lifesignal_mc[2] = C_LIFESIGNAL_MC;
-byte send_ok_mc[2] = C_OK_MC;
+command_function comSPS_commands[SPS_UART_RxCommandMemory]; //Array storing function_pointers for each configured SPS-Command
+bool comSPS_commandsDefined [SPS_UART_RxCommandMemory] = {false};     //Array storing which commands are defined
+uint8_t comSPS_packetSize = SPS_UART_RxPacketLength;          //Size of one SPS-Command-Packet
+byte comSPS_receivedPacket [SPS_UART_RxPacketLength];          //Buffer to save one received packet
 
+//Configuration of Serial Communications with SPS
 //- Configuration of UART Interface
-//- blocking until first valid life Signal comes from SPS
-void initializeCom()
-{
+//- Initialize protocol of communication
+void comSPS_init(){
     SPS_UART.begin(9600, SERIAL_8N1);
+    comSPS_protocol();
+}
+
+//Syncronize Serial Communications between SPS and µC
+//- blocking until first valid life Signal comes from SPS
+void comSPS_sync()
+{
+    byte syncPacket[SPS_UART_RxPacketLength] = C_SPS_SYNC;
     uint8_t packetCounter = 0;              // Check for 5 zeroes in a row for life packet
     while (packetCounter< 5) {       // Blocking until valid Life Signal from SPS is received
         if (SPS_UART.available() > 0)
         {
-            if (SPS_UART.read() == 48)
+            if (SPS_UART.read() == syncPacket[packetCounter])
             {
                 packetCounter++;
             }
@@ -29,28 +31,30 @@ void initializeCom()
                 packetCounter = 0;
         }
     }
-
 #ifdef SERIAL_DEBUGGING
     Serial.println("Connection to SPS established!");
 #endif
 }
 
-inline uint8_t command(byte *packet)
-{
-    return packet[0];
+//Add SPS-Command and linked routine
+void comSPS_add(uint8_t cmd, command_function function){ 
+    comSPS_commands[cmd] = function;
+    comSPS_commandsDefined[cmd] = true;
 }
 
-void answer()
-{
-    if (newDataReceived && micros() - timeDataReceived < SPS_UART_Period / 2)
-    {
-        if (command(&receivedBuffer[receivedBufferIndex]) == 0)
-        {
-            SPS_UART.write(sendBuffer, SPS_UART_TxPacketLength);
-        }
-        else
-        {
-            SPS_UART.write(send_ok_mc, SPS_UART_TxPacketLength);
-        }
+//Periodic function to read Serial Data from SPS and execute linked function
+void comSPS_execute(){
+    if(SPS_UART.available()>=SPS_UART_RxPacketLength){
+        
+        SPS_UART.read(comSPS_receivedPacket, SPS_UART_RxPacketLength);
+        if(comSPS_commandsDefined[comSPS_receivedPacket[0]]){    //Check if received command is defined and valid
+            comSPS_commands[comSPS_receivedPacket [0]](&comSPS_receivedPacket[1]);
+        } 
+        #ifdef SERIAL_DEBUGGING
+            Serial.printf("Paket empfangen: %X %X %X %X %X\n", comSPS_receivedPacket[0], comSPS_receivedPacket[1], comSPS_receivedPacket[2], comSPS_receivedPacket[3], comSPS_receivedPacket[4]);
+        #endif
     }
 }
+
+
+

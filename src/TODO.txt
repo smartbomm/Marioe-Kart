@@ -1,4 +1,5 @@
 2024-11-11: Initialisierung Kom SPS. Wenn falscher Wert im Lifewort kommt, kommt die Logik durcheinander -> OK
+2024-11-12: Kommunikations-Library SPS standalone getestet ->funktioniert. Ist einfach erweiterbat
 
 
 

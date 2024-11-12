@@ -11,7 +11,7 @@
 
 
 //Serielle Kommunikation
-#define SPS_UART_CommandMemory 85       //Number of Commands that can be stored on MC, \n must be the highest command number actually
+#define SPS_UART_RxCommandMemory 85       //Number of Commands that can be stored on MC, \n must be the highest command number actually
 #define SPS_UART_RxPacketLength 5       //Length of Packets to receive form SPS
 #define SPS_UART_TxPacketLength 2       //Length of Packets to send to SPS
 
@@ -23,6 +23,7 @@
 #define C_OK_MC {80,0}
 
 //Pakete SPS
+#define C_SPS_SYNC {0,0,0,0,}         //Packet SPS will send to syncSPS and µC
 #define C_LIFESIGNAL_SPS {48,48,48,48,48}
 
 #endif
