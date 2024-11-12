@@ -1,1 +1,8 @@
-2024-11-11: Initialisierung Kom SPS. Wenn falscher Wert im Lifewort kommt, kommt die Logik durcheinander
+2024-11-11: Initialisierung Kom SPS. Wenn falscher Wert im Lifewort kommt, kommt die Logik durcheinander -> OK
+
+
+
+
+
+Later Optional: 
+- Dynamische Speichergrösse für Anzahl Befehler in Serieller Kommunikation. Momentan ziemliche Speicherverschwendung

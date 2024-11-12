@@ -1,18 +1,29 @@
-#ifndef ComSPS_Protocol
-#define ComSPS_Protocol
-#include <Arduino.h>
+#ifndef ComSPS_Protocol_h
+#define ComSPS_Protocol_h
 
-typedef void (*void_function)(void);
+#include <CommunicationSPS/Command.h>
+#include <Settings.h>
 
-class SPSCommand {
-    public:
-        uint8_t command;
-        void execute();
-};
+Command SPSCommand(SPS_UART_RxPacketLength);
+Command MCCommand (SPS_UART_TxPacketLength);
 
+void initializeProtocol() {
+    SPSCommand.add(0, lifeSignal);
+    SPSCommand.add(1, programCar);
+    SPSCommand.add(5, drive);
 
+}
 
+void lifeSignal(byte * buffer, uint8_t word_size) {
 
+}
 
+void programCar(byte * buffer, uint8_t word_size) {
+    
+}
+
+void drive(byte * buffer, uint8_t word_size) {
+    
+}
 
 #endif

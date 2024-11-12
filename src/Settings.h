@@ -11,8 +11,10 @@
 
 
 //Serielle Kommunikation
-#define SPS_UART_RxPacketLength 5 //Length of Packets to receive form SPS
-#define SPS_UART_TxPacketLength 2 //Length of Packets to send to SPS
+#define SPS_UART_CommandMemory 85       //Number of Commands that can be stored on MC, \n must be the highest command number actually
+#define SPS_UART_RxPacketLength 5       //Length of Packets to receive form SPS
+#define SPS_UART_TxPacketLength 2       //Length of Packets to send to SPS
+
 
 #define SPS_UART_Frequency 10     //Communication Frequency in Hz
 

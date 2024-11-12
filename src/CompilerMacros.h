@@ -10,6 +10,11 @@
 #define SPS_UART Serial1
 #endif
 
+//Strings verketten
+#define STR_HELPER(x) #x 
+#define STR(x) STR_HELPER(x) 
+
+
 
 //Serial Periods
 #define SPS_UART_Period 1000000/SPS_UART_Frequency

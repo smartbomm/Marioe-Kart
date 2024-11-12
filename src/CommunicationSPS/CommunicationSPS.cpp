@@ -35,7 +35,7 @@ void initializeCom()
 #endif
 }
 
-uint8_t command(byte *packet)
+inline uint8_t command(byte *packet)
 {
     return packet[0];
 }

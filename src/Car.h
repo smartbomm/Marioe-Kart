@@ -1,6 +1,8 @@
 #ifndef Car_h
 #define Car_h
 
+//NOT USED YET - führt zu Abstürzen von Esp32
+
 #include <Arduino.h>
 #include <Definitions.h>
 #include <Settings.h>
