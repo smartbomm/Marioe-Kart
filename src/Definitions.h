@@ -4,7 +4,6 @@
 //In dieser Datei sollten alle Definitionen abgespeichert werden
 //An diesen soll nicht mehr herumgepfuscht werden, sonst kann der Code unbrauchbar werden!!
 
-#define LED_BUILTIN 18
 
 //Fahrzeugerkennung mittels IR_Fototransistor
 #define IR_SENSOR_PIN 21
