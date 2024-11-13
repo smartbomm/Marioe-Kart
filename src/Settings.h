@@ -16,14 +16,14 @@
 #define SPS_UART_TxPacketLength 2       //Length of Packets to send to SPS
 
 
-#define SPS_UART_Frequency 10     //Communication Frequency in Hz
+#define SPS_UART_Frequency 10           //Communication Frequency in Hz
 
 //Pakete µC
-#define C_LIFESIGNAL_MC {0,0}
+#define C_LIFESIGNAL_MC {0,1}
 #define C_OK_MC {80,0}
 
 //Pakete SPS
-#define C_SPS_SYNC {0,0,0,0,}         //Packet SPS will send to syncSPS and µC
+#define C_SPS_SYNC {0,0x79,0x9a,0x62,0x43}         //Packet SPS will send to syncSPS and µC
 #define C_LIFESIGNAL_SPS {48,48,48,48,48}
 
 #endif

@@ -5,6 +5,11 @@
 
 
 void setup() {
+    #ifdef SERIAL_DEBUGGING
+    Serial.begin(9600);
+    #endif
+    delay(2000);
+    Serial.println("Test");
     comSPS_init();
     comSPS_sync();
 }
@@ -12,11 +17,11 @@ void setup() {
 void loop() {
     comSPS_execute();
 }
+
 void lifesignal(byte * buffer){
-    comSPS_send2(0,0);
+    comSPS_send2(0,1);
 }
 
 void comSPS_protocol(){
-    comSPS_add(48, lifesignal);
+    comSPS_add(0, lifesignal);
 }
-

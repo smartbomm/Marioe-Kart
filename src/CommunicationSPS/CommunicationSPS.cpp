@@ -6,11 +6,12 @@ bool comSPS_commandsDefined [SPS_UART_RxCommandMemory] = {false};     //Array st
 uint8_t comSPS_packetSize = SPS_UART_RxPacketLength;          //Size of one SPS-Command-Packet
 byte comSPS_receivedPacket [SPS_UART_RxPacketLength];          //Buffer to save one received packet
 
+
 //Configuration of Serial Communications with SPS
 //- Configuration of UART Interface
 //- Initialize protocol of communication
 void comSPS_init(){
-    SPS_UART.begin(9600, SERIAL_8N1);
+    SPS_UART.begin(9600, SERIAL_8N1, SPS_UART_RX, SPS_UART_TX);
     comSPS_protocol();
 }
 
@@ -25,6 +26,7 @@ void comSPS_sync()
         {
             if (SPS_UART.read() == syncPacket[packetCounter])
             {
+                Serial.printf("Ok: %d", packetCounter);
                 packetCounter++;
             }
             else

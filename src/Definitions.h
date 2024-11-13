@@ -10,8 +10,8 @@
 
 
 //Serielle Schnittstelle SPS RS-485
-#define SPS_UART_NUM 0    //Nummer des UART-Ausgangs 0,1,2
-#define SPS_RX 17
-#define SPS_TX 16
+#define SPS_UART_NUM 1    //Nummer des UART-Ausgangs 0,1,2
+#define SPS_UART_RX 17
+#define SPS_UART_TX 16
 
 #endif

@@ -8,6 +8,9 @@
 #elif SPS_UART_NUM == 1
 #define SPS_UART_EVENT serialEvent1
 #define SPS_UART Serial1
+#elif SPS_UART_NUM == 2
+#define SPS_UART_EVENT serialEvent2
+#define SPS_UART Serial2
 #endif
 
 //Strings verketten
