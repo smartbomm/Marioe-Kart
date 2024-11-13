@@ -50,7 +50,7 @@ void comSPS_execute(){
         
         SPS_UART.read(comSPS_receivedPacket, SPS_UART_RxPacketLength);
         if(comSPS_commandsDefined[comSPS_receivedPacket[0]]){    //Check if received command is defined and valid
-            comSPS_commands[comSPS_receivedPacket [0]](&comSPS_receivedPacket[1]);
+            comSPS_commands[comSPS_receivedPacket [0]](comSPS_receivedPacket);
         } 
         #ifdef SERIAL_DEBUGGING
             Serial.printf("Paket empfangen: %X %X %X %X %X\n", comSPS_receivedPacket[0], comSPS_receivedPacket[1], comSPS_receivedPacket[2], comSPS_receivedPacket[3], comSPS_receivedPacket[4]);
