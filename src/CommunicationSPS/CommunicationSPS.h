@@ -1,7 +1,7 @@
 #ifndef CommunicationSPS_h
 #define CommunicationSPS_h
 #include <Arduino.h>
-#include <Settings.h>
+#include <Definitions.h>
 
 typedef void (*command_function)(uint8_t *);            // function (uint8_t* pointer to buffer)
 
