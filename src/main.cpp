@@ -22,12 +22,12 @@ void setup() {
 void loop() {
     comSPS_execute();
     carDect1_execute();
-    if(uint8_t carId = carDect1_getCarId() < 99) ansMc_addAnswer(1, carId);
+    if(uint8_t carId = carDect1_getCarId() < 99) comSPS_addAnswer(1, carId);
 }
 
 //Answer to request from SPS
 void request(byte * buffer){
-    comSPS_answer();
+    comSPS_sendData();
 }
 //Program id to car
 void programCar(byte * buffer){
@@ -47,7 +47,7 @@ void driveCar(byte * buffer){
 
 
 void comSPS_protocol(){
-    comSPS_add(0, request);
-    comSPS_add(1, programCar);
-    comSPS_add(5, driveCar);
+    comSPS_addCommand(0, request);
+    comSPS_addCommand(1, programCar);
+    comSPS_addCommand(5, driveCar);
 }

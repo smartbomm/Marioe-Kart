@@ -39,7 +39,7 @@ void comSPS_sync()
 }
 
 //Add SPS-Command and linked routine
-void comSPS_add(uint8_t cmd, command_function function){ 
+void comSPS_addCommand(uint8_t cmd, command_function function){ 
     comSPS_commands[cmd] = function;
     comSPS_commandsDefined[cmd] = true;
 }

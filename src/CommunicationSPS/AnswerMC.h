@@ -26,7 +26,7 @@ void comSPS_addAnswer(uint8_t cmd, uint8_t data){
 }
 
 //Answer to request from SPS. Sends data if available, else answers with MC-Lifesignal
-void comSPS_answer(){   
+void comSPS_sendData(){   
     SPS_UART.write(C_ClientID);
     if(ansMc_nextRead != ansMc_nextWrite) {     //if available, send data
         SPS_UART.write(&ansMc_dataBuffer[ansMc_nextRead], 2);
