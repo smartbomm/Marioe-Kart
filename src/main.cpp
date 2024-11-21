@@ -2,6 +2,9 @@
 #include <Definitions.h>
 #include <CommunicationSPS/CommunicationSPS.h>
 #include <CommunicationSPS/AnswerMC.h>
+#include <CarDetection.h>
+
+
 
 
 void setup() {
@@ -10,17 +13,21 @@ void setup() {
     #endif
     delay(2000);
     Serial.println("Test");
+    carDect1_init(12);
     comSPS_init();
     comSPS_sync();
+
 }
 
 void loop() {
     comSPS_execute();
+    carDect1_execute();
+    if(uint8_t carId = carDect1_getCarId() < 99) ansMc_addAnswer(1, carId);
 }
 
-//Answer to Lifesignal from SPS
-void lifesignal(byte * buffer){
-    comSPS_send2(C_MC_LIFESIGNAL);
+//Answer to request from SPS
+void request(byte * buffer){
+    comSPS_answer();
 }
 //Program id to car
 void programCar(byte * buffer){
@@ -40,7 +47,7 @@ void driveCar(byte * buffer){
 
 
 void comSPS_protocol(){
-    comSPS_add(0, lifesignal);
+    comSPS_add(0, request);
     comSPS_add(1, programCar);
     comSPS_add(5, driveCar);
 }

@@ -3,27 +3,29 @@
 #include <Arduino.h>
 #include "Definitions.h"
 
-class CarDetectionSensor {
-    private:
-        int pin;
-        bool detectionActive;
-        volatile unsigned int microsDelay;
-        volatile unsigned long lastMicros;
+//Configuration of the CarDetectionUnit
+//- initialize pin and variables
+void carDect1_init (uint8_t pin);   
 
-        int carID = 99;                                         // save current car ID
-        
-        unsigned long previousMicros = 0;                       // last runtime of interrupt call
-        unsigned long currentMicros = 0;                        // current runtime 
-        unsigned long interval = 0;                             // time interval between last and current interrupt call
+//to be executed in program loop, calculates car ids, if cars where detected and writes to buffer
+void carDect1_execute();   
 
-        int pulseCnt;
-        boolean identified = false;                             // indicates that car has already been indentified
-        
-        
-    public:
-        void begin(int controllerPin);
-        void carDetectedISR_i();
-        int getCarID();
-};
+//returns detected cars from buffer, if no new car is available returns 99
+uint8_t carDect1_getCarId();   
+
+//Interrupt-Routine Count to 5 pulses, save the timestamps and then stop the interrupt routine until minimal timegap between two cars has run out
+void IRAM_ATTR carDect1_isr();  
+
+uint8_t carDect1_pin;
+//CarDection LIFO-Buffer
+uint8_t carDect1_detectionBuffer [IR_DECT_BufferSize]= {99};
+uint8_t carDect1_nextRead;
+uint8_t carDect1_nextWrite;
+//-
+volatile uint8_t carDect1_count;
+volatile uint32_t carDect1_firstTime;
+volatile uint32_t carDect1_lastTime;
+
+
 
 #endif 
