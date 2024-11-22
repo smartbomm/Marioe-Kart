@@ -22,7 +22,7 @@ void setup() {
 void loop() {
     comSPS_execute();
     carDect1_execute();
-    if(uint8_t carId = carDect1_getCarId() < 99) comSPS_addAnswer(1, carId);
+    if(uint8_t carId = carDect1_getCarId() < 99) comSPS_writeData(1, carId);
 }
 
 //Answer to request from SPS

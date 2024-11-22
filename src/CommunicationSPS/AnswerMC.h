@@ -18,7 +18,8 @@ void comSPS_send2(uint8_t cmd, uint8_t data){
     byte buffer[2] = {cmd, data};
     SPS_UART.write(buffer, 2);
 }
-void comSPS_addAnswer(uint8_t cmd, uint8_t data){
+//Add Data to SPS-Send-Data-Buffer
+void comSPS_writeData(uint8_t cmd, uint8_t data){
     ansMc_dataBuffer[ansMc_nextWrite] = cmd;
     ansMc_dataBuffer[ansMc_nextWrite + 1] = data;
     if(ansMc_nextWrite < C_MC_DataBufferSize-2) ansMc_nextWrite+=2; //Move pointer to next value in FIFO-Buffer
