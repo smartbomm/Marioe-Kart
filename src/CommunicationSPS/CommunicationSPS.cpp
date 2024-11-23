@@ -33,9 +33,7 @@ void comSPS_sync()
                 packetCounter = 0;
         }
     }
-#ifdef SERIAL_DEBUGGING
-    Serial.println("Connection to SPS established!");
-#endif
+    DEBUG(Connection to SPS established!);
 }
 
 //Add SPS-Command and linked routine
