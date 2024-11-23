@@ -4,8 +4,6 @@ void carDect1_init (uint8_t pin) {  //initialize pin and variables
     carDect1_pin = pin;
     carDect1_firstTime = 0;
     carDect1_lastTime = 0;
-    carDect1_nextRead = 0;
-    carDect1_nextWrite = 0;
     carDect1_count = 0;
 }
 
@@ -14,7 +12,7 @@ uint8_t carDect1_execute(){    //to be executed in program loop, calculates car 
     if(carDect1_count==5){
         uint32_t interval = carDect1_lastTime - carDect1_firstTime;
         car_id =  (int)(interval + 5*IR_DECT_Period_Tolerance)/320;        //calculate Car-ID under consideration of the setted tolerance
-    
+        carDect1_count = 0;
     } else car_id = 99;
     if(micros()-carDect1_firstTime>=IR_DECT_CarTimeGap) attachInterrupt(digitalPinToInterrupt(carDect1_pin), carDect1_isr, FALLING);
     return car_id;
