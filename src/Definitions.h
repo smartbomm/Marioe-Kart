@@ -17,9 +17,12 @@
 
 
 //Serielle Schnittstelle SPS RS-485
-#define SPS_UART_NUM 1    //Nummer des UART-Ausgangs 0,1,2
+#define SPS_UART_NUM 0    //Nummer des UART-Ausgangs 0,1,2
 #define SPS_UART_RX 17
 #define SPS_UART_TX 16
+
+#define SPS_UART_RxPacketLength 5       //Length of Packets to receive form SPS
+#define SPS_UART_TxPacketLength 2       //Length of Packets to send to SPS
 
 
   //#################//
@@ -45,8 +48,10 @@
 //-Alles was nur im Debug-Fall ausgegeben werden soll, kann mit DEBUG(...) definiert werden
 #ifdef SERIAL_DEBUGGING
 #define DEBUG(...) Serial.println(STR(__VA_ARGS__) ); 
+#define DEBUGF(...) Serial.printf(__VA_ARGS__); 
 #else 
 #define DEBUG(...) 
+#define DEBUGF(...) 
 #endif
 
 

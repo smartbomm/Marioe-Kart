@@ -11,7 +11,11 @@ byte comSPS_receivedPacket [SPS_UART_RxPacketLength];          //Buffer to save 
 //- Configuration of UART Interface
 //- Initialize protocol of communication
 void comSPS_init(){
+    #if (SPS_UART_NUM == 0)
+    SPS_UART.begin(9600);
+    #else
     SPS_UART.begin(9600, SERIAL_8N1, SPS_UART_RX, SPS_UART_TX);
+    #endif
     comSPS_protocol();
 }
 

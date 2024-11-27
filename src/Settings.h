@@ -9,9 +9,6 @@
 
 //Serielle Kommunikation
 #define SPS_UART_RxCommandMemory 85       //Number of Commands that can be stored on MC, must be the highest command number actually
-#define SPS_UART_RxPacketLength 5       //Length of Packets to receive form SPS
-#define SPS_UART_TxPacketLength 2       //Length of Packets to send to SPS
-
 
 #define SPS_UART_Frequency 10           //Communication Frequency in Hz
 
@@ -40,12 +37,13 @@
  //  Fahrzeugerkennung  //
 //#####################//
 
-#define IR_DECT_Period_Tolerance 16         //Erlaubte zeitliche Abweichung in µs von der Soll-Periodendauer - Maximum: 32µs
+#define IR_DECT_Period_Tolerance 10         //Erlaubte zeitliche Abweichung in µs von der Soll-Periodendauer - Maximum: 32µs
 #define IR_DECT_Period_min 64               //Minimale Zeitdauer zwischen zwei Pulsen
 
 #define IR_DECT_CarTimeGap 32000            //Minimale Zeitdauer zwischen zwei durchfahrenden Autos in µs
 
 #define IR_DECT_BufferSize 5                //Anzahl der erkannnten Autos, die auf dem Mikrocontroller zwischengespeichert werden sollen
+#define IR_DECT_Counts 1
 
 //ZUM Löschen
 #define IR_DECT_Period_R1 64                //Soll- Periodendauer der IR-Frequenz für Fahrzeug ID 1

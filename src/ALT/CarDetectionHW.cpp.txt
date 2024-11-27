@@ -1,0 +1,69 @@
+#include <ALT/CarDetectionHW.h>
+
+
+uint8_t carDect1_pin;
+
+//-
+volatile uint8_t carDect1_count;
+volatile uint32_t carDect1_firstTime;
+volatile uint32_t carDect1_lastTime;
+
+
+pcnt_evt_t carDect1_intrEvt;
+
+pcnt_config_t carDect1_countConfig;
+
+void carDect1_init (uint8_t pin) {  //initialize pin and variables
+    carDect1_countConfig = {
+    .pulse_gpio_num = pin,    // set gpio for pulse input gpio
+        .ctrl_gpio_num = -1,            // no gpio for control
+        .lctrl_mode = PCNT_MODE_KEEP,   // when control signal is low, keep the primary counter mode
+        .hctrl_mode = PCNT_MODE_KEEP,   // when control signal is high, keep the primary counter mode
+        .pos_mode = PCNT_COUNT_INC,     // increment the counter on positive edge
+        .neg_mode = PCNT_COUNT_DIS,     // do nothing on falling edge
+        .counter_h_lim = 0,
+        .counter_l_lim = 10,
+        .unit = PCNT_UNIT_1,               /*!< PCNT unit number */
+        .channel = PCNT_CHANNEL_0
+    };
+    pcnt_unit_config(&carDect1_countConfig);
+    pcnt_set_event_value(PCNT_UNIT_1,PCNT_EVT_THRES_0, 2);
+    pcnt_event_enable(PCNT_UNIT_1, PCNT_EVT_THRES_0);
+    pcnt_set_event_value(PCNT_UNIT_1, PCNT_EVT_THRES_1, 7);
+    pcnt_event_enable(PCNT_UNIT_1, PCNT_EVT_THRES_1);
+
+    pcnt_counter_pause(PCNT_UNIT_1);
+    pcnt_counter_clear(PCNT_UNIT_1);
+
+    pcnt_isr_service_install(0);
+    pcnt_isr_handler_add(PCNT_UNIT_1, carDect1_isr, NULL);
+
+    pcnt_counter_resume(PCNT_UNIT_1);
+    carDect1_pin = pin;
+    carDect1_firstTime = 0;
+    carDect1_lastTime = 0;
+    carDect1_count = 0;
+}
+
+uint8_t carDect1_execute(){    //to be executed in program loop, calculates car ids, if cars where detected and writes to buffer
+    uint8_t car_id;
+    if(carDect1_count==5){
+        uint32_t interval = carDect1_lastTime - carDect1_firstTime;
+        car_id =  (int)(interval + 5*IR_DECT_Period_Tolerance)/320;        //calculate Car-ID under consideration of the setted tolerance
+        carDect1_count = 0;
+    } else car_id = 99;
+    if(micros()-carDect1_firstTime>=IR_DECT_CarTimeGap) attachInterrupt(digitalPinToInterrupt(carDect1_pin), carDect1_isr, FALLING);
+    return car_id;
+}
+
+void IRAM_ATTR carDect1_isr(void * argi){                  //Count to 5 pulses, save the timestamps and then stop the interrupt routine until minimal timegap between two cars has run out
+    int16_t counterValue;
+    pcnt_get_event_status(PCNT_UNIT_1, &carDect1_intrEvt.status);
+    pcnt_get_counter_value(PCNT_UNIT_1, &carDect1_intrEvt.value);
+    carDect1_intrEvt.state = true;
+
+}
+
+pcnt_evt_t * carDect1_get(){
+    return &carDect1_intrEvt;
+}

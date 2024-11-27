@@ -28,7 +28,7 @@ void comSPS_writeData(uint8_t cmd, uint8_t data){
 
 //Answer to request from SPS. Sends data if available, else answers with MC-Lifesignal
 void comSPS_sendData(){   
-    SPS_UART.write(C_ClientID);
+    //SPS_UART.write(C_ClientID);               Wieder aktivieren wenn die SPS auf Clients reagiert
     if(ansMc_nextRead != ansMc_nextWrite) {     //if available, send data
         SPS_UART.write(&ansMc_dataBuffer[ansMc_nextRead], 2);
         if(ansMc_nextRead < C_MC_DataBufferSize-2) ansMc_nextRead+=2; //Move pointer to next value in FIFO-Buffer

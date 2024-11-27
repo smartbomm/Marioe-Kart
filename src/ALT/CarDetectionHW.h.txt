@@ -1,7 +1,17 @@
-#ifndef CARDETECTION_H
-#define CARDETECTION_H
+#ifndef CARDETECTIONHW_H
+#define CARDETECTIONHW_H
 #include <Arduino.h>
 #include "Definitions.h"
+#include <driver/pcnt.h>
+
+
+typedef struct {
+    int8_t unit;
+    uint32_t status;
+    int16_t value;
+    bool state;
+} pcnt_evt_t;
+
 
 //Configuration of the CarDetectionUnit
 //- initialize pin and variables
@@ -14,6 +24,8 @@ uint8_t carDect1_execute();
 
 //Interrupt-Routine Count to 5 pulses, save the timestamps and then stop the interrupt routine until minimal timegap between two cars has run out
 void IRAM_ATTR carDect1_isr();  
+
+pcnt_evt_t * carDect1_get();
 
 
 
