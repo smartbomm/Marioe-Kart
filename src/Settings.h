@@ -45,14 +45,5 @@
 #define IR_DECT_BufferSize 5                //Anzahl der erkannnten Autos, die auf dem Mikrocontroller zwischengespeichert werden sollen
 #define IR_DECT_Counts 1
 
-//ZUM Löschen
-#define IR_DECT_Period_R1 64                //Soll- Periodendauer der IR-Frequenz für Fahrzeug ID 1
-#define IR_DECT_Period_R2 128               //Soll- Periodendauer der IR-Frequenz für Fahrzeug ID 2
-#define IR_DECT_Period_R3 192               //Soll- Periodendauer der IR-Frequenz für Fahrzeug ID 3
-#define IR_DECT_Period_R4 256               //Soll- Periodendauer der IR-Frequenz für Fahrzeug ID 4
-#define IR_DECT_Period_R5 320               //Soll- Periodendauer der IR-Frequenz für Fahrzeug ID 5
-#define IR_DECT_Period_R6 384               //Soll- Periodendauer der IR-Frequenz für Fahrzeug ID 6
-#define IR_DECT_Period_RG 448               //Soll- Periodendauer der IR-Frequenz für Ghostcar
-#define IR_DECT_Period_RP 512               //Soll- Periodendauer der IR-Frequenz für Pacecar
 
 #endif

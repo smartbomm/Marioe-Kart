@@ -2,6 +2,7 @@
 #define CommunicationSPS_h
 #include <Arduino.h>
 #include <Definitions.h>
+#include "AnswerMC.h"
 
 typedef void (*command_function)(uint8_t *);            // function (uint8_t* pointer to buffer)
 

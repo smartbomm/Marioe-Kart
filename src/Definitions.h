@@ -16,6 +16,7 @@
 #define IR_SENSOR_PIN 21
 
 
+
 //Serielle Schnittstelle SPS RS-485
 #define SPS_UART_NUM 0    //Nummer des UART-Ausgangs 0,1,2
 #define SPS_UART_RX 17
@@ -23,6 +24,8 @@
 
 #define SPS_UART_RxPacketLength 5       //Length of Packets to receive form SPS
 #define SPS_UART_TxPacketLength 2       //Length of Packets to send to SPS
+
+
 
 
   //#################//
