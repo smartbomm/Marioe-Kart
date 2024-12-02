@@ -3,6 +3,14 @@
 
 //In dieser Datei sollen alle veränderbaren Einstellungen abgespeichert werden
 
+  //#####################//
+ //  Fahrzeugsteuerung  //
+//#####################//
+
+//Einfahrgeschwindigkeit
+#define VEL_CarEntry 5
+#define VEL_CarExit 15
+
 //if defined, enable Serial Debugging
 #define SERIAL_DEBUGGING
 
