@@ -3,7 +3,7 @@
 #include <CommunicationSPS/CommunicationSPS.h>
 #include <CarDetection.h>
 #include <CarreraControll.h>
-
+#include <FastLED.h>
 
 
 //carDect1  == CarDetection EntryLane
@@ -12,12 +12,19 @@
 CarreraControll laneControl;
 bool carOnPickingPlace = false;     //Is car standing on
 uint8_t entryLaneQueue = 0;         // waiting car - id for putting in to storage
-uint8_t lastProgrammedCar = 0;      
+uint8_t lastProgrammedCar = 0;   
+uint32_t SPS_lastLifeSignal = 0;   
+
+CRGB led [1];
 
 
 
 
 void setup() {
+    FastLED.addLeds<NEOPIXEL, RGB_LED>(led, 1);
+    FastLED.setBrightness(DEBUG_RGB_BRIGHTNESS);
+    led [0] = CRGB::Red;
+    FastLED.show();
     pinMode(RELAY_EntryLane_p, OUTPUT);  //Relay Entry Lane
     pinMode(RELAY_ExitLane_p, OUTPUT);   //Relay Exit Lane
     laneControl.conf(DRIVER_ProgLane_p);     //Initialize Carrera Lane Protocol
@@ -31,33 +38,62 @@ void setup() {
 
     comSPS_init();      //Initialize Serial Instance for Communication with SPS
     comSPS_sync();      //Sync µC with SPS
+    SPS_lastLifeSignal = millis();
 
-    digitalWrite(RELAY_EntryLane_p, HIGH);
+    led [0] = CRGB::Green;
+    FastLED.show();
+    digitalWrite(RELAY_ExitLane_p, HIGH);
+    laneControl.driveAll(VEL_CarEntry);
 
 }
 
 void loop() {
+    uint32_t timestamp = millis();
+    if(timestamp - SPS_lastLifeSignal > SPS_UART_Timeout*1000) {
+        led [0] = CRGB::Red; FastLED.show();
+        DEBUG(ALARM! SPS not reacheable!);
+        bool syncSuccessfull = false;
+        while(syncSuccessfull == false) {
+            comSPS_sync();
+            syncSuccessfull = true;
+        }
+        SPS_lastLifeSignal = timestamp;
+        led [0] = CRGB::Green; FastLED.show();
+    }
     if(!carOnPickingPlace || entryLaneQueue > 0) {          //Car is waiting on programming lane for entry to storage
         laneControl.drive(entryLaneQueue, VEL_CarEntry);
         entryLaneQueue = false;
     }
     if(uint8_t carId = carDect1_execute() < 99) {           //Car is entering the programming lane
+        DEBUGF("Car in - ID: %d\n", carId);
+        led [0] = CRGB::Blue;
+        FastLED.show();
+        led [0] = CRGB::Green;
+        FastLED.show();
         comSPS_writeData(C_MC_CarIN(carId));
-        if(!carOnPickingPlace) laneControl.drive(carId, VEL_CarEntry);
+        if(!carOnPickingPlace) laneControl.driveAll(VEL_CarEntry);
         else entryLaneQueue = carId;
     }
-    if(uint8_t carId = carDect2_execute() < 99) comSPS_writeData(C_MC_CarOUT(carId));   //report to SPS: Car is exiting
-
+    if(uint8_t carId = carDect2_execute() < 99) {           //report to SPS: Car is exiting
+        DEBUGF("Car out - ID: %d\n", carId);
+        led [0] = CRGB::Blue;
+        FastLED.show();
+        led [0] = CRGB::Green;
+        FastLED.show();
+        comSPS_writeData(C_MC_CarOUT(carId));
+    }
+           
     if(laneControl.program()) {
         comSPS_writeData(C_MC_CarPROGRAMMED(lastProgrammedCar));  //report to SPS: Car was programmed successfull
         digitalWrite(RELAY_EntryLane_p, HIGH);
-    comSPS_execute();   //Execute Commands received from SPS
     }
+    comSPS_execute();   //Execute Commands received from SPS
     
 }
 
 //Answer to request from SPS
 void request(byte * buffer){
+    SPS_lastLifeSignal = millis();
     comSPS_sendDataPacket();
 }
 //Program id to car

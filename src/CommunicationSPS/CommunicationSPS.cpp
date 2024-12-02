@@ -31,13 +31,15 @@ void comSPS_sync()
     while (packetCounter< 5) {       // Blocking until valid Life Signal from SPS is received
         if (SPS_UART.available() > 0)
         {
-            if (SPS_UART.read() == syncPacket[packetCounter])
+            uint8_t received = SPS_UART.read();
+            if (received == syncPacket[packetCounter])
             {
-                Serial.printf("Ok: %d", packetCounter);
+                Serial.printf("Ok: %d, ", packetCounter);
                 packetCounter++;
             }
             else
                 packetCounter = 0;
+                Serial.printf("%d ,", received);
         }
     }
     DEBUG(Connection to SPS established!);

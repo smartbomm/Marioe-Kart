@@ -12,15 +12,18 @@
 
 //##########################################################################################//
 
+
+#define RGB_LED 38
+
 //Fahrzeugerkennung mittels IR_Fototransistor
 #define IR_SENSOR_PIN 21
 
 
 
 //Serielle Schnittstelle SPS RS-485
-#define SPS_UART_NUM 0    //Nummer des UART-Ausgangs 0,1,2
-#define SPS_UART_RX 17
-#define SPS_UART_TX 16
+#define SPS_UART_NUM 1    //Nummer des UART-Ausgangs 0,1,2
+#define SPS_UART_RX 11
+#define SPS_UART_TX 10
 
 #define SPS_UART_RxPacketLength 5       //Length of Packets to receive form SPS
 #define SPS_UART_TxPacketLength 2       //Length of Packets to send to SPS

@@ -35,7 +35,7 @@ uint8_t carDect1_execute(){    //to be executed in program loop, calculates car 
     if(carDect1_carDetected){
         carDect1_carDetected = false;
         uint32_t period = carDect1_lastTime - carDect1_firstTime;
-        DEBUGF("Periode = %d\n", period);
+        //DEBUGF("Periode = %d\n", period);
         car_id =  (int)(period + IR_DECT_Period_Tolerance)/(64);        //calculate Car-ID under consideration of the setted tolerance
         if(car_id>8 || car_id == 0) car_id = 99;
     } else car_id = 99;
@@ -80,7 +80,7 @@ uint8_t carDect2_execute(){    //to be executed in program loop, calculates car 
     if(carDect2_carDetected){
         carDect2_carDetected = false;
         uint32_t period = carDect2_lastTime - carDect2_firstTime;
-        DEBUGF("Periode = %d\n", period);
+        //DEBUGF("Periode = %d\n", period);
         car_id =  (int)(period + IR_DECT_Period_Tolerance)/(64);        //calculate Car-ID under consideration of the setted tolerance
         if(car_id>8 || car_id == 0) car_id = 99;
     } else car_id = 99;

@@ -3,12 +3,14 @@
 
 //In dieser Datei sollen alle veränderbaren Einstellungen abgespeichert werden
 
+#define DEBUG_RGB_BRIGHTNESS 50
+
   //#####################//
  //  Fahrzeugsteuerung  //
 //#####################//
 
 //Einfahrgeschwindigkeit
-#define VEL_CarEntry 5
+#define VEL_CarEntry 10
 #define VEL_CarExit 15
 
 //if defined, enable Serial Debugging
@@ -19,6 +21,7 @@
 #define SPS_UART_RxCommandMemory 85       //Number of Commands that can be stored on MC, must be the highest command number actually
 
 #define SPS_UART_Frequency 10           //Communication Frequency in Hz
+#define SPS_UART_Timeout 10              //Communication Timeout in s
 
 
 //Serielles Datenprotokoll
@@ -33,6 +36,8 @@
 
 //Pakete SPS
 #define C_SPS_SYNC {0,0x79,0x9a,0x62,0x43}         //Life- and Sync-Signal from SPS -> MC
+//#define C_SPS_SYNC {0,0,0,0,0}
+//#define C_SPS_SYNC {48,48,48,48,48}                 //Test 00000 with ASCII
 #define C_SPS_PROGRAM {1, id, vmax, brake, fuel}    //Program-Command from SPS -> MC
     #define C_SPS_PROGRAM_ID 1      //Index of Id to program
     #define C_SPS_PROGRAM_VMAX 2    //Index of vmax-parameter
