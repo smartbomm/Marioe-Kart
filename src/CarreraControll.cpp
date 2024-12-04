@@ -221,22 +221,22 @@ bool CarreraControll::setID(){
 int CarreraControll::IDtoCar(int carID){ //transform the external id into the internal id of the CarreraProtokoll
   int ID = 3;
     switch(carID) {
-  case 1:
+  case 0:
     ID = 3;
     break;
-  case 2:
+  case 1:
     ID = 5;
     break;
-  case 3:
+  case 2:
     ID = 7;
     break;
-  case 4:
+  case 3:
     ID = 9;
     break;
-  case 5:
+  case 4:
     ID = 4;
     break;
-  case 6:
+  case 5:
     ID = 6;
     break;
 }
@@ -262,7 +262,7 @@ void CarreraControll::drive(int CarNr, int Speed){ //change the speed bits and a
   }
 }
 void CarreraControll::driveAll(int speed){
-  for(int i=1; i<=6; i++){
+  for(int i=0; i<=5; i++){
     drive(i,speed);
   }
 }
@@ -288,7 +288,6 @@ bool CarreraControll::program(){
 }
 
 void CarreraControll::changeList(int Nr, int value, int carNr){ //0 ist speed 1 is break 2 is fuel
-  carNr = carNr-1;
   values[Nr] &= ~(0b1111 << 8);
   values[Nr] |= (reverseBits(value,4) << 8);
   values[Nr] &= ~(0b111 << 0);
