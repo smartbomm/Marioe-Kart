@@ -56,7 +56,7 @@ int flashCount = 0;
 int flashCar=0;
 bool cycleAllowed = true;
 bool merk = true;
-bool inverted = false; //to invert the protocoll (if hardware changes)
+bool inverted = true; //to invert the protocoll (if hardware changes)
 
 bool programmed = true;
 int pCount = 0; //which programming word is chosen
@@ -221,22 +221,22 @@ bool CarreraControll::setID(){
 int CarreraControll::IDtoCar(int carID){ //transform the external id into the internal id of the CarreraProtokoll
   int ID = 3;
     switch(carID) {
-  case 0:
+  case 1:
     ID = 3;
     break;
-  case 1:
+  case 2:
     ID = 5;
     break;
-  case 2:
+  case 3:
     ID = 7;
     break;
-  case 3:
+  case 4:
     ID = 9;
     break;
-  case 4:
+  case 5:
     ID = 4;
     break;
-  case 5:
+  case 6:
     ID = 6;
     break;
 }
@@ -262,7 +262,7 @@ void CarreraControll::drive(int CarNr, int Speed){ //change the speed bits and a
   }
 }
 void CarreraControll::driveAll(int speed){
-  for(int i=0; i<=5; i++){
+  for(int i=1; i<=6; i++){
     drive(i,speed);
   }
 }

@@ -10,7 +10,7 @@
 //#####################//
 
 //Einfahrgeschwindigkeit
-#define VEL_CarEntry 10
+#define VEL_CarEntry 5
 #define VEL_CarExit 15
 
 //if defined, enable Serial Debugging
@@ -18,10 +18,11 @@
 
 
 //Serielle Kommunikation
+//#define SPS_Connected
 #define SPS_UART_RxCommandMemory 85       //Number of Commands that can be stored on MC, must be the highest command number actually
 
 #define SPS_UART_Frequency 10           //Communication Frequency in Hz
-#define SPS_UART_Timeout 10              //Communication Timeout in s
+#define SPS_UART_Timeout 5              //Communication Timeout in s
 
 
 //Serielles Datenprotokoll

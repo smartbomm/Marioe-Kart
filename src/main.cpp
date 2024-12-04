@@ -25,29 +25,34 @@ void setup() {
     FastLED.setBrightness(DEBUG_RGB_BRIGHTNESS);
     led [0] = CRGB::Red;
     FastLED.show();
+
+    #ifdef SERIAL_DEBUGGING
+    Serial.begin(9600);
+    delay(2000);
+    #endif
+    
     pinMode(RELAY_EntryLane_p, OUTPUT);  //Relay Entry Lane
     pinMode(RELAY_ExitLane_p, OUTPUT);   //Relay Exit Lane
     laneControl.conf(DRIVER_ProgLane_p);     //Initialize Carrera Lane Protocol
-    #ifdef SERIAL_DEBUGGING
-    Serial.begin(9600);
-    #endif
-    delay(2000);
+    
 
     carDect1_init(12);  //CarDetection Entry
     carDect2_init(13);  //CarDetection Exit
 
+    #ifdef SPS_Connected
     comSPS_init();      //Initialize Serial Instance for Communication with SPS
     comSPS_sync();      //Sync µC with SPS
     SPS_lastLifeSignal = millis();
+    #endif
 
     led [0] = CRGB::Green;
     FastLED.show();
     digitalWrite(RELAY_ExitLane_p, HIGH);
-    laneControl.driveAll(VEL_CarEntry);
 
 }
 
 void loop() {
+    #ifdef SPS_Connected
     uint32_t timestamp = millis();
     if(timestamp - SPS_lastLifeSignal > SPS_UART_Timeout*1000) {
         led [0] = CRGB::Red; FastLED.show();
@@ -60,6 +65,7 @@ void loop() {
         SPS_lastLifeSignal = timestamp;
         led [0] = CRGB::Green; FastLED.show();
     }
+    #endif
     if(!carOnPickingPlace || entryLaneQueue > 0) {          //Car is waiting on programming lane for entry to storage
         laneControl.drive(entryLaneQueue, VEL_CarEntry);
         entryLaneQueue = false;
@@ -71,7 +77,7 @@ void loop() {
         led [0] = CRGB::Green;
         FastLED.show();
         comSPS_writeData(C_MC_CarIN(carId));
-        if(!carOnPickingPlace) laneControl.driveAll(VEL_CarEntry);
+        if(!carOnPickingPlace) laneControl.drive(carId, VEL_CarEntry);
         else entryLaneQueue = carId;
     }
     if(uint8_t carId = carDect2_execute() < 99) {           //report to SPS: Car is exiting
