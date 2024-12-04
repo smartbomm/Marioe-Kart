@@ -255,8 +255,8 @@ void CarreraControll::drive(int CarNr, int Speed){ //change the speed bits and a
   }
   else{
     changeBits(CarID, Speed, 0b1, 0b1111);
-    changeBits(2, 0b1, 7-CarNr ,0b1);
-    changeBits(8, 0b1 , 7-CarNr ,0b1);
+    changeBits(2, 0b1, 6-CarNr ,0b1);
+    changeBits(8, 0b1 , 6-CarNr ,0b1);
     changeBits(2, 0b1 , 0 ,0b1);
     changeBits(8, 0b1, 0 ,0b1);
   }
