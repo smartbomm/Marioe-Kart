@@ -5,6 +5,7 @@
 #include <CarreraControll.h>
 #include <FastLED.h>
 #include <OTA.h>
+#include <DebugLED.h>
 
 
 //carDect1  == CarDetection EntryLane
@@ -32,7 +33,8 @@ void setup() {
     delay(2000);
     #endif
 
-    setupOTA("OTA_Flash", OTA_SSID, OTA_PW);
+
+    setupOTA("CCU", OTA_SSID, OTA_PW);
     
     pinMode(RELAY_EntryLane_p, OUTPUT);  //Relay Entry Lane
     pinMode(RELAY_ExitLane_p, OUTPUT);   //Relay Exit Lane
