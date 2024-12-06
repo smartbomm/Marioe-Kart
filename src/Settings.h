@@ -10,7 +10,7 @@
 //#####################//
 
 //Einfahrgeschwindigkeit
-#define VEL_CarEntry 5
+#define VEL_CarEntry 1
 #define VEL_CarExit 15
 
 //if defined, enable Serial Debugging

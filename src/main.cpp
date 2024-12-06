@@ -47,7 +47,7 @@ void setup() {
 
     led [0] = CRGB::Green;
     FastLED.show();
-    digitalWrite(RELAY_ExitLane_p, HIGH);
+    
 
 
 
@@ -79,8 +79,12 @@ void loop() {
         led [0] = CRGB::Green;
         FastLED.show();
         comSPS_writeData(C_MC_CarIN(carId));
-        if(!carOnPickingPlace) laneControl.driveAll(VEL_CarEntry);
-        else entryLaneQueue = carId;
+        if(!carOnPickingPlace) {
+            digitalWrite(RELAY_EntryLane_p, HIGH);
+            laneControl.drive(carId, VEL_CarEntry);
+        } else i*{
+            entryLaneQueue = carId;
+        }
     }
     if(uint8_t carId = carDect2_execute() < 99) {           //report to SPS: Car is exiting
         DEBUGF("Car out - ID: %d\n", carId);

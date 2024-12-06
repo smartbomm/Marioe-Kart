@@ -34,8 +34,8 @@
  *  TRUE  == Spannungsversorgung von interner Steuerung 
  * 
 */
-#define RELAY_EntryLane_p 41
-#define RELAY_ExitLane_p 42
+#define RELAY_ExitLane_p 41
+#define RELAY_EntryLane_p 42
 
 //Bahnkommunikation
 #define DRIVER_ProgLane_p 40
