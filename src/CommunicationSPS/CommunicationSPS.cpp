@@ -41,6 +41,7 @@ void comSPS_sync()
                 packetCounter = 0;
                 Serial.printf("%d ,", received);
         }
+        vTaskDelay(100);
     }
     DEBUG(Connection to SPS established!);
 }

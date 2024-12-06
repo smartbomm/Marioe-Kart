@@ -17,10 +17,52 @@ uint32_t SPS_lastLifeSignal = 0;
 
 CRGB led [1];
 
-
+void mainProgram(void* paramters);
+void testBlink(void * param);
 
 
 void setup() {
+    xTaskCreate(
+        mainProgram,
+        "Main",
+        30000,
+        NULL,
+        1,
+        NULL
+    );
+    
+    xTaskCreate(
+        testBlink,
+        "Test",
+        2048,
+        NULL,
+        1,
+        NULL
+    );
+    
+}
+
+void loop() {
+
+    
+}
+
+void testBlink(void * param){
+    CRGB originalColor;
+    vTaskDelay(2000);
+    while(1) {
+        originalColor = led [0];
+        led [0] = CRGB::DeepPink;
+        FastLED.show();
+        vTaskDelay(1000);
+        led [0] = originalColor;
+        FastLED.show();
+        vTaskDelay(1000);
+
+    }
+}
+
+void mainProgram(void* parameters){
     FastLED.addLeds<NEOPIXEL, RGB_LED>(led, 1);
     FastLED.setBrightness(DEBUG_RGB_BRIGHTNESS);
     led [0] = CRGB::Red;
@@ -47,12 +89,9 @@ void setup() {
 
     led [0] = CRGB::Green;
     FastLED.show();
-    
-}
 
-void loop() {
-
-    //Debugging
+    while(1){
+        //Debugging
     #ifdef SPS_Connected
     uint32_t timestamp = millis();
     if(timestamp - SPS_lastLifeSignal > SPS_UART_Timeout*1000) {
@@ -100,6 +139,7 @@ void loop() {
     }
     comSPS_execute();   //Execute Commands received from SPS
     
+    }
 }
 
 //Answer to request from SPS
