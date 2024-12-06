@@ -14,7 +14,7 @@
 void ota_handle( void * parameter ) {
   for (;;) {
     ArduinoOTA.handle();
-    delay(3500);
+    vTaskDelay(3500);
   }
 }
 #endif
