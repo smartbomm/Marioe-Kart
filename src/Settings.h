@@ -5,6 +5,9 @@
 
 #define DEBUG_RGB_BRIGHTNESS 50
 
+#define OTA_SSID "WG-Net"
+#define OTA_PW "144+WG_pmtj&1844"
+
   //#####################//
  //  Fahrzeugsteuerung  //
 //#####################//

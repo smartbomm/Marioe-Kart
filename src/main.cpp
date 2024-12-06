@@ -4,6 +4,7 @@
 #include <CarDetection.h>
 #include <CarreraControll.h>
 #include <FastLED.h>
+#include <OTA.h>
 
 
 //carDect1  == CarDetection EntryLane
@@ -30,6 +31,8 @@ void setup() {
     Serial.begin(9600);
     delay(2000);
     #endif
+
+    setupOTA("OTA_Flash", OTA_SSID, OTA_PW);
     
     pinMode(RELAY_EntryLane_p, OUTPUT);  //Relay Entry Lane
     pinMode(RELAY_ExitLane_p, OUTPUT);   //Relay Exit Lane
@@ -58,11 +61,7 @@ void loop() {
     if(timestamp - SPS_lastLifeSignal > SPS_UART_Timeout*1000) {
         led [0] = CRGB::Red; FastLED.show();
         DEBUG(ALARM! SPS not reacheable!);
-        bool syncSuccessfull = false;
-        while(syncSuccessfull == false) {
-            comSPS_sync();
-            syncSuccessfull = true;
-        }
+        comSPS_sync();
         SPS_lastLifeSignal = timestamp;
         led [0] = CRGB::Green; FastLED.show();
     }

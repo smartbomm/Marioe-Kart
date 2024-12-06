@@ -13,6 +13,8 @@
 //##########################################################################################//
 
 
+#define ESP32_RTOS
+
 #define RGB_LED 48
 
 //Fahrzeugerkennung mittels IR_Fototransistor
