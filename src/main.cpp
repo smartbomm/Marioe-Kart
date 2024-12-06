@@ -82,7 +82,7 @@ void loop() {
         if(!carOnPickingPlace) {
             digitalWrite(RELAY_EntryLane_p, HIGH);
             laneControl.drive(carId, VEL_CarEntry);
-        } else i*{
+        } else {
             entryLaneQueue = carId;
         }
     }
