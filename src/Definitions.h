@@ -13,7 +13,7 @@
 //##########################################################################################//
 
 
-#define RGB_LED 38
+#define RGB_LED 48
 
 //Fahrzeugerkennung mittels IR_Fototransistor
 #define IR_SENSOR_PIN 21

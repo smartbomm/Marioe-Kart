@@ -48,12 +48,11 @@ void setup() {
     led [0] = CRGB::Green;
     FastLED.show();
     
-
-
-
 }
 
 void loop() {
+
+    //Debugging
     #ifdef SPS_Connected
     uint32_t timestamp = millis();
     if(timestamp - SPS_lastLifeSignal > SPS_UART_Timeout*1000) {
@@ -113,6 +112,7 @@ void programCar(byte * buffer){
     digitalWrite(RELAY_EntryLane_p, LOW);
     digitalWrite(RELAY_ExitLane_p, HIGH);
     laneControl.program(buffer [C_SPS_PROGRAM_ID], buffer [C_SPS_PROGRAM_VMAX], buffer [C_SPS_PROGRAM_BRAKE], buffer [C_SPS_PROGRAM_FUEL]);
+    DEBUGF("Programming: ID: %d, V: %d, B: %d, F: %d\n", buffer [C_SPS_PROGRAM_ID], buffer [C_SPS_PROGRAM_VMAX], buffer [C_SPS_PROGRAM_BRAKE], buffer [C_SPS_PROGRAM_FUEL]);
     comSPS_send2(C_MC_OK(buffer [C_SPS_PROGRAM_ID]));
     lastProgrammedCar = buffer [C_SPS_PROGRAM_ID];
     
@@ -133,8 +133,6 @@ void lightBarrier(byte * buffer){
         carOnPickingPlace = false;
         laneControl.driveAll(0);
     }
-
-
 }
 
 
