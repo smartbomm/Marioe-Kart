@@ -19,8 +19,8 @@
 //if defined, enable Serial Debugging
 #define SERIAL_DEBUGGING
 
-//if defined, enable Telnet Debugging
-#define TELNET_DEBUGGING
+//if defined, enable Telnet Debugging, only possible if Serial Debugging disabled
+//#define TELNET_DEBUGGING
 
 
 //Serielle Kommunikation

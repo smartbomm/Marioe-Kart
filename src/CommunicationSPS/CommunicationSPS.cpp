@@ -59,9 +59,7 @@ void comSPS_execute(){
         if(comSPS_commandsDefined[comSPS_receivedPacket[0]]){    //Check if received command is defined and valid
             comSPS_commands[comSPS_receivedPacket [0]](comSPS_receivedPacket);
         } 
-        #ifdef SERIAL_DEBUGGING
-            Serial.printf("Paket empfangen: %X %X %X %X %X\n", comSPS_receivedPacket[0], comSPS_receivedPacket[1], comSPS_receivedPacket[2], comSPS_receivedPacket[3], comSPS_receivedPacket[4]);
-        #endif
+            DEBUGF("Receive Packet: %02X %02X %02X %02X %02X\n", comSPS_receivedPacket[0], comSPS_receivedPacket[1], comSPS_receivedPacket[2], comSPS_receivedPacket[3], comSPS_receivedPacket[4]);
     }
 }
 
@@ -82,6 +80,7 @@ void ansMc_init() {
 void comSPS_send2(uint8_t cmd, uint8_t data){
     byte buffer[2] = {cmd, data};
     SPS_UART.write(buffer, 2);
+    DEBUGF("Send Packet: %02X %02X\n", buffer [0], buffer [1]);
 }
 //Add Data to SPS-Send-Data-Buffer
 void comSPS_writeData(uint8_t cmd, uint8_t data){

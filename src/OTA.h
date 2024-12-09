@@ -8,7 +8,7 @@
 
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
-#include <TelnetPrint.h>
+#include <TelnetStream.h>
 #include <Definitions.h>
 
 #if defined(ESP32_RTOS) && defined(ESP32)
@@ -82,7 +82,7 @@ void setupOTA(const char* nameprefix, const char* ssid, const char* password) {
 
   ArduinoOTA.begin();
   #ifdef TELNET_DEBUGGING
-  TelnetPrint.begin();
+  TelnetStream.begin();
   #endif
 
   Serial.println("OTA Initialized");

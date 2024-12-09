@@ -35,9 +35,8 @@ uint8_t carDect1_execute(){    //to be executed in program loop, calculates car 
     if(carDect1_carDetected){
         carDect1_carDetected = false;
         uint32_t period = carDect1_lastTime - carDect1_firstTime;
-        DEBUGF("Periode = %d\n", period);
-        car_id =  (int)(period + IR_DECT_Period_Tolerance)/(64);        //calculate Car-ID under consideration of the setted tolerance
-        DEBUGF("ID: %d\n", car_id);
+        //DEBUGF("Periode = %d\n", period);
+        car_id =  (int)(period + IR_DECT_Period_Tolerance)/(64) - 1;        //calculate Car-ID under consideration of the setted tolerance
         if(car_id>8 || car_id == 0) car_id = 99;
     } else car_id = 99;
     if(micros() - carDect1_firstTime > IR_DECT_CarTimeGap) attachInterrupt(carDect1_pin, carDect1_isr, FALLING);
@@ -82,8 +81,8 @@ uint8_t carDect2_execute(){    //to be executed in program loop, calculates car 
         carDect2_carDetected = false;
         uint32_t period = carDect2_lastTime - carDect2_firstTime;
         //DEBUGF("Periode = %d\n", period);
-        car_id =  (int)(period + IR_DECT_Period_Tolerance)/(64);        //calculate Car-ID under consideration of the setted tolerance
-        if(car_id>8 || car_id == 0) car_id = 99;
+        car_id =  (int)(period + IR_DECT_Period_Tolerance)/(64) - 1;        //calculate Car-ID under consideration of the setted tolerance
+        if(car_id>7 || car_id == 0) car_id = 99;
     } else car_id = 99;
     if(micros() - carDect2_firstTime > IR_DECT_CarTimeGap) attachInterrupt(carDect2_pin, carDect2_isr, FALLING);
     return car_id;

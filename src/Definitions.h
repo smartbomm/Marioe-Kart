@@ -69,9 +69,10 @@
 #ifdef SERIAL_DEBUGGING
 #define DEBUG(...) Serial.println(STR(__VA_ARGS__) ); 
 #define DEBUGF(...) Serial.printf(__VA_ARGS__); 
-#elif TELNET_DEBUGGING
-#define DEBUG(...) TelnetPrint.println(STR(__VA_ARGS__));
-#define DEBUGF(...) TelnetPrint.println(sprintf(__VA_ARGS__));
+#elif defined TELNET_DEBUGGING
+#define DEBUG(...) TelnetStream.println(STR(__VA_ARGS__));
+#define DEBUGF(...) {char toPrint [100]; sprintf(toPrint, _VA_ARGS__); TelnetStream.println(toPrint);}
+#else
 #define DEBUG(...) 
 #define DEBUGF(...) 
 #endif
