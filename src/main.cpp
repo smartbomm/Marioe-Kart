@@ -13,7 +13,7 @@
 
 CarreraControll laneControl;
 bool carOnPickingPlace = false;     //Is car standing on
-uint8_t entryLaneQueue = 0;         // waiting car - id for putting in to storage
+uint8_t entryLaneQueue = 99;         // waiting car - id for putting in to storage
 uint8_t lastProgrammedCar = 0;   
 uint32_t SPS_lastLifeSignal = 0;   
 
@@ -57,6 +57,14 @@ void setup() {
     led [0] = CRGB::Green;
     FastLED.show();
 
+    uint8_t test [5] = {1,3,15,15,0};
+    programCar(test);
+    DEBUG(bla);
+    while(!laneControl.program()) {}
+    led [0] = CRGB::DeepPink;
+    FastLED.show();
+    laneControl.drive(0,5);
+
     
 }
 
@@ -73,9 +81,9 @@ void loop() {
         led [0] = CRGB::Green; FastLED.show();
     }
     #endif
-    if(!carOnPickingPlace || entryLaneQueue > 0) {          //Car is waiting on programming lane for entry to storage
+    if(!carOnPickingPlace && entryLaneQueue != 99) {          //Car is waiting on programming lane for entry to storage
         laneControl.drive(entryLaneQueue, VEL_CarEntry);
-        entryLaneQueue = false;
+        entryLaneQueue = 99;
     }
     uint8_t carId;
     if((carId = carDect1_execute()) < 99) {           //Car is entering the programming lane
@@ -123,6 +131,7 @@ void programCar(byte * buffer){
 
     //delay(4500);
     //comSPS_writeData(C_MC_CarPROGRAMMED(lastProgrammedCar));
+    DEBUGF("EntryLaneQueue: %d \n", entryLaneQueue);
     
 }
 

@@ -3,7 +3,7 @@
 
 //In dieser Datei sollen alle veränderbaren Einstellungen abgespeichert werden
 
-#define DEBUG_RGB_BRIGHTNESS 50
+#define DEBUG_RGB_BRIGHTNESS 255
 
 #define OTA_SSID "WaMa"
 #define OTA_PW "Waschmaschine"
@@ -24,7 +24,7 @@
 
 
 //Serielle Kommunikation
-#define SPS_Connected
+//#define SPS_Connected
 #define SPS_UART_RxCommandMemory 85       //Number of Commands that can be stored on MC, must be the highest command number actually
 
 #define SPS_UART_Frequency 10           //Communication Frequency in Hz

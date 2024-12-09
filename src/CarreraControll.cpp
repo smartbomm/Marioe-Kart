@@ -99,7 +99,7 @@ void CarreraControll::cycle() {
 
       if(flashCount==9){
         CycleCount++;
-       if(CycleCount>10000){
+       if(CycleCount>13000){
         flashCount++;
         cycleAllowed=true;
         CycleCount = 0;
