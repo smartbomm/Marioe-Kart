@@ -98,6 +98,7 @@ void loop() {
     if(laneControl.program()) {
         comSPS_writeData(C_MC_CarPROGRAMMED(lastProgrammedCar));  //report to SPS: Car was programmed successfull
         digitalWrite(RELAY_EntryLane_p, HIGH);
+        DEBUG(Programmieren fertig.);
     }
     comSPS_execute();   //Execute Commands received from SPS
     
@@ -118,6 +119,10 @@ void programCar(byte * buffer){
     laneControl.program(buffer [C_SPS_PROGRAM_ID], buffer [C_SPS_PROGRAM_VMAX], buffer [C_SPS_PROGRAM_BRAKE], buffer [C_SPS_PROGRAM_FUEL]);
     DEBUGF("Programming: ID: %d, V: %d, B: %d, F: %d\n", buffer [C_SPS_PROGRAM_ID], buffer [C_SPS_PROGRAM_VMAX], buffer [C_SPS_PROGRAM_BRAKE], buffer [C_SPS_PROGRAM_FUEL]);
     lastProgrammedCar = buffer [C_SPS_PROGRAM_ID];
+    //Pfusch
+
+    //delay(4500);
+    //comSPS_writeData(C_MC_CarPROGRAMMED(lastProgrammedCar));
     
 }
 

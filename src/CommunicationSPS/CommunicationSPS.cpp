@@ -56,10 +56,10 @@ void comSPS_execute(){
     if(SPS_UART.available()>=SPS_UART_RxPacketLength){
         
         SPS_UART.read(comSPS_receivedPacket, SPS_UART_RxPacketLength);
+        DEBUGF("Receive Packet: %02X %02X %02X %02X %02X\t", comSPS_receivedPacket[0], comSPS_receivedPacket[1], comSPS_receivedPacket[2], comSPS_receivedPacket[3], comSPS_receivedPacket[4]);
         if(comSPS_commandsDefined[comSPS_receivedPacket[0]]){    //Check if received command is defined and valid
             comSPS_commands[comSPS_receivedPacket [0]](comSPS_receivedPacket);
         } 
-            DEBUGF("Receive Packet: %02X %02X %02X %02X %02X\n", comSPS_receivedPacket[0], comSPS_receivedPacket[1], comSPS_receivedPacket[2], comSPS_receivedPacket[3], comSPS_receivedPacket[4]);
     }
 }
 
@@ -95,11 +95,13 @@ void comSPS_sendDataPacket(){
     //SPS_UART.write(C_ClientID);               Wieder aktivieren wenn die SPS auf Clients reagiert
     if(ansMc_nextRead != ansMc_nextWrite) {     //if available, send data
         SPS_UART.write(&ansMc_dataBuffer[ansMc_nextRead], 2);
+        DEBUGF("Send Packet: %02X %02X\n", ansMc_dataBuffer [ansMc_nextRead], ansMc_dataBuffer [ansMc_nextRead + 1]);
         if(ansMc_nextRead < C_MC_DataBufferSize-2) ansMc_nextRead+=2; //Move pointer to next value in FIFO-Buffer
         else ansMc_nextRead = 0;
     } else {    //send lifesignal
         uint8_t buffer [2] = {0,1};
         SPS_UART.write(buffer, 2);
+        DEBUGF("Send Packet: %02X %02X\n", buffer [0], buffer [1]);
     }
     
     
