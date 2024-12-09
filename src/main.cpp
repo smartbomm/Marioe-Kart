@@ -58,7 +58,7 @@ void setup() {
 void loop() {
 
     //Debugging
-    #ifdef SPS_Connected
+    #ifdef SPS_Connected                //Checking if SPS is online
     uint32_t timestamp = millis();
     if(timestamp - SPS_lastLifeSignal > SPS_UART_Timeout*1000) {
         led [0] = CRGB::Red; FastLED.show();
@@ -74,10 +74,6 @@ void loop() {
     }
     if(uint8_t carId = carDect1_execute() < 99) {           //Car is entering the programming lane
         DEBUGF("Car in - ID: %d\n", carId);
-        led [0] = CRGB::Blue;
-        FastLED.show();
-        led [0] = CRGB::Green;
-        FastLED.show();
         comSPS_writeData(C_MC_CarIN(carId));
         if(!carOnPickingPlace) {
             digitalWrite(RELAY_EntryLane_p, HIGH);
@@ -88,11 +84,10 @@ void loop() {
     }
     if(uint8_t carId = carDect2_execute() < 99) {           //report to SPS: Car is exiting
         DEBUGF("Car out - ID: %d\n", carId);
-        led [0] = CRGB::Blue;
-        FastLED.show();
-        led [0] = CRGB::Green;
-        FastLED.show();
         comSPS_writeData(C_MC_CarOUT(carId));
+        vTaskDelay(500);
+        laneControl.driveAll(0);
+        digitalWrite(RELAY_ExitLane_p, LOW);
     }
            
     if(laneControl.program()) {
@@ -129,10 +124,12 @@ void driveCar(byte * buffer){
 }
 
 void lightBarrier(byte * buffer){
-    if(buffer[1] == 0xff) carOnPickingPlace = true;
+    if(buffer[1] == 0xff) {
+        carOnPickingPlace = true;
+        laneControl.driveAll(0);
+    }
     else if (buffer [1] == 0x00) {
         carOnPickingPlace = false;
-        laneControl.driveAll(0);
     }
 }
 

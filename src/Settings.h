@@ -5,15 +5,15 @@
 
 #define DEBUG_RGB_BRIGHTNESS 50
 
-#define OTA_SSID "WG-Net"
-#define OTA_PW "144+WG_pmtj&1844"
+#define OTA_SSID "WaMa"
+#define OTA_PW "Waschmaschine"
 
   //#####################//
  //  Fahrzeugsteuerung  //
 //#####################//
 
 //Einfahrgeschwindigkeit
-#define VEL_CarEntry 1
+#define VEL_CarEntry 4
 #define VEL_CarExit 15
 
 //if defined, enable Serial Debugging
