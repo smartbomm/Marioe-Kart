@@ -24,7 +24,7 @@
 
 
 //Serielle Kommunikation
-//#define SPS_Connected
+#define SPS_Connected
 #define SPS_UART_RxCommandMemory 85       //Number of Commands that can be stored on MC, must be the highest command number actually
 
 #define SPS_UART_Frequency 10           //Communication Frequency in Hz

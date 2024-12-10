@@ -57,14 +57,6 @@ void setup() {
     led [0] = CRGB::Green;
     FastLED.show();
 
-    uint8_t test [5] = {1,3,15,15,0};
-    programCar(test);
-    DEBUG(bla);
-    while(!laneControl.program()) {}
-    led [0] = CRGB::DeepPink;
-    FastLED.show();
-    laneControl.drive(0,5);
-
     
 }
 
@@ -123,7 +115,6 @@ void programCar(byte * buffer){
     digitalWrite(RELAY_EntryLane_p, LOW);
     digitalWrite(RELAY_ExitLane_p, HIGH);
     laneControl.driveAll(0);
-    delay(500);
     laneControl.program(buffer [C_SPS_PROGRAM_ID], buffer [C_SPS_PROGRAM_VMAX], buffer [C_SPS_PROGRAM_BRAKE], buffer [C_SPS_PROGRAM_FUEL]);
     DEBUGF("Programming: ID: %d, V: %d, B: %d, F: %d\n", buffer [C_SPS_PROGRAM_ID], buffer [C_SPS_PROGRAM_VMAX], buffer [C_SPS_PROGRAM_BRAKE], buffer [C_SPS_PROGRAM_FUEL]);
     lastProgrammedCar = buffer [C_SPS_PROGRAM_ID];
