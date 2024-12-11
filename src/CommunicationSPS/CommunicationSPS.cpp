@@ -34,12 +34,12 @@ void comSPS_sync()
             uint8_t received = SPS_UART.read();
             if (received == syncPacket[packetCounter])
             {
-                Serial.printf("Ok: %d, ", packetCounter);
+                DEBUGF("Ok: %d, ", packetCounter);
                 packetCounter++;
             }
             else
                 packetCounter = 0;
-                Serial.printf("%d ,", received);
+                DEBUGF("%d ,", received);
         }
     }
     DEBUG(Connection to SPS established!);

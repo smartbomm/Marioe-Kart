@@ -2,6 +2,8 @@
 #define DEFINITIONS_H
 
 #include <Settings.h>
+#include <TelnetStream.h>
+
 
   //################//
  //  Definitionen  //
@@ -66,12 +68,15 @@
 
 //Serielles Debugging
 //-Alles was nur im Debug-Fall ausgegeben werden soll, kann mit DEBUG(...) definiert werden
+
+
 #ifdef SERIAL_DEBUGGING
 #define DEBUG(...) Serial.println(STR(__VA_ARGS__) ); 
 #define DEBUGF(...) Serial.printf(__VA_ARGS__); 
 #elif defined TELNET_DEBUGGING
 #define DEBUG(...) TelnetStream.println(STR(__VA_ARGS__));
-#define DEBUGF(...) {char toPrint [100]; sprintf(toPrint, _VA_ARGS__); TelnetStream.println(toPrint);}
+#define DEBUGF(...) sprintf(toPrint, __VA_ARGS__); \
+  TelnetStream.println(toPrint); 
 #else
 #define DEBUG(...) 
 #define DEBUGF(...) 

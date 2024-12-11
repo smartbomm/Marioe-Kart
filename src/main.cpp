@@ -4,8 +4,8 @@
 #include <CarDetection.h>
 #include <CarreraControll.h>
 #include <FastLED.h>
-#include <OTA.h>
 #include <DebugLED.h>
+#include <OTA.h>
 
 
 //carDect1  == CarDetection EntryLane
@@ -15,7 +15,9 @@ CarreraControll laneControl;
 bool carOnPickingPlace = false;     //Is car standing on
 uint8_t entryLaneQueue = 99;         // waiting car - id for putting in to storage
 uint8_t lastProgrammedCar = 0;   
-uint32_t SPS_lastLifeSignal = 0;   
+uint32_t SPS_lastLifeSignal = 0; 
+
+
 
 CRGB led [1];
 
@@ -54,8 +56,11 @@ void setup() {
     SPS_lastLifeSignal = millis();
     #endif
 
+    laneControl.driveAll(VEL_CarEntry);
+    digitalWrite(RELAY_EntryLane_p, HIGH);
     led [0] = CRGB::Green;
     FastLED.show();
+
 
     
 }
@@ -82,9 +87,10 @@ void loop() {
         DEBUGF("Car in - ID: %d\n", carId);
         comSPS_writeData(C_MC_CarIN(carId));
         if(!carOnPickingPlace) {
-            digitalWrite(RELAY_EntryLane_p, HIGH);
-            laneControl.drive(carId, VEL_CarEntry);
+            laneControl.driveAll(0);
+            laneControl.drive(carId, VEL_CarEntry_brake);
         } else {
+            laneControl.driveAll(0);
             entryLaneQueue = carId;
         }
     }
@@ -101,6 +107,8 @@ void loop() {
         DEBUG(Programmieren fertig.);
     }
     comSPS_execute();   //Execute Commands received from SPS
+
+    
     
 }
 
@@ -132,17 +140,23 @@ void driveCar(byte * buffer){
     digitalWrite(RELAY_EntryLane_p, LOW);
     digitalWrite(RELAY_ExitLane_p, HIGH);
     laneControl.drive(buffer [1], VEL_CarExit);
-    DEBUGF("driveCar ID: %d, Vel: %d", buffer [1], VEL_CarExit);
+    DEBUGF("driveCar ID: %d, Vel: %d\n", buffer [1], VEL_CarExit);
+    delay(500);
+    digitalWrite(RELAY_ExitLane_p, LOW);
+    digitalWrite(RELAY_EntryLane_p, HIGH);
+    laneControl.driveAll(VEL_CarEntry);
     
 }
 
 void lightBarrier(byte * buffer){
     if(buffer[1] == 0xff) {
+        comSPS_send2(C_MC_OK(0xff));
         carOnPickingPlace = true;
         laneControl.driveAll(0);
         DEBUG(Light Barrier: Car is on picking place.)
     }
     else if (buffer [1] == 0x00) {
+        comSPS_send2(C_MC_OK(0xfe));
         carOnPickingPlace = false;
         DEBUG(Light Barrier: Picking Place is free.)
     }
