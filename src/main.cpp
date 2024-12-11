@@ -141,7 +141,7 @@ void driveCar(byte * buffer){
     digitalWrite(RELAY_ExitLane_p, HIGH);
     laneControl.drive(buffer [1], VEL_CarExit);
     DEBUGF("driveCar ID: %d, Vel: %d\n", buffer [1], VEL_CarExit);
-    delay(500);
+    delay(2000);
     digitalWrite(RELAY_ExitLane_p, LOW);
     digitalWrite(RELAY_EntryLane_p, HIGH);
     laneControl.driveAll(VEL_CarEntry);
@@ -158,12 +158,15 @@ void lightBarrier(byte * buffer){
     else if (buffer [1] == 0x00) {
         comSPS_send2(C_MC_OK(0xfe));
         carOnPickingPlace = false;
+        laneControl.driveAll(VEL_CarEntry);
         DEBUG(Light Barrier: Picking Place is free.)
     }
 }
 
 void mcReady (byte * buffer){
     comSPS_send2(C_MC_OK(6));
+    laneControl.driveAll(0);
+    digitalWrite(RELAY_ExitLane_p, HIGH);
 }
 
 void comSPS_protocol(){

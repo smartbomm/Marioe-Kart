@@ -70,6 +70,7 @@
 //-Alles was nur im Debug-Fall ausgegeben werden soll, kann mit DEBUG(...) definiert werden
 
 
+
 #ifdef SERIAL_DEBUGGING
 #define DEBUG(...) Serial.println(STR(__VA_ARGS__) ); 
 #define DEBUGF(...) Serial.printf(__VA_ARGS__); 
