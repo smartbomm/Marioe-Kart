@@ -5,8 +5,12 @@
 
 #define DEBUG_RGB_BRIGHTNESS 255
 
-#define OTA_SSID "WaMa"
-#define OTA_PW "Waschmaschine"
+#define OTA_SSID "Labore-Hof AT-MT"
+#define OTA_PW "laborwlan"
+#define OTA_IP {192,168,9,5}
+#define OTA_DNS {192,168,9,1}
+#define OTA_SUBNET {255,255,255,0}
+#define OTA_GW {192,168,9,1}
 
   //#####################//
  //  Fahrzeugsteuerung  //
@@ -19,10 +23,10 @@
 #define VEL_CarExit 15
 
 //if defined, enable Serial Debugging
-#define SERIAL_DEBUGGING
+//#define SERIAL_DEBUGGING
 
 //if defined, enable Telnet Debugging, only possible if Serial Debugging disabled
-//#define TELNET_DEBUGGING
+#define TELNET_DEBUGGING
 
 
 //Serielle Kommunikation

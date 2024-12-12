@@ -32,6 +32,7 @@ void setupOTA(const char* nameprefix, const char* ssid, const char* password) {
 
   // Configure and start the WiFi station
   WiFi.mode(WIFI_STA);
+  WiFi.config(OTA_IP, OTA_DNS, OTA_GW, OTA_SUBNET);
   WiFi.begin(ssid, password);
 
   // Wait for connection
