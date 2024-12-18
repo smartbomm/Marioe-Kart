@@ -63,9 +63,7 @@ void setup() {
 }
 
 void loop() {
-
-    //Debugging
-    #ifdef SPS_Connected                //Checking if SPS is online
+    #ifdef SPS_Connected                //Checking if PLC is online
     uint32_t timestamp = millis();
     if(timestamp - SPS_lastLifeSignal > SPS_UART_Timeout*1000) {
         led [0] = CRGB::Red; FastLED.show();
