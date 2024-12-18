@@ -25,7 +25,18 @@
 //if defined, enable Serial Debugging
 //#define SERIAL_DEBUGGING
 
-//if defined, enable Telnet Debugging, only possible if Serial Debugging disabled
+//if defined, enable Over-the-Air-Flashing
+#define OTA_Flashing
+
+//Network-Settings for OTA-Functionality
+#define OTA_SSID "Labore-Hof AT-MT"
+#define OTA_PW "laborwlan"
+#define OTA_IP {192,168,9,5}
+#define OTA_DNS {192,168,9,1}
+#define OTA_SUBNET {255,255,255,0}
+#define OTA_GW {192,168,9,1}
+
+//if defined, enable Telnet Debugging, only possible if Serial Debugging disabled and OTA_Flashing is enabled
 #define TELNET_DEBUGGING
 
 

@@ -18,8 +18,4 @@ uint8_t carDect2_execute();
 void IRAM_ATTR carDect1_isr();  
 void IRAM_ATTR carDect2_isr();  
 
-
-
-
-
 #endif 

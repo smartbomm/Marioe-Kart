@@ -12,14 +12,9 @@ void comSPS_execute();
 void comSPS_init();
 void comSPS_sync();
 
-void ansMc_init();
 void comSPS_send2(uint8_t cmd, uint8_t data);
 //Add Data to SPS-Send-Data-Buffer
 void comSPS_writeData(uint8_t cmd, uint8_t data);
 //Answer to request from SPS. Sends data if available, else answers with MC-Lifesignal
 void comSPS_sendDataPacket();                       
-
-
-
-
 #endif

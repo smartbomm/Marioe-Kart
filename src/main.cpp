@@ -24,8 +24,6 @@ CRGB led [1];
 void programCar(byte * buffer);
 
 
-
-
 void setup() {
     FastLED.addLeds<NEOPIXEL, RGB_LED>(led, 1);
     FastLED.setBrightness(DEBUG_RGB_BRIGHTNESS);
@@ -37,7 +35,9 @@ void setup() {
     delay(2000);
     #endif
 
+    #ifdef OTA_Flashing
     setupOTA("CCU", OTA_SSID, OTA_PW);
+    #endif
 
     led [0] = CRGB::Blue;
     FastLED.show();
@@ -60,9 +60,6 @@ void setup() {
     digitalWrite(RELAY_EntryLane_p, HIGH);
     led [0] = CRGB::Green;
     FastLED.show();
-
-
-    
 }
 
 void loop() {
@@ -108,8 +105,6 @@ void loop() {
     }
     comSPS_execute();   //Execute Commands received from SPS
 
-    
-    
 }
 
 //Answer to request from SPS
@@ -139,9 +134,10 @@ void driveCar(byte * buffer){
     DEBUGF("driveCar ID: %d, Vel: %d\n", buffer [1], VEL_CarExit);
     delay(2000);
     digitalWrite(RELAY_ExitLane_p, LOW);
-    digitalWrite(RELAY_EntryLane_p, HIGH);
-    laneControl.driveAll(VEL_CarEntry);
-    
+    if (!carOnPickingPlace) {
+        digitalWrite(RELAY_EntryLane_p, HIGH);
+        laneControl.driveAll(VEL_CarEntry);
+    }
 }
 
 void lightBarrier(byte * buffer){
@@ -154,6 +150,8 @@ void lightBarrier(byte * buffer){
     else if (buffer [1] == 0x00) {
         comSPS_send2(C_MC_OK(0xfe));
         carOnPickingPlace = false;
+        digitalWrite(RELAY_EntryLane_p, HIGH);
+        digitalWrite(RELAY_ExitLane_p, LOW);
         laneControl.driveAll(VEL_CarEntry);
         DEBUG(Light Barrier: Picking Place is free.)
     }
@@ -161,8 +159,6 @@ void lightBarrier(byte * buffer){
 
 void mcReady (byte * buffer){
     comSPS_send2(C_MC_OK(6));
-    laneControl.driveAll(0);
-    digitalWrite(RELAY_ExitLane_p, HIGH);
 }
 
 void comSPS_protocol(){

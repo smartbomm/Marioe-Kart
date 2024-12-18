@@ -68,20 +68,15 @@ void comSPS_execute(){
 //########################################
 
 uint8_t ansMc_dataBuffer [C_MC_DataBufferSize*2] = {0};
-uint8_t ansMc_nextRead;
-uint8_t ansMc_nextWrite;
-
-void ansMc_init() {
-    ansMc_nextRead = 0;
-    ansMc_nextWrite = 0;
-}
-
+uint8_t ansMc_nextRead = 0;
+uint8_t ansMc_nextWrite = 0;
 
 void comSPS_send2(uint8_t cmd, uint8_t data){
     byte buffer[2] = {cmd, data};
     SPS_UART.write(buffer, 2);
     DEBUGF("Send Packet: %02X %02X\n", buffer [0], buffer [1]);
 }
+
 //Add Data to SPS-Send-Data-Buffer
 void comSPS_writeData(uint8_t cmd, uint8_t data){
     ansMc_dataBuffer[ansMc_nextWrite] = cmd;
@@ -103,9 +98,4 @@ void comSPS_sendDataPacket(){
         SPS_UART.write(buffer, 2);
         DEBUGF("Send Packet: %02X %02X\n", buffer [0], buffer [1]);
     }
-    
-    
 }
-
-
-

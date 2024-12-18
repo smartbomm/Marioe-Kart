@@ -272,8 +272,9 @@ void CarreraControll::program(int carNr, int maxSpeed, int brake, int fuel){
   changeList(0, maxSpeed, carNr);
   changeList(1, brake, carNr);
   changeList(2, fuel, carNr);
-  programmed=false;
   setID(carNr);
+  programmed=false;
+  
   
 
 }
