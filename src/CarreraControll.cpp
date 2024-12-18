@@ -70,6 +70,7 @@ void CarreraControll::cycle() {
         doneCycle = false;
         statesInt= states[CycleCount];
         numStates = size[CycleCount];
+        Serial.print(statesInt);
       }
     }
     
@@ -80,29 +81,32 @@ void CarreraControll::cycle() {
            if(flashCount==-1||flashCount==-2){
       changeBits(flashCar,0,5,0b1);
       pushWord(Cpin);  
+
       
      }
      if(flashCount==0||flashCount==1||flashCount ==4||flashCount==5||flashCount==13||flashCount==12||flashCount ==17||flashCount==16){
       changeBits(flashCar,1,5,0b1);
       pushWord(Cpin); 
+
      }
      if(flashCount ==2||flashCount ==3||flashCount ==6||flashCount==7||flashCount ==11||flashCount==10||flashCount ==15||flashCount==14||flashCount == 18){
        changeBits(flashCar,0,5,0b1);  
        pushWord(Cpin);
+
      }
      if(flashCount == 8){
       cycleAllowed = false;
        digitalWrite(Cpin,inverted); //set signal to low
        flashCount++;
-
        }
 
       if(flashCount==9){
         CycleCount++;
-       if(CycleCount>13000){
+       if(CycleCount>10000){
         flashCount++;
         cycleAllowed=true;
         CycleCount = 0;
+        doneProtProgramming = true;
 
       }
      }
@@ -119,6 +123,7 @@ void CarreraControll::cycle() {
     cycleAllowed = true;
     normalMode = true;
     flashCount = -2;
+    digitalWrite(10,!digitalRead(10));
    }
   }
 }
@@ -213,7 +218,12 @@ void CarreraControll::setID(int rID){ //starts the "other cycle" it will automat
 
 }
 bool CarreraControll::setID(){
-  return normalMode;
+  if (doneProtProgramming){
+  doneProtProgramming = false;
+  return true;
+  }
+  else 
+  return false;
 }
 
 
@@ -244,21 +254,21 @@ return ID;
 }
 
 
-void CarreraControll::drive(int CarNr, int Speed){ //change the speed bits and all the active word bits --> if you sont it will studder if you try to speedup
+void CarreraControll::drive(int CarNr, int Speed){ //change the speed bits and all the active word bits --> if you dont it will studder if you try to speedup
   int CarID = IDtoCar(CarNr);
   if (Speed==0){
     changeBits(CarID, Speed, 0b1, 0b1111);  
-    changeBits(2, 0b0 , 6-CarNr ,0b1);
-    changeBits(8, 0b0, 6-CarNr ,0b1);
-    changeBits(2, 0b0 , 0 ,0b1);
-    changeBits(8, 0b0, 0 ,0b1);
+    changeBits(2, 0 , 6-CarNr ,0b1);
+    changeBits(8, 0, 6-CarNr ,0b1);
+    changeBits(2, 0 , 0 ,0b1);
+    changeBits(8, 0, 0 ,0b1);
   }
   else{
     changeBits(CarID, Speed, 0b1, 0b1111);
-    changeBits(2, 0b1, 6-CarNr ,0b1);
-    changeBits(8, 0b1 , 6-CarNr ,0b1);
-    changeBits(2, 0b1 , 0 ,0b1);
-    changeBits(8, 0b1, 0 ,0b1);
+    changeBits(2, 1, 6-CarNr ,0b1);
+    changeBits(8, 1 , 6-CarNr ,0b1);
+    changeBits(2, 1 , 0 ,0b1);
+    changeBits(8, 1, 0 ,0b1);
   }
 }
 void CarreraControll::driveAll(int speed){
