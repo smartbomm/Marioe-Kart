@@ -21,17 +21,29 @@
 //carDect1  == CarDetection EntryLane
 //carDect2  == CarDetection ExitLane
 
-CarreraControll laneControl;
+
+//Functions
+
+void request(byte * buffer);
+void programCar(byte * buffer);
+void driveCar(byte * buffer);
+void lightBarrier(byte * buffer);
+void mcReady (byte * buffer);
+void comSPS_protocol();
+
+
+//Variables
+
 bool carOnPickingPlace = false;     //Is car standing on
 uint8_t entryLaneQueue = 99;         // waiting car - id for putting in to storage
 uint8_t lastProgrammedCar = 0;   
 uint32_t SPS_lastLifeSignal = 0; 
 
+//Objects
 
-
+CarreraControll laneControl;
 CRGB led [1];
 
-void programCar(byte * buffer);
 
 
 void setup() {
@@ -56,7 +68,6 @@ void setup() {
     pinMode(RELAY_ExitLane_p, OUTPUT);   //Relay Exit Lane
     laneControl.conf(DRIVER_ProgLane_p);     //Initialize Carrera Lane Protocol
     
-
     carDect1_init(12);  //CarDetection Entry
     carDect2_init(13);  //CarDetection Exit
 
@@ -115,6 +126,14 @@ void loop() {
 
 }
 
+void comSPS_protocol(){
+    comSPS_addCommand(0, request);
+    comSPS_addCommand(1, programCar);
+    comSPS_addCommand(5, driveCar);
+    comSPS_addCommand(2, lightBarrier);
+    comSPS_addCommand(6, mcReady);
+}
+
 //Answer to request from SPS
 void request(byte * buffer){
     SPS_lastLifeSignal = millis();
@@ -167,12 +186,4 @@ void lightBarrier(byte * buffer){
 
 void mcReady (byte * buffer){
     comSPS_send2(C_MC_OK(6));
-}
-
-void comSPS_protocol(){
-    comSPS_addCommand(0, request);
-    comSPS_addCommand(1, programCar);
-    comSPS_addCommand(5, driveCar);
-    comSPS_addCommand(2, lightBarrier);
-    comSPS_addCommand(6, mcReady);
 }

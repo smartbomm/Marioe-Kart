@@ -11,7 +11,7 @@
  * 
  * 
  * 
- * @see Kommunikation mit der SPS
+ * #SPS_Connected
  * 
  * #SPS_UART_Timeout
  * 
@@ -32,11 +32,6 @@
 
 #include <Arduino.h>
 #include <Definitions.h>
-
-/**
- * @brief 
- * 
- */
 
 /**
  * @brief Funktionszeiger für für dynamischen Aufruf von Funktionen.
