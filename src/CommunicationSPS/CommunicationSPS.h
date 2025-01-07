@@ -1,20 +1,96 @@
 #ifndef CommunicationSPS_h
 #define CommunicationSPS_h
+
+/**
+ * @file CommunicationSPS.h
+ * @author Joel Bommeli (joel.bommeli@hof-university.de)
+ * 
+ * @brief Funktionen zur Kommunikation mit der SPS über RS-485
+ * 
+ * Siehe folgende Möglichkeiten zur Einstellung in Settings.h:
+ * 
+ * 
+ * 
+ * @see Kommunikation mit der SPS
+ * 
+ * #SPS_UART_Timeout
+ * 
+ * #SPS_UART_RxCommandMemory
+ * 
+ * #SPS_UART_Frequency
+ * 
+ * #C_MC_DataBufferSize
+ * 
+ * 
+ * @version 0.1
+ * @date 2025-01-07
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
+
 #include <Arduino.h>
 #include <Definitions.h>
 
-typedef void (*command_function)(uint8_t *);            // function (uint8_t* pointer to buffer)
+/**
+ * @brief 
+ * 
+ */
 
-extern void comSPS_protocol();  //configures the SPS-Rx Protocol
+/**
+ * @brief Funktionszeiger für für dynamischen Aufruf von Funktionen.
+ * @return Funktion darf keinen Rückgabewert haben
+ * @param uint8_t * Funktion darf Argumente in Form eines uint8_t-Zeigers haben
+ */
+typedef void (*command_function)(uint8_t *);
+
+/**
+ * @brief Funktion zur Implementierung des Kommunikationsprotokolls. Muss extern definiert werden.
+ */
+extern void comSPS_protocol();
+/**
+ * @brief Definition von SPS-Befehlspaketen. Zur Verwendung innerhalb von comSPS_protocol().
+ * 
+ * @param cmd Wert des Befehlsbyte des zugeordneten Befehlspakets
+ * @param function Auszuführende Funktion bei Empfang des entsprechenden Befehlsbytes
+ */
 void comSPS_addCommand(uint8_t cmd, command_function function);
+
+/**
+ * @brief Daten von SPS empfangen und ausführen, sofern definiert.
+ */
 void comSPS_execute();
 
+/**
+ * @brief Initialisiere UART-Interface und in comSPS_protocol() definiertes Protokoll.
+ */
 void comSPS_init();
+
+/**
+ * @brief Synchronisiere SPS und CarControlUnit mithilfe des Life-/Polling-Signals; blockierende Funktion.
+ */
 void comSPS_sync();
 
+/**
+ * @brief Sende Daten an die SPS. Wird sofort gesendet und nicht gepuffert. Für Bestätigung von empfangenenen Befehlspaketen. Kann bei falscher Verwendung die Kommunikation stören.
+ * 
+ * @param cmd Befehl
+ * @param data Daten
+ */
 void comSPS_send2(uint8_t cmd, uint8_t data);
-//Add Data to SPS-Send-Data-Buffer
+
+/**
+ * @brief Sende Daten an die SPS. Wird in den Sendepuffer geschrieben und bei Polling an die SPS gesendet.
+ * 
+ * @param cmd Befehl
+ * @param data Daten
+ */
 void comSPS_writeData(uint8_t cmd, uint8_t data);
-//Answer to request from SPS. Sends data if available, else answers with MC-Lifesignal
+
+/**
+ * @brief Beantwortung des Polling-Pakets der SPS. Sendet Daten aus dem Puffer an die SPS, falls vorhanden ansonsten das Life-Signal.
+ * @see comSPS_writeData()
+ */
 void comSPS_sendDataPacket();                       
 #endif
