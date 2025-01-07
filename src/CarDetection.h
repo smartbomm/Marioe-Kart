@@ -1,3 +1,14 @@
+/**
+ * @file CarDetection.h
+ * @author Joel Bommeli (joel.bommeli@hof-university.de)
+ * @brief 
+ * @version 0.1
+ * @date 2024-12-28
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #ifndef CARDETECTION_H
 #define CARDETECTION_H
 #include <Arduino.h>
@@ -5,6 +16,9 @@
 
 //Configuration of the CarDetectionUnit
 //- initialize pin and variables
+
+/// @brief 
+/// @param pin 
 void carDect1_init (uint8_t pin);   
 void carDect2_init (uint8_t pin); 
 

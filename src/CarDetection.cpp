@@ -3,11 +3,11 @@
 /* Ablauf CarDetection:
  *                                 carDetected  |   detecting   |   Interrupt
  *                                 -------------|---------------|-------------------
- * 1. System bereit zur Erkennung       false   |   false       |   active
- * 2. Erster Impuls erkannt             false   |   true        |   active
- * 3. Zweiter Impuls erkannt            true    |   false       |   inactive
- * 4. execute(): ID berechne            false   |   false       |   inactive
- * 5. Timeout abgelaufen --> 1.         false   |   false       |   active
+ * 1. System ready for detection        false   |   false       |   active
+ * 2. First pulse detected              false   |   true        |   active
+ * 3. Second pulse detected             true    |   false       |   inactive
+ * 4. execute(): calculate ID           false   |   false       |   inactive
+ * 5. timeout runned out --> 1.         false   |   false       |   active
  */
 
 
@@ -16,8 +16,6 @@
 //##########################################################
 
 uint8_t carDect1_pin;
-
-//-
 volatile uint32_t carDect1_firstTime;
 volatile uint32_t carDect1_lastTime;
 volatile bool carDect1_detecting = false;
@@ -30,21 +28,19 @@ void carDect1_init (uint8_t pin) {  //initialize pin and variables
     attachInterrupt(pin, carDect1_isr, FALLING);
 }
 
-uint8_t carDect1_execute(){    //to be executed in program loop, calculates car ids, if cars where detected and writes to buffer
+uint8_t carDect1_execute(){    //to be executed in program loop, calculates car ids, if cars where detected
     uint8_t car_id = 0;
     if(carDect1_carDetected){
         carDect1_carDetected = false;
         uint32_t period = carDect1_lastTime - carDect1_firstTime;
-        //DEBUGF("Periode = %d\n", period);
         car_id =  (int)(period + IR_DECT_Period_Tolerance)/(64) - 1;        //calculate Car-ID under consideration of the setted tolerance
-        //DEBUGF("ID: %d", car_id);
         if(car_id>7 ) car_id = 99;
     } else car_id = 99;
     if(micros() - carDect1_firstTime > IR_DECT_CarTimeGap) attachInterrupt(carDect1_pin, carDect1_isr, FALLING);
     return car_id;
 }
 
-void IRAM_ATTR carDect1_isr(){                  //Count to 5 pulses, save the timestamps and then stop the interrupt routine until minimal timegap between two cars has run out
+void IRAM_ATTR carDect1_isr(){
     if(!carDect1_detecting){
         carDect1_firstTime =micros();
         carDect1_detecting = true;
@@ -76,12 +72,11 @@ void carDect2_init (uint8_t pin) {  //initialize pin and variables
     attachInterrupt(pin, carDect2_isr, FALLING);
 }
 
-uint8_t carDect2_execute(){    //to be executed in program loop, calculates car ids, if cars where detected and writes to buffer
+uint8_t carDect2_execute(){    //to be executed in program loop, calculates car ids, if cars where detected
     uint8_t car_id = 0;
     if(carDect2_carDetected){
         carDect2_carDetected = false;
         uint32_t period = carDect2_lastTime - carDect2_firstTime;
-        //DEBUGF("Periode = %d\n", period);
         car_id =  (int)(period + IR_DECT_Period_Tolerance)/(64) - 1;        //calculate Car-ID under consideration of the setted tolerance
         if(car_id>7 ) car_id = 99;
     } else car_id = 99;
@@ -89,7 +84,7 @@ uint8_t carDect2_execute(){    //to be executed in program loop, calculates car 
     return car_id;
 }
 
-void IRAM_ATTR carDect2_isr(){                  //Count to 5 pulses, save the timestamps and then stop the interrupt routine until minimal timegap between two cars has run out
+void IRAM_ATTR carDect2_isr(){ 
     if(!carDect2_detecting){
         carDect2_firstTime =micros();
         carDect2_detecting = true;

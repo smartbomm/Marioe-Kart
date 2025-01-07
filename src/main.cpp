@@ -1,3 +1,14 @@
+/**
+ * @file main.cpp
+ * @author Joel Bommeli (joel.bommeli@hof-university.de)
+ * @brief 
+ * @version 0.1
+ * @date 2024-12-28
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #include <Arduino.h>
 #include <Definitions.h>
 #include <CommunicationSPS/CommunicationSPS.h>
