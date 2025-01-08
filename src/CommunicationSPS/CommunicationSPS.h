@@ -68,7 +68,8 @@ void comSPS_init();
 void comSPS_sync();
 
 /**
- * @brief Sende Daten an die SPS. Wird sofort gesendet und nicht gepuffert. Für Bestätigung von empfangenenen Befehlspaketen. Kann bei falscher Verwendung die Kommunikation stören.
+ * @brief Sende Daten an die SPS. Wird sofort gesendet und nicht gepuffert. Für Bestätigung von empfangenenen Befehlspaketen. 
+ * @warning Kann bei falscher Verwendung die Kommunikation stören.
  * 
  * @param cmd Befehl
  * @param data Daten
