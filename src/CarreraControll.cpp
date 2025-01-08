@@ -14,7 +14,16 @@ CarreraControll::CarreraControll(){
   interruptPointer = this;
 }
 
+void IRAM_ATTR CarreraControll::timerInterrupt() {
+ cycle_e();
+}
 
+void CarreraControll::initTime(){
+        timer = timerBegin(0, 80, true); 
+        timerAttachInterrupt(timer, &CarreraControll::timerInterrupt, true); //all the interrupts
+        timerAlarmWrite(timer, 50, true); 
+        timerAlarmEnable(timer); 
+}
 
 int states[] = 
 {
@@ -30,8 +39,7 @@ int states[] =
  0b1011100000,  //9 > Car 3
  };
 
-
-int size[] = {13 , 10 , 8, 10 , 10 , 10 , 10 , 10 , 8 , 10}; //standard lenghts of the words adapts if new word is written
+int size[] = {13 , 10 , 8, 10 , 10 , 10 , 10 , 10 , 8 , 10}; //standard lenghts of the words
 
 int values[] =
 {
@@ -46,16 +54,16 @@ int restCycle = 150; //zykles to rest between words
 int numStates = size[0];
 int statesInt = states[0];
 bool doneCycle = true; //done with word
-bool doneProtonce = true;  //done the protocoll ( all elements in list) part of change word
+bool halfDone = true; //is true if half of the bit is written (either hight or low)
 bool doneProtCH=false;  //flash flag
-bool doneProtProgramming = true;
+bool doneProtProgramming = true; //true if the protocoll got programmed
 int CycleCount = 0;
 
 bool normalMode = true;
 int flashCount = 0;
 int flashCar=0;
 bool cycleAllowed = true;
-bool merk = true;
+
 bool inverted = true; //to invert the protocoll (if hardware changes)
 
 bool programmed = true;
@@ -129,16 +137,9 @@ void CarreraControll::cycle() {
 }
 
 
-void IRAM_ATTR CarreraControll::timerInterrupt() {
- cycle_e();
-}
 
-void CarreraControll::initTime(){
-        timer = timerBegin(0, 80, true); 
-        timerAttachInterrupt(timer, &CarreraControll::timerInterrupt, true); //all the interrupts
-        timerAlarmWrite(timer, 50, true); 
-        timerAlarmEnable(timer); 
-}
+
+
 
 
 
@@ -153,19 +154,19 @@ void CarreraControll::conf(int pin) { //part of startup of the protocoll
 
 void CarreraControll::pushWord(int CPin) {
 
-  if (merk == false && loc <= numStates) {  // Test for the 1st run and if smaller than the number of states 
+  if (halfDone == false && loc <= numStates) {  // Test for the 1st run and if smaller than the number of states 
       digitalWrite(CPin, !digitalRead(CPin));       // Flip state
-      merk = true;
+      halfDone = true;
   }
   else if (loc > numStates-1 && loc != restCycle) { // Restart the cycle
       digitalWrite(CPin, !inverted);                   // Set pin LOW when restarting
       loc++;
   }
-  else if (merk == true && loc <= numStates ) {  // Test for the 2nd run and if smaller than the number of states
+  else if (halfDone == true && loc <= numStates ) {  // Test for the 2nd run and if smaller than the number of states
       loc++;
       bool state = (statesInt >> numStates - loc) & 1;    // Extract the state from statesInt
       digitalWrite(CPin, state != inverted);              // Write the state from the bitshifted int
-      merk = false;
+      halfDone = false;
   }
   else if (loc == restCycle) {                     // End of the cycle
       loc = 0;                                     // Reset the location
@@ -174,7 +175,6 @@ void CarreraControll::pushWord(int CPin) {
   }
   if (CycleCount==10){
     CycleCount = 0;
-    doneProtonce = true; //various flaggs to return the states of the functions
     doneProtCH = true;
       if (pCount == 0||pCount ==1){
         states[0] = values[0];
