@@ -17,9 +17,8 @@ void comSPS_init(){
     #if (SPS_UART_NUM == 0)
     SPS_UART.begin(9600);
     #else
-    SPS_UART.begin(9600, SERIAL_8N1, SPS_UART_RX, SPS_UART_TX);
+    SPS_UART.begin(9600, SERIAL_8N1, SPS_UART_RX_p, SPS_UART_TX_p);
     #endif
-    comSPS_protocol();
 }
 
 //Syncronize Serial Communications between SPS and µC
@@ -28,7 +27,7 @@ void comSPS_sync()
 {
     byte syncPacket[SPS_UART_RxPacketLength] = C_SPS_SYNC;
     uint8_t packetCounter = 0;              // Check for 5 zeroes in a row for life packet
-    while (packetCounter< 5) {       // Blocking until valid Life Signal from SPS is received
+    while (packetCounter< SPS_UART_RxPacketLength) {       // Blocking until valid Life Signal from SPS is received
         if (SPS_UART.available() > 0)
         {
             uint8_t received = SPS_UART.read();

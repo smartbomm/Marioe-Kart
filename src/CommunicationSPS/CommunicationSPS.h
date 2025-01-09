@@ -41,11 +41,7 @@
 typedef void (*command_function)(uint8_t *);
 
 /**
- * @brief Funktion zur Implementierung des Kommunikationsprotokolls. Muss extern definiert werden.
- */
-extern void comSPS_protocol();
-/**
- * @brief Definition von SPS-Befehlspaketen. Zur Verwendung innerhalb von comSPS_protocol().
+ * @brief Definition von SPS-Befehlspaketen. 
  * 
  * @param cmd Wert des Befehlsbyte des zugeordneten Befehlspakets
  * @param function Auszuführende Funktion bei Empfang des entsprechenden Befehlsbytes

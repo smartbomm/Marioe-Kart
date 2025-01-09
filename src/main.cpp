@@ -68,10 +68,18 @@ void setup() {
     pinMode(RELAY_ExitLane_p, OUTPUT);   //Relay Exit Lane
     laneControl.conf(DRIVER_ProgLane_p);     //Initialize Carrera Lane Protocol
     
-    carDect1_init(12);  //CarDetection Entry
-    carDect2_init(13);  //CarDetection Exit
+    carDect1_init(CAR_Detect_EntryLane_p);  //CarDetection Entry
+    carDect2_init(CAR_Detect_ExitLane_p);  //CarDetection Exit
 
     #ifdef SPS_Connected
+
+    ///@brief Definition der Befehle, die von der SPS empfangen werden können
+    comSPS_addCommand(0, request);  
+    comSPS_addCommand(1, programCar);
+    comSPS_addCommand(2, lightBarrier);
+    comSPS_addCommand(5, driveCar);
+    comSPS_addCommand(6, mcReady);
+
     comSPS_init();      //Initialize Serial Instance for Communication with SPS
     comSPS_sync();      //Sync µC with SPS
     SPS_lastLifeSignal = millis();
@@ -126,19 +134,12 @@ void loop() {
 
 }
 
-void comSPS_protocol(){
-    comSPS_addCommand(0, request);
-    comSPS_addCommand(1, programCar);
-    comSPS_addCommand(5, driveCar);
-    comSPS_addCommand(2, lightBarrier);
-    comSPS_addCommand(6, mcReady);
-}
-
 //Answer to request from SPS
 void request(byte * buffer){
     SPS_lastLifeSignal = millis();
     comSPS_sendDataPacket();
 }
+
 //Program id to car
 void programCar(byte * buffer){
     comSPS_send2(C_MC_OK(buffer [C_SPS_PROGRAM_ID]));
