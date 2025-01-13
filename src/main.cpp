@@ -1,3 +1,5 @@
+
+
 /**
  * @file main.cpp
  * @author Joel Bommeli (joel.bommeli@hof-university.de)
@@ -11,7 +13,7 @@
 
 #include <Arduino.h>
 #include <Definitions.h>
-#include <CommunicationSPS/CommunicationSPS.h>
+#include <CommunicationSPS.h>
 #include <CarDetection.h>
 #include <CarreraControll.h>
 #include <FastLED.h>
