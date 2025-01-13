@@ -77,6 +77,8 @@ public:
      */
     void driveAll(int value);
 
+    void cycle();
+
 
 private:
     void initTime();
@@ -87,7 +89,7 @@ private:
     void changeBits(int carNr, int value, int shifts, int mask);
     int Cpin;
     bool Crun;
-    void cycle();
+
 
 
 
