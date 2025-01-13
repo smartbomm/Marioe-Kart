@@ -7,11 +7,7 @@
  * 
  * CCU - CarControlUnit  
  * CDU - CarDetectionUnit 
- * 
- *  @section sec2 Softwarekomponenten
- *  @subsection sec2_1 Kommunikation
- *  @subsection sec2_2 Fahrzeugerfassung
- *  @subsection sec2_3 Fahrzeugsteuerung   
+ *  
  * @page Kommunikation
  *
  * @brief Alle Funktionen zur Kommunikation mit einer Gegenstelle (SPS) über RS-485 sind in der Komponente CommunicationSPS definiert. Siehe Dokumentation von CommunicationSPS.h .
@@ -77,10 +73,6 @@
  * 
  * 
  * 
- * 
- *  
-*
-
  * 
  * 
  *  \include{lineno} example.cpp
