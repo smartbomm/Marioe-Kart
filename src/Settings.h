@@ -65,7 +65,7 @@
 
 /// @brief Aktiviere Debugging über Serielle Schnittstelle UART0. Wird durch Auskommentieren deaktiviert. Hat, wenn aktiviert, stets Vorrang vor Telnet-Debugging.
 
-#define SERIAL_DEBUGGING
+//#define SERIAL_DEBUGGING
 
 /// @brief Aktiviere Over-the-Air-Flashing und Debugging, wird durch auskommentieren deaktiviert
 #define OTA_Flashing
