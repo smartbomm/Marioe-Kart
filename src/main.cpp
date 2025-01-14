@@ -20,6 +20,7 @@
  * @date 2024-12-28
  * 
  * @copyright Copyright (c) 2025
+ * @copyright Copyright (c) 2025
  * 
  */
 
@@ -56,6 +57,7 @@ CRGB led [1];                       ///<Config-Strukur für Debug-RGB-LED
 
 
 void setup() {
+    drivingOutDelay.delayTime_ms = 2000;
     FastLED.addLeds<NEOPIXEL, RGB_LED>(led, 1);
     FastLED.setBrightness(DEBUG_RGB_BRIGHTNESS);
     led [0] = CRGB::Red;
@@ -99,6 +101,11 @@ void setup() {
     FastLED.show();
 }
 
+/**
+ * @brief Arduino-Loop-Funktion
+ * Wird nach der Setup-Funktion in Endlosschleife ausgeführt
+ * 
+ */
 void loop() {
     #ifdef SPS_Connected                //Checking if PLC is online
     uint32_t timestamp = millis();
@@ -110,9 +117,15 @@ void loop() {
         led [0] = CRGB::Green; FastLED.show();
     }
     #endif
-    if(!carOnPickingPlace && entryLaneQueue != 99) {          //Car is waiting on programming lane for entry to storage
-        laneControl.drive(entryLaneQueue, VEL_CarEntry);
-        entryLaneQueue = 99;
+
+    if (smartdelay_check(&drivingOutDelay))
+    {
+        digitalWrite(RELAY_ExitLane_p, LOW);
+        if (!carOnPickingPlace)
+        {
+            digitalWrite(RELAY_EntryLane_p, HIGH);
+            laneControl.driveAll(VEL_CarEntry);
+        }
     }
     uint8_t carId;
     if((carId = carDect1_execute()) < 99) {           //Car is entering the programming lane
