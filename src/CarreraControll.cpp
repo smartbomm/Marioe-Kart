@@ -24,7 +24,7 @@ void CarreraControll::initTime(){
         timerAlarmWrite(timer, 50, true); 
         timerAlarmEnable(timer); 
 }
-
+///! [CarreraControllVariables
 int states[] = 
 {
  0b1000000000000,  //0 > Programming Word
@@ -68,7 +68,7 @@ bool inverted = true; //to invert the protocoll (if hardware changes)
 
 bool programmed = true;
 int pCount = 0; //which programming word is chosen
-
+///! [CarreraControllVariables
 
 
 void CarreraControll::cycle() {

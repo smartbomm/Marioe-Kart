@@ -1,0 +1,35 @@
+\chapter{Car\+Control\+Unit}
+\hypertarget{index}{}\label{index}\index{CarControlUnit@{CarControlUnit}}
+Dieses Projekt entstand im Rahmen einer Projektarbeit des Moduls "{}\+Projekt Automatisierung"{} an der Hochschule für angewandte Wissenschaften Hof. Das Ziel des Gesamtprojekts war es, eine automatisierte Boxengasse zu entwickeln, die einen automatisierten Fahrzeugwechsel sowie die Ein-\/ und Auslagerung von Carrera Digital 124-\/Fahrzeugen in ein Lager ermöglicht.
+
+Das Modul Car\+Control\+Unit ermöglicht die Ansteuerung der Programmierschiene, über welche die Ein-\/ und Ausfahrt der Fahrzeuge in die Boxengasse erfolgt.
+
+Die Hardware besteht aus\+:
+\begin{DoxyItemize}
+\item Eine Car\+Control\+Unit, auf welcher ein Mikrocontroller (ESP32-\/\+S3) sowie der Bahntreiber installiert ist.
+\item Bis zu drei Car\+Detection\+Units, mit einer Aufbereitungsschaltung für die zur Fahrzeugerkennung notwendigen IR-\/\+LEDs.
+\end{DoxyItemize}
+
+Es werden im Projekt folgende Abkürzungen verwendet\+:
+
+
+\begin{DoxyItemize}
+\item CCU -\/ Car\+Control\+Unit
+\item CDU -\/ Car\+Detection\+Unit
+\item SPS -\/ Übergeordnete Steuerung
+\end{DoxyItemize}\hypertarget{index_settings_defs}{}\doxysection{\texorpdfstring{Einstellungen/\+Definitionen}{Einstellungen/\+Definitionen}}\label{index_settings_defs}
+Damit wichtige Paramater und Einstellungen zentral verwaltet und abgerufen werden können, wurden die zwei Dateien \doxylink{_settings_8h}{Settings.\+h} und \doxylink{_definitions_8h}{Definitions.\+h} erstellt. Die zwei Dateien unterscheiden sich dabei wie folgt\+:\hypertarget{index_autotoc_md7}{}\doxysubsection{\texorpdfstring{Definitionen}{Definitionen}}\label{index_autotoc_md7}
+\begin{DoxyWarning}{Warnung}
+Wird an dieser Datei etwas geändert, funktioniert möglicherweise das Programm nicht mehr. Enthält Definitionen, die die Funktion des Programms beeinflussen.
+\end{DoxyWarning}
+
+\begin{DoxyItemize}
+\item Pinbelegungen
+\item UART-\/\+Interfaces
+\item Makros
+\end{DoxyItemize}
+
+\doxylink{_definitions_8h}{Zur Datei} \hypertarget{index_autotoc_md8}{}\doxysubsection{\texorpdfstring{Einstellungen}{Einstellungen}}\label{index_autotoc_md8}
+Enthält Einstellungen und Parameter, die die Funktion des Programms nicht beeinflussen. z.\+B. Geschwindigkeiten, Zeiten
+
+\doxylink{_settings_8h}{Zur Datei} 

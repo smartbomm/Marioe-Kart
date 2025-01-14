@@ -1,0 +1,31 @@
+\doxysection{Communication\+SPS.\+h}
+\hypertarget{_communication_s_p_s_8h_source}{}\label{_communication_s_p_s_8h_source}\index{C:/Users/grste/Git/Marioe-\/Kart/src/CommunicationSPS.h@{C:/Users/grste/Git/Marioe-\/Kart/src/CommunicationSPS.h}}
+\mbox{\hyperlink{_communication_s_p_s_8h}{gehe zur Dokumentation dieser Datei}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CommunicationSPS\_h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CommunicationSPS\_h}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{_definitions_8h}{Definitions.h}}>}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00129\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{_communication_s_p_s_8h_a25d85117b880ead4b043c2cff864ed9d}{command\_function}})(uint8\_t\ *);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00137\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_communication_s_p_s_8h_a77f30894a1c6b2194bd4bdd29d5f1a77}{comSPS\_addCommand}}(uint8\_t\ cmd,\ \mbox{\hyperlink{_communication_s_p_s_8h_a25d85117b880ead4b043c2cff864ed9d}{command\_function}}\ function);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00142\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_communication_s_p_s_8h_aa40036e45eb722cdfe09f93a76ff0332}{comSPS\_execute}}();}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00147\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_communication_s_p_s_8h_a7a44baf895cbb1fe844c018159bd21fe}{comSPS\_init}}();}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00152\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_communication_s_p_s_8h_acb58a91c9d65a5a37d533eb72d5e963d}{comSPS\_sync}}();}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00161\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_communication_s_p_s_8h_aa3233e8223eb8943f89da931504c4e70}{comSPS\_send2}}(uint8\_t\ cmd,\ uint8\_t\ data);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00169\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_communication_s_p_s_8h_a9338fd1d170c2b15d2e6ae0ffbb409ce}{comSPS\_writeData}}(uint8\_t\ cmd,\ uint8\_t\ data);}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00175\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_communication_s_p_s_8h_a4824e680a8f9f7da4dfcaa3a342b3a1a}{comSPS\_sendDataPacket}}();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

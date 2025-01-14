@@ -1,0 +1,128 @@
+\chapter{Kommunikation}
+\hypertarget{_kommunikation}{}\label{_kommunikation}\index{Kommunikation@{Kommunikation}}
+Alle Funktionen zur Kommunikation mit einer Gegenstelle (SPS) über RS-\/485 sind in der Komponente Communication\+SPS definiert. Siehe Dokumentation von \doxylink{_communication_s_p_s_8h}{Communication\+SPS.\+h} .
+
+Die Car\+Control\+Unit ist als Slave konzipiert und wird über RS-\/485 angesteuert. Mithilfe der Komponente Communication\+SPS wir die Kommunikation implementiert. Damit ist es möglich beliebige Befehlspakete von einer übergeordneten Steuerung zu empfangen und auszuführen. Diese können einfach definiert werden und jeweils an eine bestimmte Funktion übergeben werden.
+
+Die Kommunikation erfolgt über RS-\/485 Half-\/\+Duplex. Das bedeutet, dass jeweils nur ein Teilnehmer auf einmal senden kann. Damit es nicht zu Kollisionen kommt, gibt die übergeordnete Steuerung (SPS) den Takt vor. Die Car\+Control\+Unit sendet nur dann Daten, wenn die übergeordnete Steuerung dies anfordert. Dabei werden zwei Arten von Paketen unterschieden\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Paket   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Beschreibung   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Grösse    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Paket   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Beschreibung   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Grösse    }\\\cline{1-3}
+\endhead
+Befehlspaket   &Wird von der SPS an die Car\+Control\+Unit gesendet und enthält einen Befehl und Daten   &5 Bytes    \\\cline{1-3}
+Datenpaket   &Wird von der Car\+Control\+Unit an die SPS gesendet und enthält Daten   &2 Bytes   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{_kommunikation_paketaufbau}{}\doxysection{\texorpdfstring{Paketaufbau}{Paketaufbau}}\label{_kommunikation_paketaufbau}
+\hypertarget{_kommunikation_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{Befehlspaket}{Befehlspaket}}\label{_kommunikation_autotoc_md1}
+Ein Befehlspaket hat grundsätzlich den folgenden Aufbau\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 0   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 2   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 3   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 4    }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 0   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 2   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 3   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 4    }\\\cline{1-5}
+\endhead
+Befehl   &Daten   &Daten   &Daten   &Daten   \\\cline{1-5}
+\end{longtabu}
+
+
+Der Befehl gibt an, welche Funktion ausgeführt werden soll. Die Daten sind optional und können je nach Befehl unterschiedlich interpretiert werden. Es gibt ein besonderes Befehlspaket, das als Polling-\/ und Synchronisationspaket dient. Dieses ist in der Datei \doxylink{_settings_8h}{Settings.\+h} unter \doxylink{_settings_8h_a7d764fc5b3d1d8eacc9d90355d9468b4}{C\+\_\+\+SPS\+\_\+\+SYNC} definiert.
+
+Neue Befehlspakete können mittels der Funktion {\ttfamily \doxylink{_communication_s_p_s_8h_a77f30894a1c6b2194bd4bdd29d5f1a77}{com\+SPS\+\_\+add\+Command()}} angelegt werden. Dazu muss zuerst eine Funktion definiert werden, die bei dem entsprechenden Befehl ausgeführt werden soll. Danach wird diese Funktion mittels \`{}com\+SPS\+\_\+add\+Command() dem Befehl zugeordnet. Die Funktionen, die den Befehlen zugeordnet werden, müssen als Argument einen uint8\+\_\+t-\/\+Zeiger haben und dürfen keinen Rückgabewert haben. Beispiel\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ exampleCommand(uint8\_t\ *\ packet);}
+
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Zu beachten}
+Die Anzahl der Befehle, die definiert werden können, ist in \doxylink{_settings_8h}{Settings.\+h} unter \doxylink{_settings_8h_aee2f0698b597709600a6f4552fcb2e2e}{SPS\+\_\+\+UART\+\_\+\+Rx\+Command\+Memory} festgelegt. Dieser Wert muss jedoch mindestens der höchsten Befehlsnummer entsprechen, sonst wird das Programm nicht funktionieren.
+\end{DoxyNote}
+\hypertarget{_kommunikation_autotoc_md2}{}\doxysubsubsection{\texorpdfstring{Beispiel}{Beispiel}}\label{_kommunikation_autotoc_md2}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//Beispielfunktion,\ die\ aufgerufen\ soll,\ wenn\ der\ Befehl\ 7\ empfangen\ wird}}
+\DoxyCodeLine{00002\ \textcolor{keywordtype}{void}\ spsCommand(uint8\_t\ *\ buffer)\{}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{comment}{//Aufruf\ von\ Daten\ aus\ dem\ empfangenen\ Befehlspaket}}
+\DoxyCodeLine{00005\ \ \ \ \ uint8\_t\ data\ =\ buffer[1];}
+\DoxyCodeLine{00006\ \}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//Beispielfunktion,\ die\ aufgerufen\ soll,\ wenn\ der\ Befehl\ 8\ empfangen\ wird}}
+\DoxyCodeLine{00009\ \textcolor{keywordtype}{void}\ spsCommand2(uint8\_t\ *\ buffer)\{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{comment}{//Aufruf\ von\ Daten\ aus\ dem\ empfangenen\ Befehlspaket}}
+\DoxyCodeLine{00012\ \ \ \ \ uint8\_t\ data\ =\ buffer[1];}
+\DoxyCodeLine{00013\ \}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{_communication_s_p_s_8cpp_a77f30894a1c6b2194bd4bdd29d5f1a77}{comSPS\_addCommand}}(7,\ spsCommand);\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Füge\ die\ Funktion\ spsCommand\ hinzu,\ die\ ausgeführt\ wird,\ wenn\ der\ Befehl\ 7\ empfangen\ wird}}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{_communication_s_p_s_8cpp_a77f30894a1c6b2194bd4bdd29d5f1a77}{comSPS\_addCommand}}(8,\ spsCommand2);\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Füge\ die\ Funktion\ spsCommand2\ hinzu,\ die\ ausgeführt\ wird,\ wenn\ der\ Befehl\ 8\ empfangen\ wird}}
+\DoxyCodeLine{00019\ \}}
+
+\end{DoxyCodeInclude}
+\hypertarget{_kommunikation_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{Datenpaket}{Datenpaket}}\label{_kommunikation_autotoc_md3}
+Ein Datenpaket ist wie folgt aufgebaut\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 0   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 1    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 0   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Byte 1    }\\\cline{1-2}
+\endhead
+Befehl   &Daten   \\\cline{1-2}
+\end{longtabu}
+
+
+Zum senden von Datenpaketen gibt es zwei verschiedene Funktionen\+:
+
+
+\begin{DoxyEnumerate}
+\item {\ttfamily \doxylink{_communication_s_p_s_8h_aa3233e8223eb8943f89da931504c4e70}{com\+SPS\+\_\+send2(uint8\+\_\+t command, uint8\+\_\+t data)}} -\/ Sendet sofort bei Aufruf das Datenpaket an die übergeordnete Steuerung. Diese Funktion ist für die Bestätigung von empfangenen Befehlspaketen konzipiert.
+\item {\ttfamily \doxylink{_communication_s_p_s_8h_a9338fd1d170c2b15d2e6ae0ffbb409ce}{com\+SPS\+\_\+write\+Data(uint8\+\_\+t command, uint8\+\_\+t data)}} -\/ Fügt das Datenpaket in eine Warteschlange ein und sendet dann die Pakete jeweils bei Polling durch die übergeordnete Steuerung. Die Länge der Warteschlange ist in \doxylink{_settings_8h}{Settings.\+h} unter \doxylink{_settings_8h_a406b0a57e3ba0391b50482f4c2dd890d}{C\+\_\+\+MC\+\_\+\+Data\+Buffer\+Size} definiert. Diese Funktion ist für das Senden von Daten an die übergeordnete Steuerung konzipiert, die gepollt werden müssen.
+\end{DoxyEnumerate}
+
+Die verschiedenen Datenpakete sind als Makros in \doxylink{_settings_8h}{Settings.\+h} definiert.
+\begin{DoxyItemize}
+\item {\ttfamily C\+\_\+\+MC\+\_\+\+LIFESIGNAL} -\/ Lifesignal der Car\+Control\+Unit
+\item {\ttfamily \doxylink{_settings_8h_a46f0a83cbd291da8ce4924dce434cd07}{C\+\_\+\+MC\+\_\+\+Car\+IN(value)}} -\/ Fahrzeug in Boxengasse eingefahren
+\item {\ttfamily \doxylink{_settings_8h_a19e748e5112d9651e468f42da9e16b8e}{C\+\_\+\+MC\+\_\+\+Car\+OUT(value)}} -\/ Fahrzeug aus Boxengasse ausgefahren
+\item {\ttfamily \doxylink{_settings_8h_a78e8c83938ae42d1ad290114e60653c1}{C\+\_\+\+MC\+\_\+\+Car\+PROGRAMMED(value)}} -\/ Fahrzeug fertig programmiert
+\item {\ttfamily \doxylink{_settings_8h_ac9b4f0da96e695d1946779554119aba4}{C\+\_\+\+MC\+\_\+\+OK(value)}} -\/ Bestätigungspaket für empfangene Befehlspakete
+\end{DoxyItemize}\hypertarget{_kommunikation_erweiterung-protokoll}{}\doxysection{\texorpdfstring{Mehrere Bus-\/\+Teilnehmer}{Mehrere Bus-\/\+Teilnehmer}}\label{_kommunikation_erweiterung-protokoll}
+Aktuell ist das Protokoll nur für die Kommunikation zwischen einem Master und einem Slave ausgelegt. Wenn weitere Slaves mit der übergeordnete Steuerung kommunizieren sollen, muss das Protokoll um eine Adressierung erweitert werden.
+
+Um die Paketlänge zu verändern, muss die Definition \doxylink{_definitions_8h_aaa713b1fca30192e1702f2996edf4e27}{SPS\+\_\+\+UART\+\_\+\+Rx\+Packet\+Length} auf die entsprechende Länge angepasst werden.\hypertarget{_kommunikation_autotoc_md4}{}\doxysubsubsection{\texorpdfstring{Synchronisierung mit übergeordneter Steuerung}{Synchronisierung mit übergeordneter Steuerung}}\label{_kommunikation_autotoc_md4}
+
+\begin{DoxyItemize}
+\item Die Definition \doxylink{_settings_8h_a7d764fc5b3d1d8eacc9d90355d9468b4}{C\+\_\+\+SPS\+\_\+\+SYNC} muss auf die entsprechende Länge ergänzt werden.
+\item Die Funktion \doxylink{_communication_s_p_s_8h_acb58a91c9d65a5a37d533eb72d5e963d}{com\+SPS\+\_\+sync()} muss um eine Logik zur Erkennung der Adressierung ergänzt werden.
+\end{DoxyItemize}\hypertarget{_kommunikation_autotoc_md5}{}\doxysubsubsection{\texorpdfstring{Empfangen von Befehlspaketen von der übergeordneten Steuerung}{Empfangen von Befehlspaketen von der übergeordneten Steuerung}}\label{_kommunikation_autotoc_md5}
+
+\begin{DoxyItemize}
+\item Die Funktion \doxylink{_communication_s_p_s_8h_aa40036e45eb722cdfe09f93a76ff0332}{com\+SPS\+\_\+execute()} muss um eine Logik zur zur Erkennung der Adressierung ergänzt werden.
+\end{DoxyItemize}\hypertarget{_kommunikation_autotoc_md6}{}\doxysubsubsection{\texorpdfstring{Senden von Datenpaketen an die übergeordnete Steuerung}{Senden von Datenpaketen an die übergeordnete Steuerung}}\label{_kommunikation_autotoc_md6}
+
+\begin{DoxyItemize}
+\item Die Definition von \doxylink{_definitions_8h_ac5bf748afe4f51c4af23bae1b0787516}{SPS\+\_\+\+UART\+\_\+\+Tx\+Packet\+Length} muss auf die entsprechende Länge ergänzt werden.
+\item Die Funktion \doxylink{_communication_s_p_s_8h_aa3233e8223eb8943f89da931504c4e70}{com\+SPS\+\_\+send2()} muss um eine Logik zur Adressierung ergänzt werden.
+\item Die Funktion \doxylink{_communication_s_p_s_8h_a4824e680a8f9f7da4dfcaa3a342b3a1a}{com\+SPS\+\_\+send\+Data\+Packet()} muss um eine Logik zur Adressierung ergänzt werden.
+\end{DoxyItemize}
+
+Moduldatei\+: \doxylink{_communication_s_p_s_8cpp}{Communication\+SPS.\+cpp} 

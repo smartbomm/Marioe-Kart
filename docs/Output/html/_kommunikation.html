@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CarControlUnit: Kommunikation</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">CarControlUnit<span id="projectnumber">&#160;0.1</span>
+   </div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('_kommunikation.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Lade ...</div>
+<div class="SRStatus" id="Searching">Suche ...</div>
+<div class="SRStatus" id="NoMatches">Keine Treffer</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Kommunikation</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Alle Funktionen zur Kommunikation mit einer Gegenstelle (SPS) über RS-485 sind in der Komponente CommunicationSPS definiert. Siehe Dokumentation von <a class="el" href="_communication_s_p_s_8h.html" title="Funktionen zur Kommunikation mit der SPS über RS-485.">CommunicationSPS.h</a> .</p>
+<p>Die CarControlUnit ist als Slave konzipiert und wird über RS-485 angesteuert. Mithilfe der Komponente CommunicationSPS wir die Kommunikation implementiert. Damit ist es möglich beliebige Befehlspakete von einer übergeordneten Steuerung zu empfangen und auszuführen. Diese können einfach definiert werden und jeweils an eine bestimmte Funktion übergeben werden.</p>
+<p>Die Kommunikation erfolgt über RS-485 Half-Duplex. Das bedeutet, dass jeweils nur ein Teilnehmer auf einmal senden kann. Damit es nicht zu Kollisionen kommt, gibt die übergeordnete Steuerung (SPS) den Takt vor. Die CarControlUnit sendet nur dann Daten, wenn die übergeordnete Steuerung dies anfordert. Dabei werden zwei Arten von Paketen unterschieden: </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Paket   </th><th class="markdownTableHeadNone">Beschreibung   </th><th class="markdownTableHeadNone">Grösse    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Befehlspaket   </td><td class="markdownTableBodyNone">Wird von der SPS an die CarControlUnit gesendet und enthält einen Befehl und Daten   </td><td class="markdownTableBodyNone">5 Bytes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Datenpaket   </td><td class="markdownTableBodyNone">Wird von der CarControlUnit an die SPS gesendet und enthält Daten   </td><td class="markdownTableBodyNone">2 Bytes   </td></tr>
+</table>
+<h1><a class="anchor" id="paketaufbau"></a>
+Paketaufbau</h1>
+<h3><a class="anchor" id="autotoc_md1"></a>
+Befehlspaket</h3>
+<p>Ein Befehlspaket hat grundsätzlich den folgenden Aufbau:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Byte 0   </th><th class="markdownTableHeadNone">Byte 1   </th><th class="markdownTableHeadNone">Byte 2   </th><th class="markdownTableHeadNone">Byte 3   </th><th class="markdownTableHeadNone">Byte 4    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Befehl   </td><td class="markdownTableBodyNone">Daten   </td><td class="markdownTableBodyNone">Daten   </td><td class="markdownTableBodyNone">Daten   </td><td class="markdownTableBodyNone">Daten   </td></tr>
+</table>
+<p>Der Befehl gibt an, welche Funktion ausgeführt werden soll. Die Daten sind optional und können je nach Befehl unterschiedlich interpretiert werden. Es gibt ein besonderes Befehlspaket, das als Polling- und Synchronisationspaket dient. Dieses ist in der Datei <a class="el" href="_settings_8h.html" title="In dieser Datei sind alle veränderbaren Einstellungen zentral abgespeichert.">Settings.h</a> unter <a class="el" href="_settings_8h.html#a7d764fc5b3d1d8eacc9d90355d9468b4" title="Pollingpaket: Wird von der SPS regelmäßig gesendet, um die CarControlUnit und die SPS zu synchronisie...">C_SPS_SYNC</a> definiert.</p>
+<p>Neue Befehlspakete können mittels der Funktion <code><a class="el" href="_communication_s_p_s_8h.html#a77f30894a1c6b2194bd4bdd29d5f1a77" title="Definition von SPS-Befehlspaketen.">comSPS_addCommand()</a></code> angelegt werden. Dazu muss zuerst eine Funktion definiert werden, die bei dem entsprechenden Befehl ausgeführt werden soll. Danach wird diese Funktion mittels `comSPS_addCommand() dem Befehl zugeordnet. Die Funktionen, die den Befehlen zugeordnet werden, müssen als Argument einen uint8_t-Zeiger haben und dürfen keinen Rückgabewert haben. Beispiel:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> exampleCommand(uint8_t * packet);</div>
+</div><!-- fragment --><dl class="section note"><dt>Zu beachten</dt><dd>Die Anzahl der Befehle, die definiert werden können, ist in <a class="el" href="_settings_8h.html" title="In dieser Datei sind alle veränderbaren Einstellungen zentral abgespeichert.">Settings.h</a> unter <a class="el" href="_settings_8h.html#aee2f0698b597709600a6f4552fcb2e2e" title="Grösse des Befehlsspeichers der von der SPS zu empfangeneden Befehle. Muss mindestens der höchsten Be...">SPS_UART_RxCommandMemory</a> festgelegt. Dieser Wert muss jedoch mindestens der höchsten Befehlsnummer entsprechen, sonst wird das Programm nicht funktionieren.</dd></dl>
+<h3><a class="anchor" id="autotoc_md2"></a>
+Beispiel</h3>
+<div class="fragment"><div class="line"><span class="lineno">    1</span><span class="comment">//Beispielfunktion, die aufgerufen soll, wenn der Befehl 7 empfangen wird</span></div>
+<div class="line"><span class="lineno">    2</span><span class="keywordtype">void</span> spsCommand(uint8_t * buffer){</div>
+<div class="line"><span class="lineno">    3</span> </div>
+<div class="line"><span class="lineno">    4</span>    <span class="comment">//Aufruf von Daten aus dem empfangenen Befehlspaket</span></div>
+<div class="line"><span class="lineno">    5</span>    uint8_t data = buffer[1];</div>
+<div class="line"><span class="lineno">    6</span>}</div>
+<div class="line"><span class="lineno">    7</span> </div>
+<div class="line"><span class="lineno">    8</span><span class="comment">//Beispielfunktion, die aufgerufen soll, wenn der Befehl 8 empfangen wird</span></div>
+<div class="line"><span class="lineno">    9</span><span class="keywordtype">void</span> spsCommand2(uint8_t * buffer){</div>
+<div class="line"><span class="lineno">   10</span> </div>
+<div class="line"><span class="lineno">   11</span>    <span class="comment">//Aufruf von Daten aus dem empfangenen Befehlspaket</span></div>
+<div class="line"><span class="lineno">   12</span>    uint8_t data = buffer[1];</div>
+<div class="line"><span class="lineno">   13</span>}</div>
+<div class="line"><span class="lineno">   14</span> </div>
+<div class="line"><span class="lineno">   15</span><span class="keywordtype">void</span> <a class="code hl_function" href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a>() {</div>
+<div class="line"><span class="lineno">   16</span> </div>
+<div class="line"><span class="lineno">   17</span>    <a class="code hl_function" href="_communication_s_p_s_8cpp.html#a77f30894a1c6b2194bd4bdd29d5f1a77">comSPS_addCommand</a>(7, spsCommand);           <span class="comment">//Füge die Funktion spsCommand hinzu, die ausgeführt wird, wenn der Befehl 7 empfangen wird</span></div>
+<div class="line"><span class="lineno">   18</span>    <a class="code hl_function" href="_communication_s_p_s_8cpp.html#a77f30894a1c6b2194bd4bdd29d5f1a77">comSPS_addCommand</a>(8, spsCommand2);          <span class="comment">//Füge die Funktion spsCommand2 hinzu, die ausgeführt wird, wenn der Befehl 8 empfangen wird</span></div>
+<div class="line"><span class="lineno">   19</span>}</div>
+<div class="ttc" id="a_communication_s_p_s_8cpp_html_a77f30894a1c6b2194bd4bdd29d5f1a77"><div class="ttname"><a href="_communication_s_p_s_8cpp.html#a77f30894a1c6b2194bd4bdd29d5f1a77">comSPS_addCommand</a></div><div class="ttdeci">void comSPS_addCommand(uint8_t cmd, command_function function)</div><div class="ttdoc">Definition von SPS-Befehlspaketen.</div><div class="ttdef"><b>Definition</b> CommunicationSPS.cpp:54</div></div>
+<div class="ttc" id="amain_8cpp_html_a4fc01d736fe50cf5b977f755b675f11d"><div class="ttname"><a href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a></div><div class="ttdeci">void setup()</div><div class="ttdef"><b>Definition</b> main.cpp:51</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md3"></a>
+Datenpaket</h3>
+<p>Ein Datenpaket ist wie folgt aufgebaut:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Byte 0   </th><th class="markdownTableHeadNone">Byte 1    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Befehl   </td><td class="markdownTableBodyNone">Daten   </td></tr>
+</table>
+<p>Zum senden von Datenpaketen gibt es zwei verschiedene Funktionen:</p>
+<ol type="1">
+<li><code><a class="el" href="_communication_s_p_s_8h.html#aa3233e8223eb8943f89da931504c4e70" title="Sende Daten an die SPS. Wird sofort gesendet und nicht gepuffert. Für Bestätigung von empfangenenen B...">comSPS_send2(uint8_t command, uint8_t data)</a></code> - Sendet sofort bei Aufruf das Datenpaket an die übergeordnete Steuerung. Diese Funktion ist für die Bestätigung von empfangenen Befehlspaketen konzipiert.</li>
+<li><code><a class="el" href="_communication_s_p_s_8h.html#a9338fd1d170c2b15d2e6ae0ffbb409ce" title="Sende Daten an die SPS. Wird in den Sendepuffer geschrieben und bei Polling an die SPS gesendet.">comSPS_writeData(uint8_t command, uint8_t data)</a></code> - Fügt das Datenpaket in eine Warteschlange ein und sendet dann die Pakete jeweils bei Polling durch die übergeordnete Steuerung. Die Länge der Warteschlange ist in <a class="el" href="_settings_8h.html" title="In dieser Datei sind alle veränderbaren Einstellungen zentral abgespeichert.">Settings.h</a> unter <a class="el" href="_settings_8h.html#a406b0a57e3ba0391b50482f4c2dd890d" title="Datenpuffer für Daten, die zur SPS gesendet werden sollen; Anzahl Pakete.">C_MC_DataBufferSize</a> definiert. Diese Funktion ist für das Senden von Daten an die übergeordnete Steuerung konzipiert, die gepollt werden müssen.</li>
+</ol>
+<p>Die verschiedenen Datenpakete sind als Makros in <a class="el" href="_settings_8h.html" title="In dieser Datei sind alle veränderbaren Einstellungen zentral abgespeichert.">Settings.h</a> definiert.</p><ul>
+<li><code>C_MC_LIFESIGNAL</code> - Lifesignal der CarControlUnit</li>
+<li><code><a class="el" href="_settings_8h.html#a46f0a83cbd291da8ce4924dce434cd07" title="Datenpaket: Fahrzeug in Boxengass eingefahren.">C_MC_CarIN(value)</a></code> - Fahrzeug in Boxengasse eingefahren</li>
+<li><code><a class="el" href="_settings_8h.html#a19e748e5112d9651e468f42da9e16b8e" title="Datenpaket: Fahrzeug aus Boxengasse ausgefahren.">C_MC_CarOUT(value)</a></code> - Fahrzeug aus Boxengasse ausgefahren</li>
+<li><code><a class="el" href="_settings_8h.html#a78e8c83938ae42d1ad290114e60653c1" title="Datenpaket: Fahrzeug fertig programmiert.">C_MC_CarPROGRAMMED(value)</a></code> - Fahrzeug fertig programmiert</li>
+<li><code><a class="el" href="_settings_8h.html#ac9b4f0da96e695d1946779554119aba4" title="Bestätigungspaket: Von der SPS erhaltenes Befehlspaket verstanden (ACK).">C_MC_OK(value)</a></code> - Bestätigungspaket für empfangene Befehlspakete</li>
+</ul>
+<h1><a class="anchor" id="erweiterung-protokoll"></a>
+Mehrere Bus-Teilnehmer</h1>
+<p>Aktuell ist das Protokoll nur für die Kommunikation zwischen einem Master und einem Slave ausgelegt. Wenn weitere Slaves mit der übergeordnete Steuerung kommunizieren sollen, muss das Protokoll um eine Adressierung erweitert werden.</p>
+<p>Um die Paketlänge zu verändern, muss die Definition <a class="el" href="_definitions_8h.html#aaa713b1fca30192e1702f2996edf4e27" title="Länge der Pakete, die von der SPS empfangen werden.">SPS_UART_RxPacketLength</a> auf die entsprechende Länge angepasst werden.</p>
+<h3><a class="anchor" id="autotoc_md4"></a>
+Synchronisierung mit übergeordneter Steuerung</h3>
+<ul>
+<li>Die Definition <a class="el" href="_settings_8h.html#a7d764fc5b3d1d8eacc9d90355d9468b4" title="Pollingpaket: Wird von der SPS regelmäßig gesendet, um die CarControlUnit und die SPS zu synchronisie...">C_SPS_SYNC</a> muss auf die entsprechende Länge ergänzt werden.</li>
+<li>Die Funktion <a class="el" href="_communication_s_p_s_8h.html#acb58a91c9d65a5a37d533eb72d5e963d" title="Synchronisiere SPS und CarControlUnit mithilfe des Life-/Polling-Signals; blockierende Funktion.">comSPS_sync()</a> muss um eine Logik zur Erkennung der Adressierung ergänzt werden.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md5"></a>
+Empfangen von Befehlspaketen von der übergeordneten Steuerung</h3>
+<ul>
+<li>Die Funktion <a class="el" href="_communication_s_p_s_8h.html#aa40036e45eb722cdfe09f93a76ff0332" title="Daten von SPS empfangen und ausführen, sofern definiert.">comSPS_execute()</a> muss um eine Logik zur zur Erkennung der Adressierung ergänzt werden.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md6"></a>
+Senden von Datenpaketen an die übergeordnete Steuerung</h3>
+<ul>
+<li>Die Definition von <a class="el" href="_definitions_8h.html#ac5bf748afe4f51c4af23bae1b0787516" title="Länge der Pakete, die an die SPS gesendet werden.">SPS_UART_TxPacketLength</a> muss auf die entsprechende Länge ergänzt werden.</li>
+<li>Die Funktion <a class="el" href="_communication_s_p_s_8h.html#aa3233e8223eb8943f89da931504c4e70" title="Sende Daten an die SPS. Wird sofort gesendet und nicht gepuffert. Für Bestätigung von empfangenenen B...">comSPS_send2()</a> muss um eine Logik zur Adressierung ergänzt werden.</li>
+<li>Die Funktion <a class="el" href="_communication_s_p_s_8h.html#a4824e680a8f9f7da4dfcaa3a342b3a1a" title="Beantwortung des Polling-Pakets der SPS. Sendet Daten aus dem Puffer an die SPS, falls vorhanden,...">comSPS_sendDataPacket()</a> muss um eine Logik zur Adressierung ergänzt werden.</li>
+</ul>
+<p>Moduldatei: <a class="el" href="_communication_s_p_s_8cpp.html">CommunicationSPS.cpp</a> </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Erzeugt von <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>

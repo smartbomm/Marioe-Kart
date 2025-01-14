@@ -1,0 +1,52 @@
+\doxysection{Carrera\+Controll.\+h}
+\hypertarget{_carrera_controll_8h_source}{}\label{_carrera_controll_8h_source}\index{C:/Users/grste/Git/Marioe-\/Kart/src/CarreraControll.h@{C:/Users/grste/Git/Marioe-\/Kart/src/CarreraControll.h}}
+\mbox{\hyperlink{_carrera_controll_8h}{gehe zur Dokumentation dieser Datei}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CARRERACONTROLL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CARRERACONTROLL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }CarreraControll\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ CarreraControll();}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ IRAM\_ATTR\ timerInterrupt();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_carrera_controll_a672d241e994efe1c4f8636502eb4421b}{conf}}(\textcolor{keywordtype}{int}\ pin);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_carrera_controll_a64af82614ee133308105f585053b575d}{setID}}(\textcolor{keywordtype}{int}\ carID);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_carrera_controll_a64af82614ee133308105f585053b575d}{setID}}();}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_carrera_controll_a48f16cf7332a6eac9e2d87bedc281ed8}{drive}}(\textcolor{keywordtype}{int}\ CarNr,\ \textcolor{keywordtype}{int}\ Speed);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_carrera_controll_ae01e4ff2d32edfca8a17ae8b2c5a7bd6}{program}}(\textcolor{keywordtype}{int}\ carNr,\ \textcolor{keywordtype}{int}\ maxSpeed,\ \textcolor{keywordtype}{int}\ brake,\ \textcolor{keywordtype}{int}\ fuel);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_carrera_controll_ae01e4ff2d32edfca8a17ae8b2c5a7bd6}{program}}();}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_carrera_controll_ab1f59a7fb6574ee78424469fc77df76c}{driveAll}}(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_carrera_controll_adc0737662be788d394b87463ad383acc}{cycle}}();}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ initTime();}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{int}\ IDtoCar(\textcolor{keywordtype}{int}\ CarID);}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{int}\ reverseBits(\textcolor{keywordtype}{int}\ value,\ \textcolor{keywordtype}{int}\ length);}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ changeList(\textcolor{keywordtype}{int}\ Nr,\ \textcolor{keywordtype}{int}\ value,\ \textcolor{keywordtype}{int}\ carNr);}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{void}\ pushWord(\textcolor{keywordtype}{int}\ CPin);}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ changeBits(\textcolor{keywordtype}{int}\ carNr,\ \textcolor{keywordtype}{int}\ value,\ \textcolor{keywordtype}{int}\ shifts,\ \textcolor{keywordtype}{int}\ mask);}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{int}\ Cpin;}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{bool}\ Crun;}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

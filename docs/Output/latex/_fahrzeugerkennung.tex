@@ -1,0 +1,29 @@
+\chapter{Fahrzeugerkennung}
+\hypertarget{_fahrzeugerkennung}{}\label{_fahrzeugerkennung}\index{Fahrzeugerkennung@{Fahrzeugerkennung}}
+Jedes Carrera Digital 124 -\/ Fahrzeug ist mit einer IR-\/\+LED ausgerüstet. Je nach zugeordnetem Regler, blinkt diese mit einer anderen Frequenz. Die Sende-\/\+Frequenzen sind folgende\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Regler-\/\+Nummer   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sendefrequenz in k\+Hz   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Periodendauer in µs    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Regler-\/\+Nummer   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sendefrequenz in k\+Hz   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Periodendauer in µs    }\\\cline{1-3}
+\endhead
+1   &15,625   &64    \\\cline{1-3}
+2   &7,813   &128    \\\cline{1-3}
+3   &5,208   &192    \\\cline{1-3}
+4   &3,906   &256    \\\cline{1-3}
+5   &3,125   &320    \\\cline{1-3}
+6   &2,604   &384    \\\cline{1-3}
+Ghostcar   &2,232   &448    \\\cline{1-3}
+Pacecar   &1,953   &512   \\\cline{1-3}
+\end{longtabu}
+
+
+Das Modul Car\+Detection dient zur Erkennung der entsprechenden Reglernummer anhand der Periodendauer.\hypertarget{_fahrzeugerkennung_autotoc_md0}{}\doxysubsubsection{\texorpdfstring{Funktionsweise}{Funktionsweise}}\label{_fahrzeugerkennung_autotoc_md0}
+Ein Impuls am deklarierten Pin löst eine Interrupt-\/\+Routine aus. Diese speichert die aktuelle Systemzeit ab. Beim nächsten Interrupt, wird ebenfalls die Systemzeit abgespeichert und der Interrupt deaktiviert. Der Interrupt wird erst wieder reaktiviert, wenn die Zeitdifferenz durch die Funktion {\ttfamily car\+Dectx\+\_\+\+Execute()}ausgewertet wurde und das Mindestintervall zwischen zwei durchfahrenden Fahrzeugen gewährleistet wurde. Aufgrund von Zeitmangel wurden die Funktionen für die zwei Infrarot-\/\+Sensoren einfach kopiert und tragen jeweils das Präfix car\+Dect1... bzw. car\+Dect2... . Eine Möglichkeit der Weiterentwicklung bestände darin, eine Struktur zu entwerfen, in der jeweils die Parameter, der Sensorik hinterlegt ist, so dass beide Sensoren mit der gleichen Funktion bedient werden könnten.
+
+Genaueres zur Verwendung der Funktionen ist in der Dokumentation zu \doxylink{_car_detection_8h}{Car\+Detection.\+h} zu finden. 
