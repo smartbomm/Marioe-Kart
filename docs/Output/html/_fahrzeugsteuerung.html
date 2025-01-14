@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CarControlUnit: Fahrzeugsteuerung</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">CarControlUnit<span id="projectnumber">&#160;0.1</span>
+   </div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('_fahrzeugsteuerung.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Lade ...</div>
+<div class="SRStatus" id="Searching">Suche ...</div>
+<div class="SRStatus" id="NoMatches">Keine Treffer</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Fahrzeugsteuerung</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="Init"></a>
+Initalisierung</h1>
+<div class="fragment"><div class="line">hw_timer_t *timer = NULL;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_class" href="class_carrera_controll.html">CarreraControll</a> *interruptPointer;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> cycle_e(){</div>
+<div class="line">  interruptPointer -&gt; cycle();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">CarreraControll::CarreraControll(){</div>
+<div class="line">  interruptPointer = <span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> IRAM_ATTR CarreraControll::timerInterrupt() {</div>
+<div class="line"> cycle_e();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> CarreraControll::initTime(){</div>
+<div class="line">        timer = timerBegin(0, 80, <span class="keyword">true</span>); </div>
+<div class="line">        timerAttachInterrupt(timer, &amp;CarreraControll::timerInterrupt, <span class="keyword">true</span>); <span class="comment">//all the interrupts</span></div>
+<div class="line">        timerAlarmWrite(timer, 50, <span class="keyword">true</span>); </div>
+<div class="line">        timerAlarmEnable(timer); </div>
+<div class="line">}</div>
+</div><!-- fragment --><p> zuerst wird ein getimter Interrupt erstellt dieser ruft regelmäßig die Funktion cycle() auf. Diese führt dann die nächste Aktion aus Diesen Teil würde ich nicht ändern solange das Protokoll laufen soll wie geplant. Falls es Änderungen am Timing geben soll kann man das in der initTime() Funktion ändern. (ACHTUNG: einige pausenzeiten zählen zusätzlich hoch also werden alle timings gestreckt wenn man hier etwas ändert) </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> states[] = </div>
+<div class="line">{</div>
+<div class="line"> 0b1000000000000,  <span class="comment">//0 &gt; Programming Word</span></div>
+<div class="line"> 0b1111000000,  <span class="comment">//1 &gt; Pace Ang GHOST Car</span></div>
+<div class="line"> 0b10000000,  <span class="comment">//2 &gt; Aktiv Word</span></div>
+<div class="line"> 0b1000100000,  <span class="comment">//3 &gt; Car 0</span></div>
+<div class="line"> 0b1100100000,  <span class="comment">//4 &gt; Car 4</span></div>
+<div class="line"> 0b1001100000,  <span class="comment">//5 &gt; Car 1</span></div>
+<div class="line"> 0b1101100000,  <span class="comment">//6 &gt; Car 5</span></div>
+<div class="line"> 0b1010100000,  <span class="comment">//7 &gt; Car 2</span></div>
+<div class="line"> 0b10000000,  <span class="comment">//8 &gt; Aktiv Word</span></div>
+<div class="line"> 0b1011100000,  <span class="comment">//9 &gt; Car 3</span></div>
+<div class="line"> };</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> size[] = {13 , 10 , 8, 10 , 10 , 10 , 10 , 10 , 8 , 10}; <span class="comment">//standard lenghts of the words</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> values[] =</div>
+<div class="line">{</div>
+<div class="line">  0b1000000000101,</div>
+<div class="line">  0b1000010000101,</div>
+<div class="line">  0b1000001000101</div>
+<div class="line">}; <span class="comment">//the standard values for the 3 cylicaly writen programming words (speed breaks and fuel)</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> loc = 0;</div>
+<div class="line"><span class="keywordtype">int</span> restCycle = 150; <span class="comment">//cycle to rest between words</span></div>
+<div class="line"><span class="keywordtype">int</span> numStates = size[0];</div>
+<div class="line"><span class="keywordtype">int</span> statesInt = states[0];</div>
+<div class="line"><span class="keywordtype">bool</span> doneCycle = <span class="keyword">true</span>; <span class="comment">//done with word</span></div>
+<div class="line"><span class="keywordtype">bool</span> halfDone = <span class="keyword">true</span>; <span class="comment">//is true if half of the bit is written (either hight or low)</span></div>
+<div class="line"><span class="keywordtype">bool</span> doneProtCH=<span class="keyword">false</span>;  <span class="comment">//flash flag</span></div>
+<div class="line"><span class="keywordtype">bool</span> doneProtProgramming = <span class="keyword">true</span>; <span class="comment">//true if the protocoll got programmed</span></div>
+<div class="line"><span class="keywordtype">int</span> CycleCount = 0;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">bool</span> normalMode = <span class="keyword">true</span>;</div>
+<div class="line"><span class="keywordtype">int</span> flashCount = 0;</div>
+<div class="line"><span class="keywordtype">int</span> flashCar=0;</div>
+<div class="line"><span class="keywordtype">bool</span> cycleAllowed = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">bool</span> inverted = <span class="keyword">true</span>; <span class="comment">//to invert the protocoll (if hardware changes)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">bool</span> programmed = <span class="keyword">true</span>;</div>
+<div class="line"><span class="keywordtype">int</span> pCount = 0; <span class="comment">//which programming word is chosen</span></div>
+</div><!-- fragment --><p> Hier werden die Variablen für die <a class="el" href="class_carrera_controll.html" title="Die Klasse CarreraControll übernimmt alle ansteuerungs Funktionen der Carrera Autos Die Klasse wird m...">CarreraControll</a> Klasse definiert. </p><dl class="section warning"><dt>Warnung</dt><dd>Achtung hier gibt es einige Flaggs die villeicht <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="class_carrera_controll.html#adc0737662be788d394b87463ad383acc">CarreraControll::cycle</a>() {</div>
+<div class="line">    <span class="keywordflow">if</span>(normalMode){</div>
+<div class="line">    pushWord(Cpin);</div>
+<div class="line">      <span class="keywordflow">if</span> (doneCycle){</div>
+<div class="line">        doneCycle = <span class="keyword">false</span>;</div>
+<div class="line">        statesInt= states[CycleCount];</div>
+<div class="line">        numStates = size[CycleCount];</div>
+<div class="line">        Serial.print(statesInt);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">else</span>{</div>
+<div class="line">           <span class="keywordflow">if</span>(flashCount==-1||flashCount==-2){</div>
+<div class="line">      changeBits(flashCar,0,5,0b1);</div>
+<div class="line">      pushWord(Cpin);  </div>
+<div class="line"> </div>
+<div class="line">      </div>
+<div class="line">     }</div>
+<div class="line">     <span class="keywordflow">if</span>(flashCount==0||flashCount==1||flashCount ==4||flashCount==5||flashCount==13||flashCount==12||flashCount ==17||flashCount==16){</div>
+<div class="line">      changeBits(flashCar,1,5,0b1);</div>
+<div class="line">      pushWord(Cpin); </div>
+<div class="line"> </div>
+<div class="line">     }</div>
+<div class="line">     <span class="keywordflow">if</span>(flashCount ==2||flashCount ==3||flashCount ==6||flashCount==7||flashCount ==11||flashCount==10||flashCount ==15||flashCount==14||flashCount == 18){</div>
+<div class="line">       changeBits(flashCar,0,5,0b1);  </div>
+<div class="line">       pushWord(Cpin);</div>
+<div class="line"> </div>
+<div class="line">     }</div>
+<div class="line">     <span class="keywordflow">if</span>(flashCount == 8){</div>
+<div class="line">      cycleAllowed = <span class="keyword">false</span>;</div>
+<div class="line">       digitalWrite(Cpin,inverted); <span class="comment">//set signal to low</span></div>
+<div class="line">       flashCount++;</div>
+<div class="line">       }</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">if</span>(flashCount==9){</div>
+<div class="line">        CycleCount++;</div>
+<div class="line">       <span class="keywordflow">if</span>(CycleCount&gt;10000){</div>
+<div class="line">        flashCount++;</div>
+<div class="line">        cycleAllowed=<span class="keyword">true</span>;</div>
+<div class="line">        CycleCount = 0;</div>
+<div class="line">        doneProtProgramming = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line">      }</div>
+<div class="line">     }</div>
+<div class="line">  <span class="keywordflow">if</span> (doneProtCH &amp; cycleAllowed &amp; flashCount != 8 &amp; flashCount != 9){</div>
+<div class="line">    doneProtCH = <span class="keyword">false</span>;</div>
+<div class="line">    flashCount++;</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">if</span> (doneCycle &amp; cycleAllowed){</div>
+<div class="line">    doneCycle = <span class="keyword">false</span>;</div>
+<div class="line">    statesInt= states[CycleCount];</div>
+<div class="line">    numStates = size[CycleCount];</div>
+<div class="line">   }</div>
+<div class="line">   <span class="keywordflow">if</span> (flashCount==19){</div>
+<div class="line">    cycleAllowed = <span class="keyword">true</span>;</div>
+<div class="line">    normalMode = <span class="keyword">true</span>;</div>
+<div class="line">    flashCount = -2;</div>
+<div class="line">    digitalWrite(10,!digitalRead(10));</div>
+<div class="line">   }</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --></dd></dl>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Erzeugt von <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+\doxysection{Settings.\+h}
+\hypertarget{_settings_8h_source}{}\label{_settings_8h_source}\index{C:/Users/grste/Git/Marioe-\/Kart/src/Settings.h@{C:/Users/grste/Git/Marioe-\/Kart/src/Settings.h}}
+\mbox{\hyperlink{_settings_8h}{gehe zur Dokumentation dieser Datei}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ Settings\_h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ Settings\_h}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00014\ \ \textcolor{comment}{//\ \ Car-\/Parameters\ \ //}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ VEL\_CarEntry\ 5}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ VEL\_CarEntry\_brake\ 2}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ VEL\_CarExit\ 15}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00037\ \ \textcolor{comment}{//\ \ Fahrzeugerkennung\ \ //}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ IR\_DECT\_Period\_Tolerance\ 10\ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ IR\_DECT\_Period\_min\ 64}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ IR\_DECT\_CarTimeGap\ 32000}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00056\ \ \textcolor{comment}{//\ \ Debugging-\/Functionalities\ \ //}}
+\DoxyCodeLine{00057\ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ DEBUG\_RGB\_BRIGHTNESS\ 255}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{comment}{//\#define\ SERIAL\_DEBUGGING}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ OTA\_Flashing}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ TELNET\_DEBUGGING}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ OTA\_SSID\ "{}Labore-\/Hof\ AT-\/MT"{}\ \ \ }}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ OTA\_PW\ "{}laborwlan"{}\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ OTA\_IP\ \{192,168,9,5\}\ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ OTA\_DNS\ \{192,168,9,1\}\ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ OTA\_SUBNET\ \{255,255,255,0\}\ \ \ \ }}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ OTA\_GW\ \{192,168,9,1\}\ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00093\ \ \textcolor{comment}{//\ \ Serial\ Connection\ with\ PLC\ \ //}}
+\DoxyCodeLine{00094\ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ SPS\_Connected}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ SPS\_UART\_Timeout\ 30}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ SPS\_UART\_RxCommandMemory\ 85\ \ \ \ \ \ \ }}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ SPS\_UART\_Frequency\ 10}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ C\_MC\_DataBufferSize\ 10\ \ }}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#define\ C\_MC\_LIFESIGNAL\ 0,1}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#define\ C\_MC\_CarIN(value)\ 1,value}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ C\_MC\_CarOUT(value)\ 2,value}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#define\ C\_MC\_CarPROGRAMMED(value)\ 3,value}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#define\ C\_MC\_OK(value)\ 80,value\ \ \ \ \ }\textcolor{comment}{//Ok\ Packet\ MC-\/>SPS}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#define\ C\_SPS\_SYNC\ \{0,0x79,0x9a,0x62,0x43\}\ \ \ \ \ \ \ \ \ }\textcolor{comment}{//Polling-\/\ and\ Sync-\/Signal\ from\ SPS\ -\/>\ MC}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#define\ C\_SPS\_PROGRAM\ \{1,\ id,\ vmax,\ brake,\ fuel\}\ \ \ \ }\textcolor{comment}{//Program-\/Command\ from\ SPS\ -\/>\ MC}}
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\ \ \ \ \#define\ C\_SPS\_PROGRAM\_ID\ 1\ \ \ \ \ \ }}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\ \ \ \ \#define\ C\_SPS\_PROGRAM\_VMAX\ 2\ \ \ \ }}
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\ \ \ \ \#define\ C\_SPS\_PROGRAM\_BRAKE\ 3\ \ \ }}
+\DoxyCodeLine{00175\ \textcolor{preprocessor}{\ \ \ \ \#define\ C\_SPS\_PROGRAM\_FUEL\ 4\ \ \ \ }}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00181\ \textcolor{preprocessor}{\#define\ C\_SPS\_CarDRIVE\ \{0x05,\ id,\ na,\ na,\ na\}\ \ }\textcolor{comment}{//Command\ to\ drive\ a\ car\ back\ to\ the\ course}}
+\DoxyCodeLine{00182\ \textcolor{preprocessor}{\ \ \ \ \#define\ C\_SPS\_CarDRIVE\_ID\ 1\ \ \ \ \ }}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -2,6 +2,24 @@
 #define CARRERACONTROLL_H
 
 /**
+ * @page Fahrzeugsteuerung
+ * @section Init Initalisierung
+ * @snippet ./CarreraControll.cpp CarreraControllInit
+ * zuerst wird ein getimter Interrupt erstellt dieser ruft regelmäßig die Funktion cycle() auf. 
+ * Diese führt dann die nächste Aktion aus Diesen Teil würde ich nicht ändern solange das Protokoll laufen soll wie geplant. 
+ * Falls es Änderungen am Timing geben soll kann man das in der initTime() Funktion ändern.
+ * (ACHTUNG: einige pausenzeiten zählen zusätzlich hoch also werden alle timings gestreckt wenn man hier etwas ändert)
+ * @snippet ./CarreraControll.cpp CarreraControllVariables
+ * Hier werden die Variablen für die CarreraControll Klasse definiert.
+ * @warning Achtung hier gibt es einige Flaggs die villeicht 
+ * 
+ * @snippet ./CarreraControll.cpp CarreraControllCycle
+ */
+
+
+
+
+/**
  * @file CarreraControll.h
  * @author Stefan Graml (stefan.graml@hof-university.de)
  * @brief The header of CarreraControll
@@ -14,7 +32,7 @@
 
 #include <Arduino.h>
 /**
- * @brief die Klasse CarreraControll übernimmt alle ansteuerungs Funktionen der Carrera Autos
+ * @brief Die Klasse CarreraControll übernimmt alle ansteuerungs Funktionen der Carrera Autos
  * Die Klasse wird momentan nur einmal verwendet. Die Klasse wurde am Anfang des Projektes erstellt, 
  * allerdings könnte sie überarbeitet werden, um mehrere Treiber auf einer CarControllUnit zu betreiben.
  * @note die Klasse ist nur einmal erstellt und nicht weiter getestet (außer Einzelbetrieb)
@@ -27,16 +45,16 @@ public:
 
 
     /**
-     * @brief Initallisieren der CarreraControll Bibliothek
+     * @brief Initialisieren der CarreraControll Bibliothek
      * 
-     * @param pin Ausgabepinn der CarreraControll Bibliothek
+     * @param pin Ausgabepin der CarreraControll Bibliothek
      */
     void conf(int pin);
 
 
 
     /**
-     * @brief Setzt die ID eines Fahrzeugs auf mitgegebene id
+     * @brief Setzt die ID eines Fahrzeugs auf mitgegebene ID
      * 
      * @param carID Die ID die Auf das mommentane Fahrzeug gesetzt werden soll
      */
@@ -45,7 +63,7 @@ public:
 
     /**
      * @brief Frage ab ob das Programieren einer ID erfolgreich durch gelaufen ist
-     * @details diese Funktion wird genau wie die Rückmeldung des programmierens nur einmalig zurückgegeben
+     * @details Diese Funktion wird genau wie die Rückmeldung des Programmierens nur einmalig zurückgegeben
      */
     bool setID();
 
@@ -61,10 +79,10 @@ public:
     /**
      * @brief Programmieren des Autos auf eine ID, Maximalgeschwindigeit, Bremskraft und Tankgröße
      * 
-     * @param carNr die zu programmierende ID
-     * @param maxSpeed die zu programmierende Maximalgeschwindigeit
-     * @param brake die zu programmierende Bremskraft
-     * @param fuel die zu programmierende Tankgröße
+     * @param carNr Die zu programmierende ID
+     * @param maxSpeed Die zu programmierende Maximalgeschwindigeit
+     * @param brake Die zu programmierende Bremskraft
+     * @param fuel Die zu programmierende Tankgröße
      * 
      * @note Die Funktion wurde nur mit den validen werten 0-5 getestet.
      */
@@ -86,9 +104,9 @@ public:
      */
     void driveAll(int value);
     /**
-     * @brief zyklus klasse (sollte nicht von außen aufgerufen werden muss aber public bleiben wegen den Interrupts)
+     * @brief Zyklus-Klasse (sollte nicht von außen aufgerufen werden muss aber public bleiben wegen den Interrupts)
      * 
-     * @note bei externem aufruf kann es timing probleme geben
+     * @note Bei externem Aufruf kann es Timing-Probleme geben
      */
     void cycle();
 

@@ -1,0 +1,156 @@
+\doxysection{C\+:/\+Users/grste/\+Git/\+Marioe-\/\+Kart/src/\+Communication\+SPS.h-\/\+Dateireferenz}
+\hypertarget{_communication_s_p_s_8h}{}\label{_communication_s_p_s_8h}\index{C:/Users/grste/Git/Marioe-\/Kart/src/CommunicationSPS.h@{C:/Users/grste/Git/Marioe-\/Kart/src/CommunicationSPS.h}}
+
+
+Funktionen zur Kommunikation mit der SPS über RS-\/485.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Definitions.\+h$>$}\newline
+\doxysubsubsection*{Typdefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_communication_s_p_s_8h_a25d85117b880ead4b043c2cff864ed9d}{command\+\_\+function}}) (uint8\+\_\+t \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Funktionszeiger für für dynamischen Aufruf von Funktionen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_communication_s_p_s_8h_a77f30894a1c6b2194bd4bdd29d5f1a77}{com\+SPS\+\_\+add\+Command}} (uint8\+\_\+t cmd, \mbox{\hyperlink{_communication_s_p_s_8h_a25d85117b880ead4b043c2cff864ed9d}{command\+\_\+function}} function)
+\begin{DoxyCompactList}\small\item\em Definition von SPS-\/\+Befehlspaketen. \end{DoxyCompactList}\item 
+\Hypertarget{_communication_s_p_s_8h_aa40036e45eb722cdfe09f93a76ff0332}\label{_communication_s_p_s_8h_aa40036e45eb722cdfe09f93a76ff0332} 
+void {\bfseries com\+SPS\+\_\+execute} ()
+\begin{DoxyCompactList}\small\item\em Daten von SPS empfangen und ausführen, sofern definiert. \end{DoxyCompactList}\item 
+\Hypertarget{_communication_s_p_s_8h_a7a44baf895cbb1fe844c018159bd21fe}\label{_communication_s_p_s_8h_a7a44baf895cbb1fe844c018159bd21fe} 
+void {\bfseries com\+SPS\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Initialisiere UART-\/\+Interface und in com\+SPS\+\_\+protocol() definiertes Protokoll. \end{DoxyCompactList}\item 
+\Hypertarget{_communication_s_p_s_8h_acb58a91c9d65a5a37d533eb72d5e963d}\label{_communication_s_p_s_8h_acb58a91c9d65a5a37d533eb72d5e963d} 
+void {\bfseries com\+SPS\+\_\+sync} ()
+\begin{DoxyCompactList}\small\item\em Synchronisiere SPS und Car\+Control\+Unit mithilfe des Life-\//\+Polling-\/\+Signals; blockierende Funktion. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_communication_s_p_s_8h_aa3233e8223eb8943f89da931504c4e70}{com\+SPS\+\_\+send2}} (uint8\+\_\+t cmd, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Sende Daten an die SPS. Wird sofort gesendet und nicht gepuffert. Für Bestätigung von empfangenenen Befehlspaketen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_communication_s_p_s_8h_a9338fd1d170c2b15d2e6ae0ffbb409ce}{com\+SPS\+\_\+write\+Data}} (uint8\+\_\+t cmd, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Sende Daten an die SPS. Wird in den Sendepuffer geschrieben und bei Polling an die SPS gesendet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_communication_s_p_s_8h_a4824e680a8f9f7da4dfcaa3a342b3a1a}{com\+SPS\+\_\+send\+Data\+Packet}} ()
+\begin{DoxyCompactList}\small\item\em Beantwortung des Polling-\/\+Pakets der SPS. Sendet Daten aus dem Puffer an die SPS, falls vorhanden, ansonsten das Life-\/\+Signal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Ausführliche Beschreibung}
+Funktionen zur Kommunikation mit der SPS über RS-\/485. 
+
+\begin{DoxyAuthor}{Autor}
+Joel Bommeli (\href{mailto:joel.bommeli@hof-university.de}{\texttt{ joel.\+bommeli@hof-\/university.\+de}})
+\end{DoxyAuthor}
+
+
+Siehe folgende Möglichkeiten zur Einstellung in \doxylink{_settings_8h}{Settings.\+h}\+:
+
+\doxylink{_settings_8h_a6d83b3a8a311b14de80255e6808be66b}{SPS\+\_\+\+Connected}
+
+\doxylink{_settings_8h_afe816a9e240d38ad48cad78230fe60c0}{SPS\+\_\+\+UART\+\_\+\+Timeout}
+
+\doxylink{_settings_8h_aee2f0698b597709600a6f4552fcb2e2e}{SPS\+\_\+\+UART\+\_\+\+Rx\+Command\+Memory}
+
+\doxylink{_settings_8h_a13d7624719eb1f940c8cd765005618d6}{SPS\+\_\+\+UART\+\_\+\+Frequency}
+
+\doxylink{_settings_8h_a406b0a57e3ba0391b50482f4c2dd890d}{C\+\_\+\+MC\+\_\+\+Data\+Buffer\+Size}
+
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Datum}
+2025-\/01-\/07
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Dokumentation der benutzerdefinierten Typen}
+\Hypertarget{_communication_s_p_s_8h_a25d85117b880ead4b043c2cff864ed9d}\index{CommunicationSPS.h@{CommunicationSPS.h}!command\_function@{command\_function}}
+\index{command\_function@{command\_function}!CommunicationSPS.h@{CommunicationSPS.h}}
+\doxysubsubsection{\texorpdfstring{command\_function}{command\_function}}
+{\footnotesize\ttfamily \label{_communication_s_p_s_8h_a25d85117b880ead4b043c2cff864ed9d} 
+typedef void(\texorpdfstring{$\ast$}{*} command\+\_\+function) (uint8\+\_\+t \texorpdfstring{$\ast$}{*})}
+
+
+
+Funktionszeiger für für dynamischen Aufruf von Funktionen. 
+
+\begin{DoxyReturn}{Rückgabe}
+Funktion darf keinen Rückgabewert haben 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameter}
+{\em uint8\+\_\+t} & \texorpdfstring{$\ast$}{*} Funktion darf Argumente in Form eines uint8\+\_\+t-\/\+Zeigers haben \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Dokumentation der Funktionen}
+\Hypertarget{_communication_s_p_s_8h_a77f30894a1c6b2194bd4bdd29d5f1a77}\index{CommunicationSPS.h@{CommunicationSPS.h}!comSPS\_addCommand@{comSPS\_addCommand}}
+\index{comSPS\_addCommand@{comSPS\_addCommand}!CommunicationSPS.h@{CommunicationSPS.h}}
+\doxysubsubsection{\texorpdfstring{comSPS\_addCommand()}{comSPS\_addCommand()}}
+{\footnotesize\ttfamily \label{_communication_s_p_s_8h_a77f30894a1c6b2194bd4bdd29d5f1a77} 
+void com\+SPS\+\_\+add\+Command (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cmd}{, }\item[{\mbox{\hyperlink{_communication_s_p_s_8h_a25d85117b880ead4b043c2cff864ed9d}{command\+\_\+function}}}]{function}{}\end{DoxyParamCaption})}
+
+
+
+Definition von SPS-\/\+Befehlspaketen. 
+
+
+\begin{DoxyParams}{Parameter}
+{\em cmd} & Wert des Befehlsbyte des zugeordneten Befehlspakets \\
+\hline
+{\em function} & Auszuführende Funktion bei Empfang des entsprechenden Befehlsbytes \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_communication_s_p_s_8h_aa3233e8223eb8943f89da931504c4e70}\index{CommunicationSPS.h@{CommunicationSPS.h}!comSPS\_send2@{comSPS\_send2}}
+\index{comSPS\_send2@{comSPS\_send2}!CommunicationSPS.h@{CommunicationSPS.h}}
+\doxysubsubsection{\texorpdfstring{comSPS\_send2()}{comSPS\_send2()}}
+{\footnotesize\ttfamily \label{_communication_s_p_s_8h_aa3233e8223eb8943f89da931504c4e70} 
+void com\+SPS\+\_\+send2 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cmd}{, }\item[{uint8\+\_\+t}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Sende Daten an die SPS. Wird sofort gesendet und nicht gepuffert. Für Bestätigung von empfangenenen Befehlspaketen. 
+
+\begin{DoxyWarning}{Warnung}
+Kann bei falscher Verwendung die Kommunikation stören.
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameter}
+{\em cmd} & Befehl \\
+\hline
+{\em data} & Daten \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_communication_s_p_s_8h_a4824e680a8f9f7da4dfcaa3a342b3a1a}\index{CommunicationSPS.h@{CommunicationSPS.h}!comSPS\_sendDataPacket@{comSPS\_sendDataPacket}}
+\index{comSPS\_sendDataPacket@{comSPS\_sendDataPacket}!CommunicationSPS.h@{CommunicationSPS.h}}
+\doxysubsubsection{\texorpdfstring{comSPS\_sendDataPacket()}{comSPS\_sendDataPacket()}}
+{\footnotesize\ttfamily \label{_communication_s_p_s_8h_a4824e680a8f9f7da4dfcaa3a342b3a1a} 
+void com\+SPS\+\_\+send\+Data\+Packet (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Beantwortung des Polling-\/\+Pakets der SPS. Sendet Daten aus dem Puffer an die SPS, falls vorhanden, ansonsten das Life-\/\+Signal. 
+
+\begin{DoxySeeAlso}{Siehe auch}
+\doxylink{_communication_s_p_s_8h_a9338fd1d170c2b15d2e6ae0ffbb409ce}{com\+SPS\+\_\+write\+Data()} 
+\end{DoxySeeAlso}
+\Hypertarget{_communication_s_p_s_8h_a9338fd1d170c2b15d2e6ae0ffbb409ce}\index{CommunicationSPS.h@{CommunicationSPS.h}!comSPS\_writeData@{comSPS\_writeData}}
+\index{comSPS\_writeData@{comSPS\_writeData}!CommunicationSPS.h@{CommunicationSPS.h}}
+\doxysubsubsection{\texorpdfstring{comSPS\_writeData()}{comSPS\_writeData()}}
+{\footnotesize\ttfamily \label{_communication_s_p_s_8h_a9338fd1d170c2b15d2e6ae0ffbb409ce} 
+void com\+SPS\+\_\+write\+Data (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cmd}{, }\item[{uint8\+\_\+t}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Sende Daten an die SPS. Wird in den Sendepuffer geschrieben und bei Polling an die SPS gesendet. 
+
+
+\begin{DoxyParams}{Parameter}
+{\em cmd} & Befehl \\
+\hline
+{\em data} & Daten \\
+\hline
+\end{DoxyParams}

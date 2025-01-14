@@ -1,0 +1,109 @@
+\doxysection{OTA.\+h}
+\hypertarget{_o_t_a_8h_source}{}\label{_o_t_a_8h_source}\index{C:/Users/grste/Git/Marioe-\/Kart/src/OTA.h@{C:/Users/grste/Git/Marioe-\/Kart/src/OTA.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifdef\ ESP32}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <WiFi.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <ESPmDNS.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <ESP8266WiFi.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <ESP8266mDNS.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <WiFiUdp.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <ArduinoOTA.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <TelnetStream.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{_definitions_8h}{Definitions.h}}>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#if\ defined(ESP32\_RTOS)\ \&\&\ defined(ESP32)}}
+\DoxyCodeLine{00015\ \textcolor{keywordtype}{void}\ ota\_handle(\ \textcolor{keywordtype}{void}\ *\ parameter\ )\ \{}
+\DoxyCodeLine{00016\ \ \ \textcolor{keywordflow}{for}\ (;;)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ ArduinoOTA.handle();}
+\DoxyCodeLine{00018\ \ \ \ \ vTaskDelay(3500);}
+\DoxyCodeLine{00019\ \ \ \}}
+\DoxyCodeLine{00020\ \}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{void}\ setupOTA(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ nameprefix,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password)\ \{}
+\DoxyCodeLine{00024\ \ \ \textcolor{comment}{//\ Configure\ the\ hostname}}
+\DoxyCodeLine{00025\ \ \ uint16\_t\ maxlen\ =\ strlen(nameprefix)\ +\ 7;}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{char}\ *fullhostname\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{char}[maxlen];}
+\DoxyCodeLine{00027\ \ \ uint8\_t\ mac[6];}
+\DoxyCodeLine{00028\ \ \ WiFi.macAddress(mac);}
+\DoxyCodeLine{00029\ \ \ snprintf(fullhostname,\ maxlen,\ \textcolor{stringliteral}{"{}\%s-\/\%02x\%02x\%02x"{}},\ nameprefix,\ mac[3],\ mac[4],\ mac[5]);}
+\DoxyCodeLine{00030\ \ \ ArduinoOTA.setHostname(fullhostname);}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{delete}[]\ fullhostname;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{comment}{//\ Configure\ and\ start\ the\ WiFi\ station}}
+\DoxyCodeLine{00034\ \ \ WiFi.mode(WIFI\_STA);}
+\DoxyCodeLine{00035\ \ \ }
+\DoxyCodeLine{00036\ \ \ WiFi.config(\mbox{\hyperlink{_settings_8h_ac2c42de3e1c8c686793b250d926f9ca2}{OTA\_IP}},\ \mbox{\hyperlink{_settings_8h_ae971a1472201f5627ecb587307697a72}{OTA\_GW}},\ \mbox{\hyperlink{_settings_8h_afb1fb38716508fff3545d58a224c86a9}{OTA\_SUBNET}},\ \mbox{\hyperlink{_settings_8h_afe60ca55552166a64572d2d84e85adc8}{OTA\_DNS}});}
+\DoxyCodeLine{00037\ \ \ WiFi.begin(ssid,\ password);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{comment}{//\ Wait\ for\ connection}}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordflow}{while}\ (WiFi.waitForConnectResult()\ !=\ WL\_CONNECTED)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Connection\ Failed!\ Rebooting..."{}});}
+\DoxyCodeLine{00042\ \ \ \ \ delay(5000);}
+\DoxyCodeLine{00043\ \ \ \ \ ESP.restart();}
+\DoxyCodeLine{00044\ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{comment}{//\ Port\ defaults\ to\ 3232}}
+\DoxyCodeLine{00047\ \ \ \textcolor{comment}{//\ ArduinoOTA.setPort(3232);\ //\ Use\ 8266\ port\ if\ you\ are\ working\ in\ Sloeber\ IDE,\ it\ is\ fixed\ there\ and\ not\ adjustable}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{comment}{//\ No\ authentication\ by\ default}}
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{//\ ArduinoOTA.setPassword("{}admin"{});}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \textcolor{comment}{//\ Password\ can\ be\ set\ with\ it's\ md5\ value\ as\ well}}
+\DoxyCodeLine{00053\ \ \ \textcolor{comment}{//\ MD5(admin)\ =\ 21232f297a57a5a743894a0e4a801fc3}}
+\DoxyCodeLine{00054\ \ \ \textcolor{comment}{//\ ArduinoOTA.setPasswordHash("{}21232f297a57a5a743894a0e4a801fc3"{});}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ ArduinoOTA.onStart([]()\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{//NOTE:\ make\ .detach()\ here\ for\ all\ functions\ called\ by\ Ticker.h\ library\ -\/\ not\ to\ interrupt\ transfer\ process\ in\ any\ way.}}
+\DoxyCodeLine{00058\ \ \ \ \ String\ type;}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (ArduinoOTA.getCommand()\ ==\ U\_FLASH)}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ type\ =\ \textcolor{stringliteral}{"{}sketch"{}};}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{comment}{//\ U\_SPIFFS}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ type\ =\ \textcolor{stringliteral}{"{}filesystem"{}};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ if\ updating\ SPIFFS\ this\ would\ be\ the\ place\ to\ unmount\ SPIFFS\ using\ SPIFFS.end()}}
+\DoxyCodeLine{00065\ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Start\ updating\ "{}}\ +\ type);}
+\DoxyCodeLine{00066\ \ \ \});}
+\DoxyCodeLine{00067\ \ \ }
+\DoxyCodeLine{00068\ \ \ ArduinoOTA.onEnd([]()\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)nEnd"{}});}
+\DoxyCodeLine{00070\ \ \ \});}
+\DoxyCodeLine{00071\ \ \ }
+\DoxyCodeLine{00072\ \ \ ArduinoOTA.onProgress([](\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ progress,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ total)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Progress:\ \%u\%\%\(\backslash\)r"{}},\ (progress\ /\ (total\ /\ 100)));}
+\DoxyCodeLine{00074\ \ \ \});}
+\DoxyCodeLine{00075\ \ \ }
+\DoxyCodeLine{00076\ \ \ ArduinoOTA.onError([](ota\_error\_t\ error)\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Error[\%u]:\ "{}},\ error);}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{if}\ (error\ ==\ OTA\_AUTH\_ERROR)\ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)nAuth\ Failed"{}});}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (error\ ==\ OTA\_BEGIN\_ERROR)\ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)nBegin\ Failed"{}});}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (error\ ==\ OTA\_CONNECT\_ERROR)\ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)nConnect\ Failed"{}});}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (error\ ==\ OTA\_RECEIVE\_ERROR)\ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)nReceive\ Failed"{}});}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (error\ ==\ OTA\_END\_ERROR)\ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)nEnd\ Failed"{}});}
+\DoxyCodeLine{00083\ \ \ \});}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ ArduinoOTA.begin();}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ \#ifdef\ TELNET\_DEBUGGING}}
+\DoxyCodeLine{00087\ \ \ TelnetStream.begin();}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ Serial.println(\textcolor{stringliteral}{"{}OTA\ Initialized"{}});}
+\DoxyCodeLine{00091\ \ \ Serial.print(\textcolor{stringliteral}{"{}IP\ address:\ "{}});}
+\DoxyCodeLine{00092\ \ \ Serial.println(WiFi.localIP());}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#if\ defined(ESP32\_RTOS)\ \&\&\ defined(ESP32)}}
+\DoxyCodeLine{00095\ \ \ xTaskCreate(}
+\DoxyCodeLine{00096\ \ \ \ \ ota\_handle,\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Task\ function.\ */}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{stringliteral}{"{}OTA\_HANDLE"{}},\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ String\ with\ name\ of\ task.\ */}}
+\DoxyCodeLine{00098\ \ \ \ \ 10000,\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Stack\ size\ in\ bytes.\ */}}
+\DoxyCodeLine{00099\ \ \ \ \ NULL,\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Parameter\ passed\ as\ input\ of\ the\ task\ */}}
+\DoxyCodeLine{00100\ \ \ \ \ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Priority\ of\ the\ task.\ */}}
+\DoxyCodeLine{00101\ \ \ \ \ NULL);\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Task\ handle.\ */}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00103\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,114 @@
+\doxysection{C\+:/\+Users/grste/\+Git/\+Marioe-\/\+Kart/src/\+Car\+Detection.h-\/\+Dateireferenz}
+\hypertarget{_car_detection_8h}{}\label{_car_detection_8h}\index{C:/Users/grste/Git/Marioe-\/Kart/src/CarDetection.h@{C:/Users/grste/Git/Marioe-\/Kart/src/CarDetection.h}}
+
+
+Programmteil zur Fahrzeugerkennung mittels IR\+\_\+\+Fototransistor.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include "{}Definitions.\+h"{}}\newline
+\doxysubsubsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_car_detection_8h_af451a50f3dffe23a79b2bf20b5a5fa80}{car\+Dect1\+\_\+init}} (uint8\+\_\+t pin)
+\begin{DoxyCompactList}\small\item\em Initialisiere Eingänge und Interrupts der Car\+Detection\+Unit 1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_car_detection_8h_aed23c2e031784661fbc3ff26edf9be08}{car\+Dect2\+\_\+init}} (uint8\+\_\+t pin)
+\begin{DoxyCompactList}\small\item\em Initialisiere Eingänge und Interrupts der Car\+Detection\+Unit 2. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{_car_detection_8h_aab0752bdd7f82f380adb120740d9e176}{car\+Dect1\+\_\+execute}} ()
+\begin{DoxyCompactList}\small\item\em Abfrage, ob an der Car\+Detection\+Unit 1 seit der letzten Ausführung ein Fahrzeug erkannt wurde. Falls ja, wird dessen zugeordneter Regler gemäß obenstehender Tabelle berechnet. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{_car_detection_8h_ab943c11d436eb809bc336f2c7dc38292}{car\+Dect2\+\_\+execute}} ()
+\begin{DoxyCompactList}\small\item\em Abfrage, ob an der Car\+Detection\+Unit 2 seit der letzten Ausführung ein Fahrzeug erkannt wurde. Falls ja, wird dessen zugeordneter Regler gemäß obenstehender Tabelle berechnet. \end{DoxyCompactList}\item 
+void IRAM\+\_\+\+ATTR \mbox{\hyperlink{_car_detection_8h_a96b6f4e0cdf61f9c4a9d747858aa417f}{car\+Dect1\+\_\+isr}} ()
+\begin{DoxyCompactList}\small\item\em Interrupt Routine zur Berechnung der Periodendauer zwischen zwei erkannten Impulsen. \end{DoxyCompactList}\item 
+\Hypertarget{_car_detection_8h_af00f26e467ab4ebbfd4091014b88c6ce}\label{_car_detection_8h_af00f26e467ab4ebbfd4091014b88c6ce} 
+void IRAM\+\_\+\+ATTR {\bfseries car\+Dect2\+\_\+isr} ()
+\begin{DoxyCompactList}\small\item\em Interrupt Routine zur Berechnung der Periodendauer zwischen zwei erkannten Impulsen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Ausführliche Beschreibung}
+Programmteil zur Fahrzeugerkennung mittels IR\+\_\+\+Fototransistor. 
+
+\begin{DoxyAuthor}{Autor}
+Joel Bommeli (\href{mailto:joel.bommeli@hof-university.de}{\texttt{ joel.\+bommeli@hof-\/university.\+de}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Datum}
+2024-\/12-\/28 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024
+\end{DoxyCopyright}
+
+
+\doxysubsection{Dokumentation der Funktionen}
+\Hypertarget{_car_detection_8h_aab0752bdd7f82f380adb120740d9e176}\index{CarDetection.h@{CarDetection.h}!carDect1\_execute@{carDect1\_execute}}
+\index{carDect1\_execute@{carDect1\_execute}!CarDetection.h@{CarDetection.h}}
+\doxysubsubsection{\texorpdfstring{carDect1\_execute()}{carDect1\_execute()}}
+{\footnotesize\ttfamily \label{_car_detection_8h_aab0752bdd7f82f380adb120740d9e176} 
+uint8\+\_\+t car\+Dect1\+\_\+execute (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Abfrage, ob an der Car\+Detection\+Unit 1 seit der letzten Ausführung ein Fahrzeug erkannt wurde. Falls ja, wird dessen zugeordneter Regler gemäß obenstehender Tabelle berechnet. 
+
+\begin{DoxyReturn}{Rückgabe}
+ID, bzw Reglerkanal, dem das erkannte Fahrzeug zugeordnet ist. Wurde kein gültiger Wert erkannt, ist die Rückgabe 99;
+\end{DoxyReturn}
+\mbox{[}car\+Dect1\+\_\+exec\mbox{]} \begin{DoxyReturn}{Rückgabe}
+
+\end{DoxyReturn}
+\Hypertarget{_car_detection_8h_af451a50f3dffe23a79b2bf20b5a5fa80}\index{CarDetection.h@{CarDetection.h}!carDect1\_init@{carDect1\_init}}
+\index{carDect1\_init@{carDect1\_init}!CarDetection.h@{CarDetection.h}}
+\doxysubsubsection{\texorpdfstring{carDect1\_init()}{carDect1\_init()}}
+{\footnotesize\ttfamily \label{_car_detection_8h_af451a50f3dffe23a79b2bf20b5a5fa80} 
+void car\+Dect1\+\_\+init (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pin}{}\end{DoxyParamCaption})}
+
+
+
+Initialisiere Eingänge und Interrupts der Car\+Detection\+Unit 1. 
+
+
+\begin{DoxyParams}{Parameter}
+{\em pin} & Pin des Mikrocontroller, an dem die Car\+Detection\+Unit angeschloßen ist \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_car_detection_8h_a96b6f4e0cdf61f9c4a9d747858aa417f}\index{CarDetection.h@{CarDetection.h}!carDect1\_isr@{carDect1\_isr}}
+\index{carDect1\_isr@{carDect1\_isr}!CarDetection.h@{CarDetection.h}}
+\doxysubsubsection{\texorpdfstring{carDect1\_isr()}{carDect1\_isr()}}
+{\footnotesize\ttfamily \label{_car_detection_8h_a96b6f4e0cdf61f9c4a9d747858aa417f} 
+void IRAM\+\_\+\+ATTR car\+Dect1\+\_\+isr (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Interrupt Routine zur Berechnung der Periodendauer zwischen zwei erkannten Impulsen. 
+
+Interrupt Routine zur Berechnung der Periodendauer zwischen zwei erkannten Impulsen. \Hypertarget{_car_detection_8h_ab943c11d436eb809bc336f2c7dc38292}\index{CarDetection.h@{CarDetection.h}!carDect2\_execute@{carDect2\_execute}}
+\index{carDect2\_execute@{carDect2\_execute}!CarDetection.h@{CarDetection.h}}
+\doxysubsubsection{\texorpdfstring{carDect2\_execute()}{carDect2\_execute()}}
+{\footnotesize\ttfamily \label{_car_detection_8h_ab943c11d436eb809bc336f2c7dc38292} 
+uint8\+\_\+t car\+Dect2\+\_\+execute (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Abfrage, ob an der Car\+Detection\+Unit 2 seit der letzten Ausführung ein Fahrzeug erkannt wurde. Falls ja, wird dessen zugeordneter Regler gemäß obenstehender Tabelle berechnet. 
+
+\begin{DoxyReturn}{Rückgabe}
+ID, bzw Reglerkanal, dem das erkannte Fahrzeug zugeordnet ist. Wurde kein gültiger Wert erkannt, ist die Rückgabe 99; 
+\end{DoxyReturn}
+\Hypertarget{_car_detection_8h_aed23c2e031784661fbc3ff26edf9be08}\index{CarDetection.h@{CarDetection.h}!carDect2\_init@{carDect2\_init}}
+\index{carDect2\_init@{carDect2\_init}!CarDetection.h@{CarDetection.h}}
+\doxysubsubsection{\texorpdfstring{carDect2\_init()}{carDect2\_init()}}
+{\footnotesize\ttfamily \label{_car_detection_8h_aed23c2e031784661fbc3ff26edf9be08} 
+void car\+Dect2\+\_\+init (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pin}{}\end{DoxyParamCaption})}
+
+
+
+Initialisiere Eingänge und Interrupts der Car\+Detection\+Unit 2. 
+
+
+\begin{DoxyParams}{Parameter}
+{\em pin} & Pin des Mikrocontroller, an dem die Car\+Detection\+Unit angeschloßen ist \\
+\hline
+\end{DoxyParams}

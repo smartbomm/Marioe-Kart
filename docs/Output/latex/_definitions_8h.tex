@@ -1,0 +1,161 @@
+\doxysection{C\+:/\+Users/grste/\+Git/\+Marioe-\/\+Kart/src/\+Definitions.h-\/\+Dateireferenz}
+\hypertarget{_definitions_8h}{}\label{_definitions_8h}\index{C:/Users/grste/Git/Marioe-\/Kart/src/Definitions.h@{C:/Users/grste/Git/Marioe-\/Kart/src/Definitions.h}}
+
+
+In dieser Datei sind alle globalen Parameter abgespeichert. Dies umfasst Pinkonfigurationen Definition der UART-\/\+Interfaces sowie Makros für Debugging.  
+
+
+{\ttfamily \#include $<$Settings.\+h$>$}\newline
+{\ttfamily \#include $<$Telnet\+Stream.\+h$>$}\newline
+\doxysubsubsection*{Makrodefinitionen}
+\begin{Indent}\textbf{ Definitionen}\par
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_definitions_8h_a6202a2724f15142593e92d49a4454074}\label{_definitions_8h_a6202a2724f15142593e92d49a4454074} 
+\#define {\bfseries ESP32\+\_\+\+RTOS}
+\begin{DoxyCompactList}\small\item\em RTOS-\/\+Modus aktivieren. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_a9aa1475225f7ea2334f2d351728d1e97}\label{_definitions_8h_a9aa1475225f7ea2334f2d351728d1e97} 
+\#define {\bfseries RGB\+\_\+\+LED}~38
+\begin{DoxyCompactList}\small\item\em Debugging-\/\+RGB-\/\+LED an Pin 38. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_aa9a5a0d09ce3f53067aec3b5e33c1a0c}\label{_definitions_8h_aa9a5a0d09ce3f53067aec3b5e33c1a0c} 
+\#define {\bfseries CAR\+\_\+\+Detect\+\_\+\+Entry\+Lane\+\_\+p}~12
+\begin{DoxyCompactList}\small\item\em Pin für Car\+Detection\+Unit Einfahrt. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_a2afec0f335d1b068e7f4ee1c3c06feb9}\label{_definitions_8h_a2afec0f335d1b068e7f4ee1c3c06feb9} 
+\#define {\bfseries CAR\+\_\+\+Detect\+\_\+\+Exit\+Lane\+\_\+p}~13
+\begin{DoxyCompactList}\small\item\em Pin für Car\+Detection\+Unit Ausfahrt. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_a823fa8dcd99a45b8d88b83b48d61a537}\label{_definitions_8h_a823fa8dcd99a45b8d88b83b48d61a537} 
+\#define {\bfseries SPS\+\_\+\+UART\+\_\+\+NUM}~1
+\begin{DoxyCompactList}\small\item\em Nummer des UART-\/\+Ausgangs 0,1,2. Kann fürs Debugging auf 0 gesetzt werden, um die mit USB verbundene serielle Schnittstelle zu verwenden. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_a336d9bba31d7b70affa444a17cb7c67d}\label{_definitions_8h_a336d9bba31d7b70affa444a17cb7c67d} 
+\#define {\bfseries SPS\+\_\+\+UART\+\_\+\+RX\+\_\+p}~11
+\begin{DoxyCompactList}\small\item\em Pin für UART-\/\+RX. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_ad4a876b1f947a5b329e23c8c312f0006}\label{_definitions_8h_ad4a876b1f947a5b329e23c8c312f0006} 
+\#define {\bfseries SPS\+\_\+\+UART\+\_\+\+TX\+\_\+p}~10
+\begin{DoxyCompactList}\small\item\em Pin für UART-\/\+TX. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_aaa713b1fca30192e1702f2996edf4e27}\label{_definitions_8h_aaa713b1fca30192e1702f2996edf4e27} 
+\#define {\bfseries SPS\+\_\+\+UART\+\_\+\+Rx\+Packet\+Length}~5
+\begin{DoxyCompactList}\small\item\em Länge der Pakete, die von der SPS empfangen werden. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_ac5bf748afe4f51c4af23bae1b0787516}\label{_definitions_8h_ac5bf748afe4f51c4af23bae1b0787516} 
+\#define {\bfseries SPS\+\_\+\+UART\+\_\+\+Tx\+Packet\+Length}~2
+\begin{DoxyCompactList}\small\item\em Länge der Pakete, die an die SPS gesendet werden. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_a2e9e3e37a6faa270cc12105b43aa2372}\label{_definitions_8h_a2e9e3e37a6faa270cc12105b43aa2372} 
+\#define {\bfseries RELAY\+\_\+\+Exit\+Lane\+\_\+p}~41
+\begin{DoxyCompactList}\small\item\em Pin des Relais für Umschaltung der Spannungsversorgung der Ausfahrtsschiene. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_a079c723ddb3659d641126317cd2a53c5}\label{_definitions_8h_a079c723ddb3659d641126317cd2a53c5} 
+\#define {\bfseries RELAY\+\_\+\+Entry\+Lane\+\_\+p}~42
+\begin{DoxyCompactList}\small\item\em Pin des Relais für Umschaltung der Spannungsversorgung der Einfahrtsschiene. \end{DoxyCompactList}\item 
+\Hypertarget{_definitions_8h_ac3fa6b9d0e3d427011bf682a2b287b2f}\label{_definitions_8h_ac3fa6b9d0e3d427011bf682a2b287b2f} 
+\#define {\bfseries DRIVER\+\_\+\+Prog\+Lane\+\_\+p}~40
+\begin{DoxyCompactList}\small\item\em Pin für den Bahntreiber der Programmierschiene. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Debugging-\/\+Makros}\par
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_definitions_8h_acf3e1cb61fb8b1e7d71bec362cd600c4}\label{_definitions_8h_acf3e1cb61fb8b1e7d71bec362cd600c4} 
+\#define {\bfseries SPS\+\_\+\+UART\+\_\+\+EVENT}~serial\+Event1
+\item 
+\Hypertarget{_definitions_8h_a919c930785103eb32dcfeb09d58ce21f}\label{_definitions_8h_a919c930785103eb32dcfeb09d58ce21f} 
+\#define {\bfseries SPS\+\_\+\+UART}~Serial1
+\item 
+\#define \mbox{\hyperlink{_definitions_8h_a890d84b9b5d0b0aede9eea1092a7a10a}{STR\+\_\+\+HELPER}}(x)
+\begin{DoxyCompactList}\small\item\em Hilfsfunktion für STR. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_definitions_8h_a18d295a837ac71add5578860b55e5502}{STR}}(x)
+\begin{DoxyCompactList}\small\item\em Strings verketten. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_definitions_8h_a96dd473db0b3d10bd43390cdacb00120}{DEBUG}}(...)
+\begin{DoxyCompactList}\small\item\em Ausgabe von Text auf der definierten Debugging-\/\+Schnittstelle (UART oder Telnet) \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_definitions_8h_a87fc3cb3e0095cf3c47f6f6f9ff05acc}{DEBUGF}}(...)
+\begin{DoxyCompactList}\small\item\em Ausgabe von formatiertem Text auf der definierten Debugging-\/\+Schnittstelle (UART oder Telnet) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsection{Ausführliche Beschreibung}
+In dieser Datei sind alle globalen Parameter abgespeichert. Dies umfasst Pinkonfigurationen Definition der UART-\/\+Interfaces sowie Makros für Debugging. 
+
+\begin{DoxyWarning}{Warnung}
+Werden Parameter in dieser Datei verändert, kann der Code unbrauchbar werden, sodass das Programm nicht mehr funktioniert. Alle im Betrieb änderbaren Parameter sind in \doxylink{_settings_8h}{Settings.\+h} abgelegt.
+\end{DoxyWarning}
+\begin{DoxyAuthor}{Autor}
+your name (\href{mailto:you@domain.com}{\texttt{ you@domain.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Datum}
+2025-\/01-\/09
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Makro-\/\+Dokumentation}
+\Hypertarget{_definitions_8h_a96dd473db0b3d10bd43390cdacb00120}\index{Definitions.h@{Definitions.h}!DEBUG@{DEBUG}}
+\index{DEBUG@{DEBUG}!Definitions.h@{Definitions.h}}
+\doxysubsubsection{\texorpdfstring{DEBUG}{DEBUG}}
+{\footnotesize\ttfamily \label{_definitions_8h_a96dd473db0b3d10bd43390cdacb00120} 
+\#define DEBUG(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Wert\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TelnetStream.println(\mbox{\hyperlink{_definitions_8h_a18d295a837ac71add5578860b55e5502}{STR}}(\_\_VA\_ARGS\_\_));}
+
+\end{DoxyCode}
+
+
+Ausgabe von Text auf der definierten Debugging-\/\+Schnittstelle (UART oder Telnet) 
+
+
+\begin{DoxyParams}{Parameter}
+{\em ...} & Text, der ausgegeben werden soll, ohne "{}"{} \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_definitions_8h_a87fc3cb3e0095cf3c47f6f6f9ff05acc}\index{Definitions.h@{Definitions.h}!DEBUGF@{DEBUGF}}
+\index{DEBUGF@{DEBUGF}!Definitions.h@{Definitions.h}}
+\doxysubsubsection{\texorpdfstring{DEBUGF}{DEBUGF}}
+{\footnotesize\ttfamily \label{_definitions_8h_a87fc3cb3e0095cf3c47f6f6f9ff05acc} 
+\#define DEBUGF(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Wert\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TelnetStream.printf(\_\_VA\_ARGS\_\_);}
+
+\end{DoxyCode}
+
+
+Ausgabe von formatiertem Text auf der definierten Debugging-\/\+Schnittstelle (UART oder Telnet) 
+
+
+\begin{DoxyParams}{Parameter}
+{\em ...} & Text, der ausgegeben werden soll, Syntax analog zu printf \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_definitions_8h_a18d295a837ac71add5578860b55e5502}\index{Definitions.h@{Definitions.h}!STR@{STR}}
+\index{STR@{STR}!Definitions.h@{Definitions.h}}
+\doxysubsubsection{\texorpdfstring{STR}{STR}}
+{\footnotesize\ttfamily \label{_definitions_8h_a18d295a837ac71add5578860b55e5502} 
+\#define STR(\begin{DoxyParamCaption}\item[{}]{x}{}\end{DoxyParamCaption})}
+
+{\bfseries Wert\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_definitions_8h_a890d84b9b5d0b0aede9eea1092a7a10a}{STR\_HELPER}}(x)}
+
+\end{DoxyCode}
+
+
+Strings verketten. 
+
+\Hypertarget{_definitions_8h_a890d84b9b5d0b0aede9eea1092a7a10a}\index{Definitions.h@{Definitions.h}!STR\_HELPER@{STR\_HELPER}}
+\index{STR\_HELPER@{STR\_HELPER}!Definitions.h@{Definitions.h}}
+\doxysubsubsection{\texorpdfstring{STR\_HELPER}{STR\_HELPER}}
+{\footnotesize\ttfamily \label{_definitions_8h_a890d84b9b5d0b0aede9eea1092a7a10a} 
+\#define STR\+\_\+\+HELPER(\begin{DoxyParamCaption}\item[{}]{x}{}\end{DoxyParamCaption})}
+
+{\bfseries Wert\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#x}}
+
+\end{DoxyCode}
+
+
+Hilfsfunktion für STR. 
+

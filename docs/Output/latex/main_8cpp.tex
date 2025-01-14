@@ -1,0 +1,81 @@
+\doxysection{C\+:/\+Users/grste/\+Git/\+Marioe-\/\+Kart/src/main.cpp-\/\+Dateireferenz}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{C:/Users/grste/Git/Marioe-\/Kart/src/main.cpp@{C:/Users/grste/Git/Marioe-\/Kart/src/main.cpp}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Definitions.\+h$>$}\newline
+{\ttfamily \#include $<$Communication\+SPS.\+h$>$}\newline
+{\ttfamily \#include $<$Car\+Detection.\+h$>$}\newline
+{\ttfamily \#include $<$Carrera\+Controll.\+h$>$}\newline
+{\ttfamily \#include $<$Fast\+LED.\+h$>$}\newline
+{\ttfamily \#include $<$OTA.\+h$>$}\newline
+\doxysubsubsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8cpp_a420b2ef8a958b657e722f97c888c8a30}\label{main_8cpp_a420b2ef8a958b657e722f97c888c8a30} 
+void {\bfseries request} (byte \texorpdfstring{$\ast$}{*}buffer)
+\item 
+\Hypertarget{main_8cpp_a0aecc05e480a84a1535000e60c9b65b5}\label{main_8cpp_a0aecc05e480a84a1535000e60c9b65b5} 
+void {\bfseries program\+Car} (byte \texorpdfstring{$\ast$}{*}buffer)
+\item 
+\Hypertarget{main_8cpp_a80c4d0670221bd02f001f45a9d30c10b}\label{main_8cpp_a80c4d0670221bd02f001f45a9d30c10b} 
+void {\bfseries drive\+Car} (byte \texorpdfstring{$\ast$}{*}buffer)
+\item 
+\Hypertarget{main_8cpp_afa51bbe74bbf3b57442efa27446dbfbc}\label{main_8cpp_afa51bbe74bbf3b57442efa27446dbfbc} 
+void {\bfseries light\+Barrier} (byte \texorpdfstring{$\ast$}{*}buffer)
+\item 
+\Hypertarget{main_8cpp_a4abaabc3f9a2cee591b04a5d0e6dd611}\label{main_8cpp_a4abaabc3f9a2cee591b04a5d0e6dd611} 
+void {\bfseries mc\+Ready} (byte \texorpdfstring{$\ast$}{*}buffer)
+\item 
+\Hypertarget{main_8cpp_a84fa8cd7d681d0917b3865f9fba42bca}\label{main_8cpp_a84fa8cd7d681d0917b3865f9fba42bca} 
+void {\bfseries com\+SPS\+\_\+protocol} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f} 
+void {\bfseries loop} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variablen}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8cpp_a7aea6e4ba2607e097a404cea735b4f25}\label{main_8cpp_a7aea6e4ba2607e097a404cea735b4f25} 
+bool {\bfseries car\+On\+Picking\+Place} = false
+\item 
+\Hypertarget{main_8cpp_a9351d31fe69e4cad2bd73dcf8e99780a}\label{main_8cpp_a9351d31fe69e4cad2bd73dcf8e99780a} 
+uint8\+\_\+t {\bfseries entry\+Lane\+Queue} = 99
+\item 
+\Hypertarget{main_8cpp_ab786e1f481b971bb0d5ef0040cd7636d}\label{main_8cpp_ab786e1f481b971bb0d5ef0040cd7636d} 
+uint8\+\_\+t {\bfseries last\+Programmed\+Car} = 0
+\item 
+\Hypertarget{main_8cpp_a89b5c66c67f0e775cd42e41a4fafc042}\label{main_8cpp_a89b5c66c67f0e775cd42e41a4fafc042} 
+uint32\+\_\+t {\bfseries SPS\+\_\+last\+Life\+Signal} = 0
+\item 
+\Hypertarget{main_8cpp_a4ec51a3d0e73304cd8bedab3f99b2b29}\label{main_8cpp_a4ec51a3d0e73304cd8bedab3f99b2b29} 
+\mbox{\hyperlink{class_carrera_controll}{Carrera\+Controll}} {\bfseries lane\+Control}
+\item 
+\Hypertarget{main_8cpp_ae3fdeb5864721e8b3dfadd21ab60d00c}\label{main_8cpp_ae3fdeb5864721e8b3dfadd21ab60d00c} 
+CRGB {\bfseries led} \mbox{[}1\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Ausführliche Beschreibung}
+\begin{DoxyAuthor}{Autor}
+Joel Bommeli (\href{mailto:joel.bommeli@hof-university.de}{\texttt{ joel.\+bommeli@hof-\/university.\+de}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Datum}
+2024-\/12-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Dokumentation der Funktionen}
+\Hypertarget{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\index{main.cpp@{main.cpp}!setup@{setup}}
+\index{setup@{setup}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Definition der Befehle, die von der SPS empfangen werden können

@@ -1,0 +1,92 @@
+\doxysection{Definitions.\+h}
+\hypertarget{_definitions_8h_source}{}\label{_definitions_8h_source}\index{C:/Users/grste/Git/Marioe-\/Kart/src/Definitions.h@{C:/Users/grste/Git/Marioe-\/Kart/src/Definitions.h}}
+\mbox{\hyperlink{_definitions_8h}{gehe zur Dokumentation dieser Datei}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DEFINITIONS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DEFINITIONS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{_settings_8h}{Settings.h}}>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <TelnetStream.h>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ ESP32\_RTOS\ \ }}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ RGB\_LED\ 38\ \ }}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{comment}{//Fahrzeugerkennung\ mittels\ IR\_Fototransistor}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ CAR\_Detect\_EntryLane\_p\ 12\ }}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ CAR\_Detect\_ExitLane\_p\ 13\ \ }}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{comment}{//Serielle\ Schnittstelle\ SPS\ RS-\/485}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ SPS\_UART\_NUM\ 1\ \ \ \ }}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ SPS\_UART\_RX\_p\ 11\ \ }}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ SPS\_UART\_TX\_p\ 10\ \ }}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ SPS\_UART\_RxPacketLength\ 5\ \ \ \ \ \ \ }}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ SPS\_UART\_TxPacketLength\ 2\ \ \ \ \ \ \ }}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{/*\ Relaisumschaltung\ Bahn}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ *\ \ FALSE\ ==\ Spannungsversorgung\ von\ externer\ Carrerabahn}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ *\ \ TRUE\ \ ==\ Spannungsversorgung\ von\ interner\ Steuerung\ }}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{00054\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ RELAY\_ExitLane\_p\ 41\ \ \ }}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ RELAY\_EntryLane\_p\ 42\ \ }}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{//Bahnkommunikation}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ DRIVER\_ProgLane\_p\ 40\ \ }}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00068\ \ \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#//}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#if\ SPS\_UART\_NUM\ ==\ 0}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#define\ SPS\_UART\_EVENT\ serialEvent}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ SPS\_UART\ Serial}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#elif\ SPS\_UART\_NUM\ ==\ 1}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ SPS\_UART\_EVENT\ serialEvent1}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ SPS\_UART\ Serial1}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#elif\ SPS\_UART\_NUM\ ==\ 2}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ SPS\_UART\_EVENT\ serialEvent2}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ SPS\_UART\ Serial2}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{comment}{//Strings\ verketten}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ STR\_HELPER(x)\ \#x\ \ }}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ STR(x)\ STR\_HELPER(x)\ \ }}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{comment}{//Serielles\ Debugging}}
+\DoxyCodeLine{00088\ \textcolor{comment}{//-\/Alles\ was\ nur\ im\ Debug-\/Fall\ ausgegeben\ werden\ soll,\ kann\ mit\ DEBUG(...)\ definiert\ werden}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#ifdef\ SERIAL\_DEBUGGING}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ DEBUG(...)\ Serial.println(STR(\_\_VA\_ARGS\_\_)\ );\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ DEBUGF(...)\ Serial.printf(\_\_VA\_ARGS\_\_);\ }}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#elif\ defined\ TELNET\_DEBUGGING}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ DEBUG(...)\ TelnetStream.println(STR(\_\_VA\_ARGS\_\_));}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ DEBUGF(...)\ TelnetStream.printf(\_\_VA\_ARGS\_\_);\ }}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#define\ DEBUG(...)\ }}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ DEBUGF(...)\ }}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,267 @@
+\doxysection{C\+:/\+Users/grste/\+Git/\+Marioe-\/\+Kart/src/\+Settings.h-\/\+Dateireferenz}
+\hypertarget{_settings_8h}{}\label{_settings_8h}\index{C:/Users/grste/Git/Marioe-\/Kart/src/Settings.h@{C:/Users/grste/Git/Marioe-\/Kart/src/Settings.h}}
+
+
+In dieser Datei sind alle veränderbaren Einstellungen zentral abgespeichert.  
+
+
+\doxysubsubsection*{Makrodefinitionen}
+\begin{Indent}\textbf{ Ein-\//\+Ausfahrt von Fahrzeugen}\par
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_settings_8h_ad16bd2810c06832929bfe0e37ee8c367}\label{_settings_8h_ad16bd2810c06832929bfe0e37ee8c367} 
+\#define {\bfseries VEL\+\_\+\+Car\+Entry}~5
+\begin{DoxyCompactList}\small\item\em Geschwindigkeit mit der das Fahrzeug bei der Einfahrt bis zur Car\+Detection\+Unit fahren soll; 0-\/15. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_a0ce0f86bd9706d9cd7607f1b30526408}\label{_settings_8h_a0ce0f86bd9706d9cd7607f1b30526408} 
+\#define {\bfseries VEL\+\_\+\+Car\+Entry\+\_\+brake}~2
+\begin{DoxyCompactList}\small\item\em Geschwindigkeit, mit der das Fahrzeug bei der Einfahrt von der Car\+Detection\+Unit bis zum Stopper fahren soll; 0-\/15. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_a85e1a27b797e9d2063044a8b66bf79df}\label{_settings_8h_a85e1a27b797e9d2063044a8b66bf79df} 
+\#define {\bfseries VEL\+\_\+\+Car\+Exit}~15
+\begin{DoxyCompactList}\small\item\em Geschwindigkeit, mit der das Fahrzeug aus dem Lager automatisiert ausfahren soll; 0-\/15. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Parameter Car\+Detection\+Unit}\par
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_settings_8h_a64f7db254cf43eb85d6308204fd12543}\label{_settings_8h_a64f7db254cf43eb85d6308204fd12543} 
+\#define {\bfseries IR\+\_\+\+DECT\+\_\+\+Period\+\_\+\+Tolerance}~10
+\begin{DoxyCompactList}\small\item\em Erlaubte zeitliche Abweichung der Impulse von der Soll-\/\+Periodendauer ; in µs -\/ Maximum\+: 32µs. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_a53ffeb039deded2c7e1fe3658ffbf179}\label{_settings_8h_a53ffeb039deded2c7e1fe3658ffbf179} 
+\#define {\bfseries IR\+\_\+\+DECT\+\_\+\+Period\+\_\+min}~64
+\begin{DoxyCompactList}\small\item\em Minimale Zeitdauer zwischen zwei Impulsen. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_ae10385002ec857a8167bf26ec983906c}\label{_settings_8h_ae10385002ec857a8167bf26ec983906c} 
+\#define {\bfseries IR\+\_\+\+DECT\+\_\+\+Car\+Time\+Gap}~32000
+\begin{DoxyCompactList}\small\item\em Minimale Zeitdauer zwischen zwei durchfahrenden Autos in µs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Debugging-\/\+Funktionalitäten}\par
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_settings_8h_a8be2c2c0c76bfc80a13b029bc249f180}\label{_settings_8h_a8be2c2c0c76bfc80a13b029bc249f180} 
+\#define {\bfseries DEBUG\+\_\+\+RGB\+\_\+\+BRIGHTNESS}~255
+\begin{DoxyCompactList}\small\item\em Helligkeit der Debug-\/\+LED des Mikrocontrollers. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_settings_8h_aa695e3b5ac8e9530c1ec1258dec9633a}{OTA\+\_\+\+Flashing}}
+\begin{DoxyCompactList}\small\item\em Aktiviere Debugging über Serielle Schnittstelle UART0. Wird durch Auskommentieren deaktiviert. Hat, wenn aktiviert, stets Vorrang vor Telnet-\/\+Debugging. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_ab8aa456e2234b3c52cd326a6b6328307}\label{_settings_8h_ab8aa456e2234b3c52cd326a6b6328307} 
+\#define {\bfseries TELNET\+\_\+\+DEBUGGING}
+\begin{DoxyCompactList}\small\item\em Aktiviere Debugging über Telnet, nur möglich, wenn SERIAL\+\_\+\+DEBUGGING nicht aktiv und OTA\+\_\+\+FLASHING aktiviert ist. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Netzwerkeinstellungen}\par
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_settings_8h_a16a2ac20424af1ad8d8a34bc3723d63a}\label{_settings_8h_a16a2ac20424af1ad8d8a34bc3723d63a} 
+\#define {\bfseries OTA\+\_\+\+SSID}~"{}Labore-\/Hof AT-\/MT"{}
+\begin{DoxyCompactList}\small\item\em WLAN-\/\+Name. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_a8299ae490959a0640ef0bd9182521682}\label{_settings_8h_a8299ae490959a0640ef0bd9182521682} 
+\#define {\bfseries OTA\+\_\+\+PW}~"{}laborwlan"{}
+\begin{DoxyCompactList}\small\item\em WLAN-\/\+Passwort. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_ac2c42de3e1c8c686793b250d926f9ca2}\label{_settings_8h_ac2c42de3e1c8c686793b250d926f9ca2} 
+\#define {\bfseries OTA\+\_\+\+IP}~\{192,168,9,5\}
+\begin{DoxyCompactList}\small\item\em Statische IP-\/\+Adresse. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_afe60ca55552166a64572d2d84e85adc8}\label{_settings_8h_afe60ca55552166a64572d2d84e85adc8} 
+\#define {\bfseries OTA\+\_\+\+DNS}~\{192,168,9,1\}
+\begin{DoxyCompactList}\small\item\em DNS-\/\+Server. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_afb1fb38716508fff3545d58a224c86a9}\label{_settings_8h_afb1fb38716508fff3545d58a224c86a9} 
+\#define {\bfseries OTA\+\_\+\+SUBNET}~\{255,255,255,0\}
+\begin{DoxyCompactList}\small\item\em Subnet-\/\+Maske. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_ae971a1472201f5627ecb587307697a72}\label{_settings_8h_ae971a1472201f5627ecb587307697a72} 
+\#define {\bfseries OTA\+\_\+\+GW}~\{192,168,9,1\}
+\begin{DoxyCompactList}\small\item\em Gateway. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Kommunikation mit der SPS}\par
+{\em Serielle Kommunikation über RS-\/485 mit eigenem Protokoll-\/ }\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_settings_8h_a6d83b3a8a311b14de80255e6808be66b}\label{_settings_8h_a6d83b3a8a311b14de80255e6808be66b} 
+\#define {\bfseries SPS\+\_\+\+Connected}
+\begin{DoxyCompactList}\small\item\em Aktiviert Verbindungsüberwachung zur SPS. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_afe816a9e240d38ad48cad78230fe60c0}\label{_settings_8h_afe816a9e240d38ad48cad78230fe60c0} 
+\#define {\bfseries SPS\+\_\+\+UART\+\_\+\+Timeout}~30
+\begin{DoxyCompactList}\small\item\em Kommunikationstimeout zur SPS in s. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Kommunikationsprotokoll}\par
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_settings_8h_aee2f0698b597709600a6f4552fcb2e2e}\label{_settings_8h_aee2f0698b597709600a6f4552fcb2e2e} 
+\#define {\bfseries SPS\+\_\+\+UART\+\_\+\+Rx\+Command\+Memory}~85
+\begin{DoxyCompactList}\small\item\em Grösse des Befehlsspeichers der von der SPS zu empfangeneden Befehle. Muss mindestens der höchsten Befehlsnummer entsprechen. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_a13d7624719eb1f940c8cd765005618d6}\label{_settings_8h_a13d7624719eb1f940c8cd765005618d6} 
+\#define {\bfseries SPS\+\_\+\+UART\+\_\+\+Frequency}~10
+\begin{DoxyCompactList}\small\item\em Pollingfrequenz der SPS; Hz. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_a406b0a57e3ba0391b50482f4c2dd890d}\label{_settings_8h_a406b0a57e3ba0391b50482f4c2dd890d} 
+\#define {\bfseries C\+\_\+\+MC\+\_\+\+Data\+Buffer\+Size}~10
+\begin{DoxyCompactList}\small\item\em Datenpuffer für Daten, die zur SPS gesendet werden sollen; Anzahl Pakete. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Pakete Car\+Control\+Unit -\/-\/\texorpdfstring{$>$}{>} SPS}\par
+{\em Definitionen der Pakete, die die Car\+Control\+Unit an die SPS sendet Paketgröße\+: 2 Bytes\+: 1 Befehlsbyte, 1 Datenbyte }\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_settings_8h_acf59fb9de6900928ff6466806bf4305f}\label{_settings_8h_acf59fb9de6900928ff6466806bf4305f} 
+\#define {\bfseries C\+\_\+\+MC\+\_\+\+LIFESIGNAL}~0,1
+\begin{DoxyCompactList}\small\item\em Lifesignal der Car\+Control\+Unit Wird als Antwort auf das Polling-\/\+Signal der SPS gesendet, sofern sich keine anderen Daten im Sendepuffer befinden. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_settings_8h_a46f0a83cbd291da8ce4924dce434cd07}{C\+\_\+\+MC\+\_\+\+Car\+IN}}(value)
+\begin{DoxyCompactList}\small\item\em Datenpaket\+: Fahrzeug in Boxengass eingefahren. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_settings_8h_a19e748e5112d9651e468f42da9e16b8e}{C\+\_\+\+MC\+\_\+\+Car\+OUT}}(value)
+\begin{DoxyCompactList}\small\item\em Datenpaket\+: Fahrzeug aus Boxengasse ausgefahren. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_settings_8h_a78e8c83938ae42d1ad290114e60653c1}{C\+\_\+\+MC\+\_\+\+Car\+PROGRAMMED}}(value)
+\begin{DoxyCompactList}\small\item\em Datenpaket\+: Fahrzeug fertig programmiert. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_settings_8h_ac9b4f0da96e695d1946779554119aba4}{C\+\_\+\+MC\+\_\+\+OK}}(value)
+\begin{DoxyCompactList}\small\item\em Bestätigungspaket\+: Von der SPS erhaltenes Befehlspaket verstanden (ACK). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Pakete SPS -\/-\/\texorpdfstring{$>$}{>} Car\+Control\+Unit}\par
+{\em Definitionen der Pakete, die die SPS an die Car\+Control\+Unit sendet Paketgröse\+: 5 Bytes\+: 1 Befehlsbyte, 4 Datenbytes }\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_settings_8h_a7d764fc5b3d1d8eacc9d90355d9468b4}\label{_settings_8h_a7d764fc5b3d1d8eacc9d90355d9468b4} 
+\#define {\bfseries C\+\_\+\+SPS\+\_\+\+SYNC}~\{0,0x79,0x9a,0x62,0x43\}
+\begin{DoxyCompactList}\small\item\em Pollingpaket\+: Wird von der SPS regelmäßig gesendet, um die Car\+Control\+Unit und die SPS zu synchronisieren und gleichzeitig Daten von der Car\+Control\+Unit zu pollen. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_settings_8h_a2510c015afeb1e969e7a390002a29182}{C\+\_\+\+SPS\+\_\+\+PROGRAM}}~\{1, id, vmax, brake, fuel\}
+\begin{DoxyCompactList}\small\item\em Befehlspaket\+: Fahrzeug programmieren. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_a4b7e607041fce622750f2c876b42452f}\label{_settings_8h_a4b7e607041fce622750f2c876b42452f} 
+\#define {\bfseries C\+\_\+\+SPS\+\_\+\+PROGRAM\+\_\+\+ID}~1
+\begin{DoxyCompactList}\small\item\em Index im Paket\+: Reglernummer des Fahrzeugs. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_aba4023c6d67f7b647927f863740e577f}\label{_settings_8h_aba4023c6d67f7b647927f863740e577f} 
+\#define {\bfseries C\+\_\+\+SPS\+\_\+\+PROGRAM\+\_\+\+VMAX}~2
+\begin{DoxyCompactList}\small\item\em Index im Paket\+: Maximalgeschwindigkeit des Fahrzeugs. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_a34d7e01a8d2d5bbc061544525c4d748d}\label{_settings_8h_a34d7e01a8d2d5bbc061544525c4d748d} 
+\#define {\bfseries C\+\_\+\+SPS\+\_\+\+PROGRAM\+\_\+\+BRAKE}~3
+\begin{DoxyCompactList}\small\item\em Index im Paket\+: Bremsverhalten des Fahrzeugs. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_a38f8d8c88f04273d9e317ac8baf0d821}\label{_settings_8h_a38f8d8c88f04273d9e317ac8baf0d821} 
+\#define {\bfseries C\+\_\+\+SPS\+\_\+\+PROGRAM\+\_\+\+FUEL}~4
+\begin{DoxyCompactList}\small\item\em Index im Paket\+: Treibstoffverhalten des Fahrzeugs. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_settings_8h_a5a8fc3c3cd4e3dc568164309b17103b0}{C\+\_\+\+SPS\+\_\+\+Car\+DRIVE}}~\{0x05, id, na, na, na\}
+\begin{DoxyCompactList}\small\item\em Befehlspaket\+: Fahrzeug ausfahren. \end{DoxyCompactList}\item 
+\Hypertarget{_settings_8h_ad3b771c84f3677efe21d0f8926e1b298}\label{_settings_8h_ad3b771c84f3677efe21d0f8926e1b298} 
+\#define {\bfseries C\+\_\+\+SPS\+\_\+\+Car\+DRIVE\+\_\+\+ID}~1
+\begin{DoxyCompactList}\small\item\em Index im Paket\+: Reglernummer des Fahrzeugs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsection{Ausführliche Beschreibung}
+In dieser Datei sind alle veränderbaren Einstellungen zentral abgespeichert. 
+
+
+
+\doxysubsection{Makro-\/\+Dokumentation}
+\Hypertarget{_settings_8h_a46f0a83cbd291da8ce4924dce434cd07}\index{Settings.h@{Settings.h}!C\_MC\_CarIN@{C\_MC\_CarIN}}
+\index{C\_MC\_CarIN@{C\_MC\_CarIN}!Settings.h@{Settings.h}}
+\doxysubsubsection{\texorpdfstring{C\_MC\_CarIN}{C\_MC\_CarIN}}
+{\footnotesize\ttfamily \label{_settings_8h_a46f0a83cbd291da8ce4924dce434cd07} 
+\#define C\+\_\+\+MC\+\_\+\+Car\+IN(\begin{DoxyParamCaption}\item[{}]{value}{}\end{DoxyParamCaption})}
+
+{\bfseries Wert\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1,value}
+
+\end{DoxyCode}
+
+
+Datenpaket\+: Fahrzeug in Boxengass eingefahren. 
+
+
+\begin{DoxyParams}{Parameter}
+{\em value} & Reglernummer des eingefahrenen Fahrzeugs \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_settings_8h_a19e748e5112d9651e468f42da9e16b8e}\index{Settings.h@{Settings.h}!C\_MC\_CarOUT@{C\_MC\_CarOUT}}
+\index{C\_MC\_CarOUT@{C\_MC\_CarOUT}!Settings.h@{Settings.h}}
+\doxysubsubsection{\texorpdfstring{C\_MC\_CarOUT}{C\_MC\_CarOUT}}
+{\footnotesize\ttfamily \label{_settings_8h_a19e748e5112d9651e468f42da9e16b8e} 
+\#define C\+\_\+\+MC\+\_\+\+Car\+OUT(\begin{DoxyParamCaption}\item[{}]{value}{}\end{DoxyParamCaption})}
+
+{\bfseries Wert\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{2,value}
+
+\end{DoxyCode}
+
+
+Datenpaket\+: Fahrzeug aus Boxengasse ausgefahren. 
+
+
+\begin{DoxyParams}{Parameter}
+{\em value} & Reglernummer des ausgefahrenen Fahrzeugs \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_settings_8h_a78e8c83938ae42d1ad290114e60653c1}\index{Settings.h@{Settings.h}!C\_MC\_CarPROGRAMMED@{C\_MC\_CarPROGRAMMED}}
+\index{C\_MC\_CarPROGRAMMED@{C\_MC\_CarPROGRAMMED}!Settings.h@{Settings.h}}
+\doxysubsubsection{\texorpdfstring{C\_MC\_CarPROGRAMMED}{C\_MC\_CarPROGRAMMED}}
+{\footnotesize\ttfamily \label{_settings_8h_a78e8c83938ae42d1ad290114e60653c1} 
+\#define C\+\_\+\+MC\+\_\+\+Car\+PROGRAMMED(\begin{DoxyParamCaption}\item[{}]{value}{}\end{DoxyParamCaption})}
+
+{\bfseries Wert\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{3,value}
+
+\end{DoxyCode}
+
+
+Datenpaket\+: Fahrzeug fertig programmiert. 
+
+
+\begin{DoxyParams}{Parameter}
+{\em value} & Reglernummer des programmierten Fahrzeugs \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_settings_8h_ac9b4f0da96e695d1946779554119aba4}\index{Settings.h@{Settings.h}!C\_MC\_OK@{C\_MC\_OK}}
+\index{C\_MC\_OK@{C\_MC\_OK}!Settings.h@{Settings.h}}
+\doxysubsubsection{\texorpdfstring{C\_MC\_OK}{C\_MC\_OK}}
+{\footnotesize\ttfamily \label{_settings_8h_ac9b4f0da96e695d1946779554119aba4} 
+\#define C\+\_\+\+MC\+\_\+\+OK(\begin{DoxyParamCaption}\item[{}]{value}{}\end{DoxyParamCaption})}
+
+{\bfseries Wert\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{80,value}
+
+\end{DoxyCode}
+
+
+Bestätigungspaket\+: Von der SPS erhaltenes Befehlspaket verstanden (ACK). 
+
+
+\begin{DoxyParams}{Parameter}
+{\em value} & Wert des Datenbyte \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_settings_8h_a5a8fc3c3cd4e3dc568164309b17103b0}\index{Settings.h@{Settings.h}!C\_SPS\_CarDRIVE@{C\_SPS\_CarDRIVE}}
+\index{C\_SPS\_CarDRIVE@{C\_SPS\_CarDRIVE}!Settings.h@{Settings.h}}
+\doxysubsubsection{\texorpdfstring{C\_SPS\_CarDRIVE}{C\_SPS\_CarDRIVE}}
+{\footnotesize\ttfamily \label{_settings_8h_a5a8fc3c3cd4e3dc568164309b17103b0} 
+\#define C\+\_\+\+SPS\+\_\+\+Car\+DRIVE~\{0x05, id, na, na, na\}}
+
+
+
+Befehlspaket\+: Fahrzeug ausfahren. 
+
+
+\begin{DoxyParams}{Parameter}
+{\em id} & Reglernummer des Fahrzeugs \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_settings_8h_a2510c015afeb1e969e7a390002a29182}\index{Settings.h@{Settings.h}!C\_SPS\_PROGRAM@{C\_SPS\_PROGRAM}}
+\index{C\_SPS\_PROGRAM@{C\_SPS\_PROGRAM}!Settings.h@{Settings.h}}
+\doxysubsubsection{\texorpdfstring{C\_SPS\_PROGRAM}{C\_SPS\_PROGRAM}}
+{\footnotesize\ttfamily \label{_settings_8h_a2510c015afeb1e969e7a390002a29182} 
+\#define C\+\_\+\+SPS\+\_\+\+PROGRAM~\{1, id, vmax, brake, fuel\}}
+
+
+
+Befehlspaket\+: Fahrzeug programmieren. 
+
+
+\begin{DoxyParams}{Parameter}
+{\em id} & Reglernummer des Fahrzeugs \\
+\hline
+{\em vmax} & Maximalgeschwindigkeit des Fahrzeugs \\
+\hline
+{\em brake} & Bremsverhalten des Fahrzeugs \\
+\hline
+{\em fuel} & Treibstoffverhalten des Fahrzeugs \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_settings_8h_aa695e3b5ac8e9530c1ec1258dec9633a}\index{Settings.h@{Settings.h}!OTA\_Flashing@{OTA\_Flashing}}
+\index{OTA\_Flashing@{OTA\_Flashing}!Settings.h@{Settings.h}}
+\doxysubsubsection{\texorpdfstring{OTA\_Flashing}{OTA\_Flashing}}
+{\footnotesize\ttfamily \label{_settings_8h_aa695e3b5ac8e9530c1ec1258dec9633a} 
+\#define OTA\+\_\+\+Flashing}
+
+
+
+Aktiviere Debugging über Serielle Schnittstelle UART0. Wird durch Auskommentieren deaktiviert. Hat, wenn aktiviert, stets Vorrang vor Telnet-\/\+Debugging. 
+
+Aktiviere Over-\/the-\/\+Air-\/\+Flashing und Debugging, wird durch auskommentieren deaktiviert 

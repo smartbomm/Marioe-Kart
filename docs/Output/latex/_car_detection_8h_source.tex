@@ -1,0 +1,36 @@
+\doxysection{Car\+Detection.\+h}
+\hypertarget{_car_detection_8h_source}{}\label{_car_detection_8h_source}\index{C:/Users/grste/Git/Marioe-\/Kart/src/CarDetection.h@{C:/Users/grste/Git/Marioe-\/Kart/src/CarDetection.h}}
+\mbox{\hyperlink{_car_detection_8h}{gehe zur Dokumentation dieser Datei}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#ifndef\ CARDETECTION\_H}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ CARDETECTION\_H}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_definitions_8h}{Definitions.h}}"{}}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{//Configuration\ of\ the\ CarDetectionUnit}}
+\DoxyCodeLine{00051\ \textcolor{comment}{//-\/\ initialize\ pin\ and\ variables}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_car_detection_8h_af451a50f3dffe23a79b2bf20b5a5fa80}{carDect1\_init}}\ (uint8\_t\ pin);\ \ \ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_car_detection_8h_aed23c2e031784661fbc3ff26edf9be08}{carDect2\_init}}\ (uint8\_t\ pin);\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{comment}{//to\ be\ executed\ in\ program\ loop,\ calculates\ car\ ids,\ if\ cars\ where\ detected\ and\ writes\ to\ buffer}}
+\DoxyCodeLine{00062\ \textcolor{comment}{//returns\ detected\ Car}}
+\DoxyCodeLine{00063\ \textcolor{comment}{//If\ no\ car\ was\ detected\ returns\ 99}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00067\ uint8\_t\ \mbox{\hyperlink{_car_detection_8h_aab0752bdd7f82f380adb120740d9e176}{carDect1\_execute}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00071\ uint8\_t\ \mbox{\hyperlink{_car_detection_8h_ab943c11d436eb809bc336f2c7dc38292}{carDect2\_execute}}();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{comment}{//Interrupt-\/Routine\ saves\ the\ period\ between\ two\ pulses\ for\ calculating\ the\ car-\/id}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00076\ \textcolor{keywordtype}{void}\ IRAM\_ATTR\ \mbox{\hyperlink{_car_detection_8h_a96b6f4e0cdf61f9c4a9d747858aa417f}{carDect1\_isr}}();\ }
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00079\ \textcolor{keywordtype}{void}\ IRAM\_ATTR\ \mbox{\hyperlink{_car_detection_8h_af00f26e467ab4ebbfd4091014b88c6ce}{carDect2\_isr}}();\ \ }
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif\ }}
+
+\end{DoxyCode}
