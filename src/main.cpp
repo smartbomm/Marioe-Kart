@@ -3,11 +3,16 @@
 /**
  * @file main.cpp
  * @author Joel Bommeli (joel.bommeli@hof-university.de)
- * @brief 
+ * @brief Hauptprogramm der CarControlUnit
+ * 
+ * Mikrocontroller | ESP-32-S3
+ * Programmiersprache | C++
+ * Framework | Arduino
+ * 
  * @version 0.1
  * @date 2024-12-28
  * 
- * @copyright Copyright (c) 2024
+ * @copyright Copyright (c) 2025
  * 
  */
 
@@ -18,6 +23,7 @@
 #include <CarreraControll.h>
 #include <FastLED.h>
 #include <OTA.h>
+#include <smartdelay.h>
 
 
 //carDect1  == CarDetection EntryLane
@@ -41,14 +47,21 @@ uint8_t entryLaneQueue = 99;         // waiting car - id for putting in to stora
 uint8_t lastProgrammedCar = 0;   
 uint32_t SPS_lastLifeSignal = 0; 
 
+
 //Objects
 
-CarreraControll laneControl;
-CRGB led [1];
+smartdelay_t drivingOutDelay;    ///<Zeit für die die Ausfahrschiene zur Ausfahrt eines Fahrzeugs aktiviert sein muss, bis sie wieder sugeschaltet werden kann
+CarreraControll laneControl;    ///<Ansteuerung des Bahntreibers
+CRGB led [1];                       ///<Config-Objekt für Debugging-RGB-LED auf MIkrocontroller-Board
 
 
-
+/**
+ * @brief Arduino Setup-Funktion
+ * Wird einmalig beim Programmstart ausgeführt
+ * 
+ */
 void setup() {
+    drivingOutDelay.delayTime_ms = 2000;
     FastLED.addLeds<NEOPIXEL, RGB_LED>(led, 1);
     FastLED.setBrightness(DEBUG_RGB_BRIGHTNESS);
     led [0] = CRGB::Red;
@@ -93,6 +106,11 @@ void setup() {
     FastLED.show();
 }
 
+/**
+ * @brief Arduino-Loop-Funktion
+ * Wird nach der Setup-Funktion in Endlosschleife ausgeführt
+ * 
+ */
 void loop() {
     #ifdef SPS_Connected                //Checking if PLC is online
     uint32_t timestamp = millis();
@@ -104,9 +122,15 @@ void loop() {
         led [0] = CRGB::Green; FastLED.show();
     }
     #endif
-    if(!carOnPickingPlace && entryLaneQueue != 99) {          //Car is waiting on programming lane for entry to storage
-        laneControl.drive(entryLaneQueue, VEL_CarEntry);
-        entryLaneQueue = 99;
+
+    if (smartdelay_check(&drivingOutDelay))
+    {
+        digitalWrite(RELAY_ExitLane_p, LOW);
+        if (!carOnPickingPlace)
+        {
+            digitalWrite(RELAY_EntryLane_p, HIGH);
+            laneControl.driveAll(VEL_CarEntry);
+        }
     }
     uint8_t carId;
     if((carId = carDect1_execute()) < 99) {           //Car is entering the programming lane
@@ -136,13 +160,24 @@ void loop() {
 
 }
 
-//Answer to request from SPS
+/**
+ * @brief Auszuführende Funktion für Befehlspaket "Polling-/Syncsignal" von der SPS
+ * Antwortet auf das Life-/Polling-Signal der SPS. 
+ * Wenn zu übremittelnde Daten im Puffer vorhanden sind, werden diese gesendet, ansonsten wird mit dem Life-Siganl geantwortet.
+ * 
+ * @param buffer Datenpaket das von der SPS empfangen wurde
+ */
 void request(byte * buffer){
     SPS_lastLifeSignal = millis();
     comSPS_sendDataPacket();
 }
 
-//Program id to car
+/**
+ * @brief Auszuführende Funktion für das Befehlspaket "Fahrzeug programmieren" von der SPS
+ * Programmieren eines Fahrzeugs auf eine ID, Maximalgeschwindigkeit, Bremskraft und Treibstoffverhalten
+ * 
+ * @param buffer Datenpaket das von der SPS empfangen wurde
+ */
 void programCar(byte * buffer){
     comSPS_send2(C_MC_OK(buffer [C_SPS_PROGRAM_ID]));
     digitalWrite(RELAY_EntryLane_p, LOW);
@@ -155,19 +190,20 @@ void programCar(byte * buffer){
     
 }
 
-//Drive car to exit the box
+/**
+ * @brief Auszuführende Funktion für das Befehlspaket "Fahrzeug ausfahren" von der SPS
+ * Schaltet die Einfahrtsschiene aus und die Ausfahrtsschiene ein und lässt anschließend das Fahrzeug mit der übermittelten Reglernummer ausfahren
+ * Nach einer 
+ * 
+ * @param buffer 
+ */
 void driveCar(byte * buffer){
     comSPS_send2(C_MC_OK(buffer [C_SPS_PROGRAM_ID]));
     digitalWrite(RELAY_EntryLane_p, LOW);
     digitalWrite(RELAY_ExitLane_p, HIGH);
     laneControl.drive(buffer [1], VEL_CarExit);
     DEBUGF("driveCar ID: %d, Vel: %d\n", buffer [1], VEL_CarExit);
-    delay(2000);
-    digitalWrite(RELAY_ExitLane_p, LOW);
-    if (!carOnPickingPlace) {
-        digitalWrite(RELAY_EntryLane_p, HIGH);
-        laneControl.driveAll(VEL_CarEntry);
-    }
+    smartdelay(&drivingOutDelay);
 }
 
 void lightBarrier(byte * buffer){
