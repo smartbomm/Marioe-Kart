@@ -13,7 +13,12 @@
  */
 
 #include <Arduino.h>
-
+/**
+ * @brief die Klasse CarreraControll übernimmt alle ansteuerungs Funktionen der Carrera Autos
+ * Die Klasse wird momentan nur einmal verwendet. Die Klasse wurde am Anfang des Projektes erstellt, 
+ * allerdings könnte sie überarbeitet werden, um mehrere Treiber auf einer CarControllUnit zu betreiben.
+ * @note die Klasse ist nur einmal erstellt und nicht weiter getestet (außer Einzelbetrieb)
+ */
 class CarreraControll {
 public:
 
@@ -38,8 +43,9 @@ public:
     void setID(int carID);
 
 
-        /**
+    /**
      * @brief Frage ab ob das Programieren einer ID erfolgreich durch gelaufen ist
+     * @details diese Funktion wird genau wie die Rückmeldung des programmierens nur einmalig zurückgegeben
      */
     bool setID();
 
@@ -56,9 +62,11 @@ public:
      * @brief Programmieren des Autos auf eine ID, Maximalgeschwindigeit, Bremskraft und Tankgröße
      * 
      * @param carNr die zu programmierende ID
-     * @param maxSpeed die zu programmierende Maximalgeschwindigeti
+     * @param maxSpeed die zu programmierende Maximalgeschwindigeit
      * @param brake die zu programmierende Bremskraft
      * @param fuel die zu programmierende Tankgröße
+     * 
+     * @note Die Funktion wurde nur mit den validen werten 0-5 getestet.
      */
     void program(int carNr, int maxSpeed, int brake, int fuel);
 
@@ -66,6 +74,7 @@ public:
      * @brief Gibt den programmiert Status einmalig zurück
      * 
      * @return true Das Auto wurde programmiert (setzt sich nach abrufen selbst zurück)
+     * 
      * @return false Zustand bei nicht programmiertem Auto
      */
     bool program();
@@ -76,7 +85,11 @@ public:
      * @param value Der Wert der Geschwindigeit die alle Autos annehmen sollen
      */
     void driveAll(int value);
-
+    /**
+     * @brief zyklus klasse (sollte nicht von außen aufgerufen werden muss aber public bleiben wegen den Interrupts)
+     * 
+     * @note bei externem aufruf kann es timing probleme geben
+     */
     void cycle();
 
 
@@ -91,11 +104,6 @@ private:
     bool Crun;
 
 
-
-
-
-
-    
 };
 
 #endif
