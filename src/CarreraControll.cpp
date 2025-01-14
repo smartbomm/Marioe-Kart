@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <CarreraControll.h>
-
+//! [CarreraControllInit]
 hw_timer_t *timer = NULL;
 
 
@@ -24,7 +24,9 @@ void CarreraControll::initTime(){
         timerAlarmWrite(timer, 50, true); 
         timerAlarmEnable(timer); 
 }
-///! [CarreraControllVariables
+//! [CarreraControllInit]
+
+//! [CarreraControllVariables]
 int states[] = 
 {
  0b1000000000000,  //0 > Programming Word
@@ -50,7 +52,7 @@ int values[] =
 
 
 int loc = 0;
-int restCycle = 150; //zykles to rest between words
+int restCycle = 150; //cycle to rest between words
 int numStates = size[0];
 int statesInt = states[0];
 bool doneCycle = true; //done with word
@@ -68,9 +70,9 @@ bool inverted = true; //to invert the protocoll (if hardware changes)
 
 bool programmed = true;
 int pCount = 0; //which programming word is chosen
-///! [CarreraControllVariables
+//! [CarreraControllVariables]
 
-
+//! [CarreraControllCycle]
 void CarreraControll::cycle() {
     if(normalMode){
     pushWord(Cpin);
@@ -81,26 +83,18 @@ void CarreraControll::cycle() {
         Serial.print(statesInt);
       }
     }
-    
-
-
-    
     else{
            if(flashCount==-1||flashCount==-2){
       changeBits(flashCar,0,5,0b1);
       pushWord(Cpin);  
-
-      
      }
      if(flashCount==0||flashCount==1||flashCount ==4||flashCount==5||flashCount==13||flashCount==12||flashCount ==17||flashCount==16){
       changeBits(flashCar,1,5,0b1);
       pushWord(Cpin); 
-
      }
      if(flashCount ==2||flashCount ==3||flashCount ==6||flashCount==7||flashCount ==11||flashCount==10||flashCount ==15||flashCount==14||flashCount == 18){
        changeBits(flashCar,0,5,0b1);  
        pushWord(Cpin);
-
      }
      if(flashCount == 8){
       cycleAllowed = false;
@@ -115,7 +109,6 @@ void CarreraControll::cycle() {
         cycleAllowed=true;
         CycleCount = 0;
         doneProtProgramming = true;
-
       }
      }
   if (doneProtCH & cycleAllowed & flashCount != 8 & flashCount != 9){
@@ -135,8 +128,7 @@ void CarreraControll::cycle() {
    }
   }
 }
-
-
+//! [CarreraControllCycle]
 
 
 
@@ -149,9 +141,6 @@ void CarreraControll::conf(int pin) { //part of startup of the protocoll
   Cpin = pin;
   initTime();
   }
-
-
-
 void CarreraControll::pushWord(int CPin) {
 
   if (halfDone == false && loc <= numStates) {  // Test for the 1st run and if smaller than the number of states 

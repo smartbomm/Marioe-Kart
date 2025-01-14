@@ -1,6 +1,5 @@
-\chapter{Fahrzeugsteuerung}
-\hypertarget{_fahrzeugsteuerung}{}\label{_fahrzeugsteuerung}\index{Fahrzeugsteuerung@{Fahrzeugsteuerung}}
-\hypertarget{_fahrzeugsteuerung_Init}{}\doxysection{\texorpdfstring{Initalisierung}{Initalisierung}}\label{_fahrzeugsteuerung_Init}
+\chapter{Carrera\+Controll}
+\hypertarget{_carrera_controll}{}\label{_carrera_controll}\index{CarreraControll@{CarreraControll}}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{hw\_timer\_t\ *timer\ =\ NULL;}
@@ -28,7 +27,7 @@
 \DoxyCodeLine{\}}
 
 \end{DoxyCodeInclude}
- zuerst wird ein getimter Interrupt erstellt dieser ruft regelmäßig die Funktion cycle() auf. Diese führt dann die nächste Aktion aus Diesen Teil würde ich nicht ändern solange das Protokoll laufen soll wie geplant. Falls es Änderungen am Timing geben soll kann man das in der init\+Time() Funktion ändern. (ACHTUNG\+: einige pausenzeiten zählen zusätzlich hoch also werden alle timings gestreckt wenn man hier etwas ändert) 
+ 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{int}\ states[]\ =\ }
 \DoxyCodeLine{\{}
@@ -75,8 +74,7 @@
 \DoxyCodeLine{\textcolor{keywordtype}{int}\ pCount\ =\ 0;\ \textcolor{comment}{//which\ programming\ word\ is\ chosen}}
 
 \end{DoxyCodeInclude}
- Hier werden die Variablen für die \doxylink{class_carrera_controll}{Carrera\+Controll} Klasse definiert. \begin{DoxyWarning}{Warnung}
-Achtung hier gibt es einige Flaggs die villeicht 
+ 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_carrera_controll_adc0737662be788d394b87463ad383acc}{CarreraControll::cycle}}()\ \{}
 \DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}(normalMode)\{}
@@ -144,5 +142,4 @@ Achtung hier gibt es einige Flaggs die villeicht
 \DoxyCodeLine{\}}
 
 \end{DoxyCodeInclude}
-
-\end{DoxyWarning}
+ 

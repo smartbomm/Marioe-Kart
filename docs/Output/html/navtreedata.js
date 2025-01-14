@@ -30,11 +30,13 @@ var NAVTREE =
       [ "Einstellungen", "index.html#autotoc_md8", null ]
     ] ],
     [ "Fahrzeugerkennung", "_fahrzeugerkennung.html", null ],
+    [ "Fahrzeugsteuerung", "_fahrzeugsteuerung.html", [
+      [ "Initalisierung", "_fahrzeugsteuerung.html#Init", null ]
+    ] ],
     [ "Kommunikation", "_kommunikation.html", [
       [ "Paketaufbau", "_kommunikation.html#paketaufbau", null ],
       [ "Mehrere Bus-Teilnehmer", "_kommunikation.html#erweiterung-protokoll", null ]
     ] ],
-    [ "Fahrzeugsteuerung", "_fahrzeugsteuerung.html", null ],
     [ "Klassen", "annotated.html", [
       [ "Auflistung der Klassen", "annotated.html", "annotated_dup" ],
       [ "Klassen-Verzeichnis", "classes.html", null ],

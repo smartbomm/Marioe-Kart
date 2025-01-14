@@ -2,7 +2,7 @@
 \hypertarget{class_carrera_controll}{}\label{class_carrera_controll}\index{CarreraControll@{CarreraControll}}
 
 
-die Klasse \doxylink{class_carrera_controll}{Carrera\+Controll} übernimmt alle ansteuerungs Funktionen der Carrera Autos Die Klasse wird momentan nur einmal verwendet. Die Klasse wurde am Anfang des Projektes erstellt, allerdings könnte sie überarbeitet werden, um mehrere Treiber auf einer Car\+Controll\+Unit zu betreiben.  
+Die Klasse \doxylink{class_carrera_controll}{Carrera\+Controll} übernimmt alle ansteuerungs Funktionen der Carrera Autos Die Klasse wird momentan nur einmal verwendet. Die Klasse wurde am Anfang des Projektes erstellt, allerdings könnte sie überarbeitet werden, um mehrere Treiber auf einer Car\+Controll\+Unit zu betreiben.  
 
 
 
@@ -13,9 +13,9 @@ die Klasse \doxylink{class_carrera_controll}{Carrera\+Controll} übernimmt alle 
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{class_carrera_controll_a672d241e994efe1c4f8636502eb4421b}{conf}} (int pin)
-\begin{DoxyCompactList}\small\item\em Initallisieren der \doxylink{class_carrera_controll}{Carrera\+Controll} Bibliothek. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Initialisieren der \doxylink{class_carrera_controll}{Carrera\+Controll} Bibliothek. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_carrera_controll_a75e70f2d185b8368f24eb4eac8f2ec74}{set\+ID}} (int car\+ID)
-\begin{DoxyCompactList}\small\item\em Setzt die ID eines Fahrzeugs auf mitgegebene id. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Setzt die ID eines Fahrzeugs auf mitgegebene ID. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_carrera_controll_a64af82614ee133308105f585053b575d}{set\+ID}} ()
 \begin{DoxyCompactList}\small\item\em Frage ab ob das Programieren einer ID erfolgreich durch gelaufen ist. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_carrera_controll_a48f16cf7332a6eac9e2d87bedc281ed8}{drive}} (int Car\+Nr, int Speed)
@@ -27,7 +27,7 @@ bool \mbox{\hyperlink{class_carrera_controll_ae01e4ff2d32edfca8a17ae8b2c5a7bd6}{
 void \mbox{\hyperlink{class_carrera_controll_ab1f59a7fb6574ee78424469fc77df76c}{drive\+All}} (int value)
 \begin{DoxyCompactList}\small\item\em Setzt die Geschwindigeit aller Carrera-\/\+Autos auf eine Geschwindigeit. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_carrera_controll_adc0737662be788d394b87463ad383acc}{cycle}} ()
-\begin{DoxyCompactList}\small\item\em zyklus klasse (sollte nicht von außen aufgerufen werden muss aber public bleiben wegen den Interrupts) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Zyklus-\/\+Klasse (sollte nicht von außen aufgerufen werden muss aber public bleiben wegen den Interrupts) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Öffentliche, statische Methoden}
 \begin{DoxyCompactItemize}
 \item 
@@ -37,7 +37,7 @@ static void IRAM\+\_\+\+ATTR {\bfseries timer\+Interrupt} ()
 
 
 \doxysubsection{Ausführliche Beschreibung}
-die Klasse \doxylink{class_carrera_controll}{Carrera\+Controll} übernimmt alle ansteuerungs Funktionen der Carrera Autos Die Klasse wird momentan nur einmal verwendet. Die Klasse wurde am Anfang des Projektes erstellt, allerdings könnte sie überarbeitet werden, um mehrere Treiber auf einer Car\+Controll\+Unit zu betreiben. 
+Die Klasse \doxylink{class_carrera_controll}{Carrera\+Controll} übernimmt alle ansteuerungs Funktionen der Carrera Autos Die Klasse wird momentan nur einmal verwendet. Die Klasse wurde am Anfang des Projektes erstellt, allerdings könnte sie überarbeitet werden, um mehrere Treiber auf einer Car\+Controll\+Unit zu betreiben. 
 
 \begin{DoxyNote}{Zu beachten}
 die Klasse ist nur einmal erstellt und nicht weiter getestet (außer Einzelbetrieb) 
@@ -53,11 +53,13 @@ void Carrera\+Controll\+::conf (\begin{DoxyParamCaption}\item[{int}]{pin}{}\end{
 
 
 
-Initallisieren der \doxylink{class_carrera_controll}{Carrera\+Controll} Bibliothek. 
+Initialisieren der \doxylink{class_carrera_controll}{Carrera\+Controll} Bibliothek. 
+
+\mbox{[}Carrera\+Controll\+Cycle\mbox{]}
 
 
 \begin{DoxyParams}{Parameter}
-{\em pin} & Ausgabepinn der \doxylink{class_carrera_controll}{Carrera\+Controll} Bibliothek \\
+{\em pin} & Ausgabepin der \doxylink{class_carrera_controll}{Carrera\+Controll} Bibliothek \\
 \hline
 \end{DoxyParams}
 \Hypertarget{class_carrera_controll_adc0737662be788d394b87463ad383acc}\index{CarreraControll@{CarreraControll}!cycle@{cycle}}
@@ -68,12 +70,14 @@ void Carrera\+Controll\+::cycle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCapti
 
 
 
-zyklus klasse (sollte nicht von außen aufgerufen werden muss aber public bleiben wegen den Interrupts) 
+Zyklus-\/\+Klasse (sollte nicht von außen aufgerufen werden muss aber public bleiben wegen den Interrupts) 
+
+\mbox{[}Carrera\+Controll\+Variables\mbox{]}
 
 \begin{DoxyNote}{Zu beachten}
-bei externem aufruf kann es timing probleme geben 
+Bei externem Aufruf kann es Timing-\/\+Probleme geben
 \end{DoxyNote}
-\Hypertarget{class_carrera_controll_a48f16cf7332a6eac9e2d87bedc281ed8}\index{CarreraControll@{CarreraControll}!drive@{drive}}
+\mbox{[}Carrera\+Controll\+Cycle\mbox{]} \Hypertarget{class_carrera_controll_a48f16cf7332a6eac9e2d87bedc281ed8}\index{CarreraControll@{CarreraControll}!drive@{drive}}
 \index{drive@{drive}!CarreraControll@{CarreraControll}}
 \doxysubsubsection{\texorpdfstring{drive()}{drive()}}
 {\footnotesize\ttfamily \label{class_carrera_controll_a48f16cf7332a6eac9e2d87bedc281ed8} 
@@ -132,13 +136,13 @@ Programmieren des Autos auf eine ID, Maximalgeschwindigeit, Bremskraft und Tankg
 
 
 \begin{DoxyParams}{Parameter}
-{\em car\+Nr} & die zu programmierende ID \\
+{\em car\+Nr} & Die zu programmierende ID \\
 \hline
-{\em max\+Speed} & die zu programmierende Maximalgeschwindigeit \\
+{\em max\+Speed} & Die zu programmierende Maximalgeschwindigeit \\
 \hline
-{\em brake} & die zu programmierende Bremskraft \\
+{\em brake} & Die zu programmierende Bremskraft \\
 \hline
-{\em fuel} & die zu programmierende Tankgröße\\
+{\em fuel} & Die zu programmierende Tankgröße\\
 \hline
 \end{DoxyParams}
 \begin{DoxyNote}{Zu beachten}
@@ -154,7 +158,7 @@ bool Carrera\+Controll\+::set\+ID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCap
 
 Frage ab ob das Programieren einer ID erfolgreich durch gelaufen ist. 
 
-diese Funktion wird genau wie die Rückmeldung des programmierens nur einmalig zurückgegeben \Hypertarget{class_carrera_controll_a75e70f2d185b8368f24eb4eac8f2ec74}\index{CarreraControll@{CarreraControll}!setID@{setID}}
+Diese Funktion wird genau wie die Rückmeldung des Programmierens nur einmalig zurückgegeben \Hypertarget{class_carrera_controll_a75e70f2d185b8368f24eb4eac8f2ec74}\index{CarreraControll@{CarreraControll}!setID@{setID}}
 \index{setID@{setID}!CarreraControll@{CarreraControll}}
 \doxysubsubsection{\texorpdfstring{setID()}{setID()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \label{class_carrera_controll_a75e70f2d185b8368f24eb4eac8f2ec74} 
@@ -162,7 +166,7 @@ void Carrera\+Controll\+::set\+ID (\begin{DoxyParamCaption}\item[{int}]{car\+ID}
 
 
 
-Setzt die ID eines Fahrzeugs auf mitgegebene id. 
+Setzt die ID eines Fahrzeugs auf mitgegebene ID. 
 
 
 \begin{DoxyParams}{Parameter}

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CarControlUnit: Fahrzeugsteuerung</title>
+<title>CarControlUnit: CarreraControll</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -76,7 +76,7 @@ $(function() { codefold.init(0); });
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('_fahrzeugsteuerung.html',''); initResizable(true); });
+$(function(){initNavTree('_carrera_controll.html',''); initResizable(true); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -102,12 +102,10 @@ $(function(){initNavTree('_fahrzeugsteuerung.html',''); initResizable(true); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Fahrzeugsteuerung</div></div>
+  <div class="headertitle"><div class="title">CarreraControll</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="Init"></a>
-Initalisierung</h1>
-<div class="fragment"><div class="line">hw_timer_t *timer = NULL;</div>
+<div class="textblock"><div class="fragment"><div class="line">hw_timer_t *timer = NULL;</div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><a class="code hl_class" href="class_carrera_controll.html">CarreraControll</a> *interruptPointer;</div>
@@ -130,7 +128,7 @@ Initalisierung</h1>
 <div class="line">        timerAlarmWrite(timer, 50, <span class="keyword">true</span>); </div>
 <div class="line">        timerAlarmEnable(timer); </div>
 <div class="line">}</div>
-</div><!-- fragment --><p> zuerst wird ein getimter Interrupt erstellt dieser ruft regelmäßig die Funktion cycle() auf. Diese führt dann die nächste Aktion aus Diesen Teil würde ich nicht ändern solange das Protokoll laufen soll wie geplant. Falls es Änderungen am Timing geben soll kann man das in der initTime() Funktion ändern. (ACHTUNG: einige pausenzeiten zählen zusätzlich hoch also werden alle timings gestreckt wenn man hier etwas ändert) </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> states[] = </div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="keywordtype">int</span> states[] = </div>
 <div class="line">{</div>
 <div class="line"> 0b1000000000000,  <span class="comment">//0 &gt; Programming Word</span></div>
 <div class="line"> 0b1111000000,  <span class="comment">//1 &gt; Pace Ang GHOST Car</span></div>
@@ -173,7 +171,7 @@ Initalisierung</h1>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">bool</span> programmed = <span class="keyword">true</span>;</div>
 <div class="line"><span class="keywordtype">int</span> pCount = 0; <span class="comment">//which programming word is chosen</span></div>
-</div><!-- fragment --><p> Hier werden die Variablen für die <a class="el" href="class_carrera_controll.html" title="Die Klasse CarreraControll übernimmt alle ansteuerungs Funktionen der Carrera Autos Die Klasse wird m...">CarreraControll</a> Klasse definiert. </p><dl class="section warning"><dt>Warnung</dt><dd>Achtung hier gibt es einige Flaggs die villeicht <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="class_carrera_controll.html#adc0737662be788d394b87463ad383acc">CarreraControll::cycle</a>() {</div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="class_carrera_controll.html#adc0737662be788d394b87463ad383acc">CarreraControll::cycle</a>() {</div>
 <div class="line">    <span class="keywordflow">if</span>(normalMode){</div>
 <div class="line">    pushWord(Cpin);</div>
 <div class="line">      <span class="keywordflow">if</span> (doneCycle){</div>
@@ -237,8 +235,7 @@ Initalisierung</h1>
 <div class="line">   }</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --></dd></dl>
-</div></div><!-- contents -->
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
