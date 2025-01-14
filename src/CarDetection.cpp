@@ -29,31 +29,30 @@ void carDect1_init (uint8_t pin) {  //initialize pin and variables
 }
 
 /// [carDect1_exec]
-/// @return 
-uint8_t carDect1_execute(){    //to be executed in program loop, calculates car ids, if cars where detected
-    uint8_t car_id = 0;
-    if(carDect1_carDetected){
-        carDect1_carDetected = false;
-        uint32_t period = carDect1_lastTime - carDect1_firstTime;
-        car_id =  (int)(period + IR_DECT_Period_Tolerance)/(64) - 1;        //calculate Car-ID under consideration of the setted tolerance
-        if(car_id>7 ) car_id = 99;
-    } else car_id = 99;
-    if(micros() - carDect1_firstTime > IR_DECT_CarTimeGap) attachInterrupt(carDect1_pin, carDect1_isr, FALLING);
-    return car_id;
+uint8_t carDect1_execute(){    
+    uint8_t car_id = 0;                                                      //Variable zur Speicherung der detektierten Reglernummer
+    if(carDect1_carDetected){                                                //Fahrzeug wurde erkannt
+        carDect1_carDetected = false;                                        //Flag zurücksetzen
+        uint32_t period = carDect1_lastTime - carDect1_firstTime;            //Berechnung der Periodendauer zwischen den zwei Impulsen
+        car_id =  (int)(period + IR_DECT_Period_Tolerance)/(64) - 1;         //Berechnung der Reglernummer unter Berücksichtigung der eingestellten Toleranz
+        if(car_id>7 ) car_id = 99;                                           //Falls keine gültige Reglernummer berechnet werden konnte, wird 99 zurückgegeben
+    } else car_id = 99;                                                      //Kein Fahrzeug erkannt  
+    if(micros() - carDect1_firstTime > IR_DECT_CarTimeGap) attachInterrupt(carDect1_pin, carDect1_isr, FALLING);    //Wenn minimale Zeit zwischen zwei Fahrzeugen abgelaufen ist, wird der Interrupt wieder aktiviert
+    return car_id;                                                        //Rückgabe der berechneten Reglernummer
 }
 /// [carDect1_exec]
 
 /// [carDect1_isr]
 void IRAM_ATTR carDect1_isr(){
-    if(!carDect1_detecting){
-        carDect1_firstTime =micros();
-        carDect1_detecting = true;
+    if(!carDect1_detecting){            //1. Impuls
+        carDect1_firstTime =micros();   //Zeitstempel des ersten Impulses sichern
+        carDect1_detecting = true;      //Flag setzen, dass erster Impuls erkannt wurde (Erkennung läuft)
     }
-    else {
-        carDect1_carDetected = true;
-        carDect1_detecting = false;
-        carDect1_lastTime = micros();
-        detachInterrupt(carDect1_pin);
+    else {                              //2. Impuls               
+        carDect1_carDetected = true;    //Flag setzen, dass Fahrzeug erkannt wurde
+        carDect1_detecting = false;     //Flag rücksetzen, dass Erkennung läuft
+        carDect1_lastTime = micros();   //Zeitstempel des zweiten Impulses sichern
+        detachInterrupt(carDect1_pin);  //Interrupt deaktivieren
     }
 }
 /// [carDect1_isr]
