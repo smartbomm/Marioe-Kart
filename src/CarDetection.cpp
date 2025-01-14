@@ -28,6 +28,8 @@ void carDect1_init (uint8_t pin) {  //initialize pin and variables
     attachInterrupt(pin, carDect1_isr, FALLING);
 }
 
+/// [carDect1_exec]
+/// @return 
 uint8_t carDect1_execute(){    //to be executed in program loop, calculates car ids, if cars where detected
     uint8_t car_id = 0;
     if(carDect1_carDetected){
@@ -39,6 +41,7 @@ uint8_t carDect1_execute(){    //to be executed in program loop, calculates car 
     if(micros() - carDect1_firstTime > IR_DECT_CarTimeGap) attachInterrupt(carDect1_pin, carDect1_isr, FALLING);
     return car_id;
 }
+/// [carDect1_exec]
 
 void IRAM_ATTR carDect1_isr(){
     if(!carDect1_detecting){

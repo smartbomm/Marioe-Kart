@@ -1,12 +1,5 @@
 /**
- * @file CarDetection.h
- * @author Joel Bommeli (joel.bommeli@hof-university.de)
- * @version 0.1
- * @date 2024-12-28
- * @copyright Copyright (c) 2024
- * 
- * 
- * @brief Programmteil zur Fahrzeugerkennung mittels IR_Fototransistor
+ * @page Fahrzeugerkennung
  * 
  * Jedes Carrera Digital 124 - Fahrzeug ist mit einer IR-LED ausgerüstet. Je nach zugeordnetem Regler, blinkt diese mit einer anderen Frequenz. Die Sende-Frequenzen sind folgende:
  * 
@@ -22,12 +15,30 @@
  *      Ghostcar  | 2,232                 | 448
  *       Pacecar  | 1,953                 | 512
  * 
+ * 
+ * Das Modul CarDetection dient zur Erkennung der entsprechenden Reglernummer anhand der Periodendauer. 
+ * 
+ * ### Funktionsweise
  * Ein Impuls am deklarierten Pin löst eine Interrupt-Routine aus. Diese speichert die aktuelle Systemzeit ab. Beim nächsten Interrupt, wird ebenfalls die Systemzeit abgespeichert und der Interrupt deaktiviert. 
  * Der Interrupt wird erst wieder reaktiviert, wenn die Zeitdifferenz durch die Funktion `carDectx_Execute()`ausgewertet wurde und das Mindestintervall zwischen zwei durchfahrenden Fahrzeugen gewährleistet wurde.
  * Aufgrund von Zeitmangel wurden die Funktionen für die zwei Infrarot-Sensoren einfach kopiert und tragen jeweils das Präfix carDect1... bzw. carDect2... . 
- * Eine Möglichkeit der Weiterentwiscklung bestände darin, eine Struktur zu entwerfen, in der jeweils die Parameter, der Sensorik hinterlegt ist, so dass beide Sensoren mit der gleichen Funktion bedient werden könnten.
+ * Eine Möglichkeit der Weiterentwicklung bestände darin, eine Struktur zu entwerfen, in der jeweils die Parameter, der Sensorik hinterlegt ist, so dass beide Sensoren mit der gleichen Funktion bedient werden könnten.
  * 
- * A link to the define #VEL_CarExit
+ * Genaueres zur Verwendung der Funktionen ist in der Dokumentation zu CarDetection.h zu finden.
+ * 
+ */
+
+/**
+ * @file CarDetection.h
+ * @author Joel Bommeli (joel.bommeli@hof-university.de)
+ * @version 0.1
+ * @date 2024-12-28
+ * @copyright Copyright (c) 2024
+ * 
+ * 
+ * @brief Programmteil zur Fahrzeugerkennung mittels IR_Fototransistor
+ * 
+ * 
  * 
  */
 

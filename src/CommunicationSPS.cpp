@@ -1,4 +1,11 @@
-#include <CommunicationSPS/CommunicationSPS.h>
+#include <CommunicationSPS.h>
+
+/**
+ * @file CommunicationSPS.cpp
+ * 
+ */
+
+
 
 //#########################################
 //Receiving Data from SPS
@@ -6,7 +13,6 @@
 
 command_function comSPS_commands[SPS_UART_RxCommandMemory]; //Array storing function_pointers for each configured SPS-Command
 bool comSPS_commandsDefined [SPS_UART_RxCommandMemory] = {false};     //Array storing which commands are defined
-uint8_t comSPS_packetSize = SPS_UART_RxPacketLength;          //Size of one SPS-Command-Packet
 byte comSPS_receivedPacket [SPS_UART_RxPacketLength];          //Buffer to save one received packet
 
 
@@ -55,7 +61,7 @@ void comSPS_execute(){
     if(SPS_UART.available()>=SPS_UART_RxPacketLength){
         
         SPS_UART.read(comSPS_receivedPacket, SPS_UART_RxPacketLength);
-        DEBUGF("Receive Packet: %02X %02X %02X %02X %02X\t", comSPS_receivedPacket[0], comSPS_receivedPacket[1], comSPS_receivedPacket[2], comSPS_receivedPacket[3], comSPS_receivedPacket[4]);
+        //DEBUGF("Receive Packet: %02X %02X %02X %02X %02X\t", comSPS_receivedPacket[0], comSPS_receivedPacket[1], comSPS_receivedPacket[2], comSPS_receivedPacket[3], comSPS_receivedPacket[4]);
         if(comSPS_commandsDefined[comSPS_receivedPacket[0]]){    //Check if received command is defined and valid
             comSPS_commands[comSPS_receivedPacket [0]](comSPS_receivedPacket);
         } 
@@ -66,7 +72,7 @@ void comSPS_execute(){
 //Sending Data to SPS
 //########################################
 
-uint8_t ansMc_dataBuffer [C_MC_DataBufferSize*2] = {0};
+uint8_t ansMc_dataBuffer [C_MC_DataBufferSize*SPS_UART_TxPacketLength] = {0};
 uint8_t ansMc_nextRead = 0;
 uint8_t ansMc_nextWrite = 0;
 
@@ -95,6 +101,6 @@ void comSPS_sendDataPacket(){
     } else {    //send lifesignal
         uint8_t buffer [2] = {0,1};
         SPS_UART.write(buffer, 2);
-        DEBUGF("Send Packet: %02X %02X\n", buffer [0], buffer [1]);
+        //DEBUGF("Send Packet: %02X %02X\n", buffer [0], buffer [1]);
     }
 }
