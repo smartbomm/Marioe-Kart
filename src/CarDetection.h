@@ -1,7 +1,13 @@
 /**
  * @page Fahrzeugerkennung
  * 
- * Jedes Carrera Digital 124 - Fahrzeug ist mit einer IR-LED ausgerüstet. Je nach zugeordnetem Regler, blinkt diese mit einer anderen Frequenz. Die Sende-Frequenzen sind folgende:
+ * ## Carrera Fahrzeugidentifizierung
+ * 
+ * Jedes Carrera Digital 124 - Fahrzeug ist mit einer IR-LED ausgerüstet. Je nach zugeordnetem Regler, blinkt diese mit einer anderen Frequenz. Dies dient auf der Orginal-Rennbahn dazu, an den Weichen und den Rundenzählern die Fahrzeuge zu erkennen.
+ * Im Projekt wurde diese Fahrzeugerkennung zur Erkennung der Carrera-Autos bei der Ein-undAusfahrt in das automatisierte Lager verwendet. Dazu wurde eine spezielle Hardware designt, die in eine Schiene eingebaut werden kann. 
+ * Es handelt sich hierbei um die bereits erwähnte CarDetectionUnit. Sie enthält einen IR-Fototransistor, sowie eine analoge Auswertungsschaltung, die das Signal verbessert.
+ * 
+ *  Die Sende-Frequenzen sind folgende :
  * 
  * 
  * Regler-Nummer  | Sendefrequenz in kHz  | Periodendauer in µs
@@ -15,14 +21,27 @@
  *      Ghostcar  | 2,232                 | 448
  *       Pacecar  | 1,953                 | 512
  * 
+ * Quelle: http://wasserstoffe.de/carrera-hacks/infrarot-erkennung/index.html 
  * 
- * Das Modul CarDetection dient zur Erkennung der entsprechenden Reglernummer anhand der Periodendauer. 
+ * Das Modul @ref CarDetection.h "CarDetection" dient zur Erkennung der entsprechenden Reglernummer anhand der Periodendauer. 
  * 
- * ### Funktionsweise
+ * ## Funktion des Programms
  * Ein Impuls am deklarierten Pin löst eine Interrupt-Routine aus. Diese speichert die aktuelle Systemzeit ab. Beim nächsten Interrupt, wird ebenfalls die Systemzeit abgespeichert und der Interrupt deaktiviert. 
- * Der Interrupt wird erst wieder reaktiviert, wenn die Zeitdifferenz durch die Funktion `carDectx_Execute()`ausgewertet wurde und das Mindestintervall zwischen zwei durchfahrenden Fahrzeugen gewährleistet wurde.
- * Aufgrund von Zeitmangel wurden die Funktionen für die zwei Infrarot-Sensoren einfach kopiert und tragen jeweils das Präfix carDect1... bzw. carDect2... . 
- * Eine Möglichkeit der Weiterentwicklung bestände darin, eine Struktur zu entwerfen, in der jeweils die Parameter, der Sensorik hinterlegt ist, so dass beide Sensoren mit der gleichen Funktion bedient werden könnten.
+ * Der Interrupt wird erst wieder reaktiviert, wenn die Zeitdifferenz durch die Funktion `carDectx_execute()`ausgewertet wurde und das Mindestintervall zwischen zwei durchfahrenden Fahrzeugen gewährleistet wurde.
+ * 
+ * @note Aufgrund von Zeitmangel wurden die Funktionen für die zwei Infrarot-Sensoren einfach kopiert und tragen jeweils das Präfix carDect1... bzw. carDect2... . Eine Möglichkeit der Weiterentwicklung bestände darin, eine Struktur zu entwerfen, in der jeweils die Parameter, der Sensorik hinterlegt ist, so dass beide Sensoren mit der gleichen Funktion bedient werden könnten.
+ * 
+ * #### Aufbau der ISR am Beispiel von `carDect1_isr()`
+ * 
+ * Diese Funktion wird durch einen Interrupt ausgelöst, wenn ein Impuls am Pin erkannt wird.
+ * 
+ * @snippet{lineno} CarDetection.cpp carDect1_isr
+ * 
+ * #### Auswertung der Reglernummer am Beispiel von `carDect1_execute()`
+ * 
+ * Diese Funktion muss in jedem Programmzyklus aufgerufen werden, um die Reglernummer auszuwerten, bzw. den Interrupt wieder zu aktivieren.
+ * 
+ * @snippet{lineno} CarDetection.cpp carDect1_exec  
  * 
  * Genaueres zur Verwendung der Funktionen ist in der Dokumentation zu CarDetection.h zu finden.
  * 
@@ -36,10 +55,9 @@
  * @copyright Copyright (c) 2024
  * 
  * 
- * @brief Programmteil zur Fahrzeugerkennung mittels IR_Fototransistor
+ * @brief Programmteil zur Fahrzeugerkennung mittels CarDetectionUnit. @see Fahrzeugerkennung
  * 
- * 
- * 
+ * Die Funktionsweise der Fahrzeugerkennung ist auf der Seite @ref Fahrzeugerkennung "Fahrzeugerkennung" dokumentiert.
  */
 
 #ifndef CARDETECTION_H
@@ -57,10 +75,6 @@ void carDect1_init (uint8_t pin);
 /// @brief Initialisiere Eingänge und Interrupts der CarDetectionUnit 2.
 /// @param pin Pin des Mikrocontroller, an dem die CarDetectionUnit angeschloßen ist
 void carDect2_init (uint8_t pin); 
-
-//to be executed in program loop, calculates car ids, if cars where detected and writes to buffer
-//returns detected Car
-//If no car was detected returns 99
 
 /// @brief Abfrage, ob an der CarDetectionUnit 1 seit der letzten Ausführung ein Fahrzeug erkannt wurde. Falls ja, wird dessen zugeordneter Regler gemäß obenstehender Tabelle berechnet.
 /// @return ID, bzw Reglerkanal, dem das erkannte Fahrzeug zugeordnet ist. Wurde kein gültiger Wert erkannt, ist die Rückgabe 99;

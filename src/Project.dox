@@ -1,0 +1,101 @@
+/** @mainpage CarControlUnit 
+ *  
+ * Dieses Projekt entstand im Rahmen einer Projektarbeit des Moduls "Projekt Automatisierung" an der Hochschule für angewandte Wissenschaften Hof.
+ * Das Ziel des Gesamtprojekts war es, eine automatisierte Boxengasse zu entwickeln, die einen automatisierten Fahrzeugwechsel 
+ * sowie die Ein- und Auslagerung von Carrera Digital 124-Fahrzeugen in ein Lager ermöglicht.
+ * 
+ * Das Modul CarControlUnit ermöglicht die Ansteuerung der Programmierschiene, 
+ * über welche die Ein- und Ausfahrt der Fahrzeuge in die Boxengasse erfolgt.
+ * 
+ * Die Hardware besteht aus:
+ * - Eine CarControlUnit, auf welcher ein Mikrocontroller (ESP32-S3) sowie der Bahntreiber installiert ist.
+ * - Bis zu drei CarDetectionUnits, mit einer Aufbereitungsschaltung für die zur Fahrzeugerkennung notwendigen IR-LEDs.
+ * 
+ * Es werden im Projekt folgende Abkürzungen verwendet:
+ * 
+ * - CCU - CarControlUnit
+ * - CDU - CarDetectionUnit
+ * 
+ * @section Softwarekomponenten
+ * 
+ * Das Programm der CarControlUnit besteht aus folgenden Modulen:
+ * 
+ * Modul | Beschreibung | Datei
+ * ------|--------------|------
+ * @ref Fahrzeugerkennung | Ermittelung der ein- und ausfahrenden Fahrzeuge | @ref CarDetection.h
+ * @ref Fahrzeugsteuerung | Verfahren und Programmieren der Fahrzeuge auf der Programmierschiene | @ref CarreraControll.h
+ * @ref Kommunikation | Kommunikation mit der übergeordneten Steuerung (SPS) | @ref CommunicationSPS.h
+ * @ref ota "OTA-Tools" | Programmieren über WLAN sowie Debugging über Telnet | @ref OTA.h
+ * @ref Debugging | Diverse Debugging-Funktionalitäten | @ref Definitions.h, @ref main.cpp
+ * 
+ *  
+ * @section settings_defs Einstellungen/Definitionen
+ * 
+ * Damit wichtige Paramater und Einstellungen zentral verwaltet und abgerufen werden können, wurden die zwei Dateien Settings.h und Definitions.h erstellt.
+ * Die zwei Dateien unterscheiden sich dabei wie folgt:
+ * 
+ * ## Definitionen
+ * 
+ * @warning Wird an dieser Datei etwas geändert, funktioniert möglicherweise das Programm nicht mehr.
+ * Enthält Definitionen, die die Funktion des Programms beeinflussen.
+ * 
+ * - Pinbelegungen
+ * - UART-Interfaces
+ * - Makros
+ * 
+ * @ref Definitions.h "Zur Datei"
+ * ## Einstellungen
+ * 
+ * Enthält Einstellungen und Parameter, die die Funktion des Programms nicht beeinflussen. z.B. Geschwindigkeiten, Zeiten
+ * 
+ * @ref Settings.h "Zur Datei"
+ * 
+ * @section ota OTA-Tools
+ * 
+ * Die Software der CarControlUnit wurde mit OTA-Funktionalität ausgestattet. Der Quellcode der OTA-Funktionalität wurde von Andreas Spiess übernommen und kann hier gefunden werden: https://github.com/SensorsIot/ESP32-OTA
+ * 
+ * 
+ * Folgende Einstellungen zur OTA-Funktionalität können in der Datei Settings.h vorgenommen werden:
+ * 
+ * Einstellung | Makro
+ * -----------|------
+ * OTA-Flashing aktivieren | #OTA_Flashing
+ * Telnet-Debugging aktivieren | #TELNET_DEBUGGING
+ * WLAN-Name | #OTA_SSID
+ * WLAN-Passwort | #OTA_PW
+ * Statische IP-Adresse | #OTA_IP
+ * DNS-Server | #OTA_DNS
+ * Subnet-Maske | #OTA_SUBNET
+ * Gateway | #OTA_GW
+ * 
+ * @page Debugging
+ * 
+ * Zur Fehlersuche während der Programmausführung wurden folgende Debugging-Funktionen implementiert:
+ * - Debugging über eine Konsole (Telnet oder Seriell)
+ * - Debugging über die RGB-LED auf dem Mikrocontroller-Board
+ * 
+ * ## Debugging über die Konsole
+ * In der Datei Definitions.h sind zwei Makros zur Ausgabe von Debugging-Informationen definiert:
+ * - #DEBUG(...) - Ausgabe von reinem Text
+ * - #DEBUGF(...) - Ausgabe von formatiertem Text analog zu printf
+ * 
+ * Je nach aktiviertem Debugging-Modus erfolgt die Ausgabe unterschiedlich:
+ * 
+ * Modus | Ausgabe
+ * ------|-------
+ * #SERIAL_DEBUGGING | Ausgabe über die serielle Schnittstelle
+ * #TELNET_DEBUGGING | Ausgabe über Telnet
+ * Keins von beiden | Keine Ausgabe
+ * 
+ * ## Debugging über die RGB-LED
+ * 
+ * Die RGB-LED gibt folgende Zustände der CarControlUnit an:
+ * 
+ * Zustand | Farbe
+ * --------|------
+ * Programmstart | Rot
+ * Verbindung mit WLAN hergestellt (falls OTA aktiviert) | Blau
+ * Verbindung mit SPS hergestellt | Grün
+ * Verbindung zu SPS verloren | Rot
+ * Verbindung zu SPS wiederhergestellt | Grün
+ */
