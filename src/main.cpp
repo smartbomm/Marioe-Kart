@@ -2,50 +2,57 @@
 
 /**
  * @file main.cpp
- * @author Joel Bommeli (joel.bommeli@hof-university.de)
- * @brief 
+ * @authors Stefan Graml (stefan.graml@hof-university.de), 
+ * 
+ *  Joel Bommeli (joel.bommeli@hof-university.de)
+ * @brief Hauptprogramm der CarControlUnit
+ * 
+ * Bezeichnung | Ausführung
+ * ------------|----------
+ * Mikrocontroller | ESP-32-S3
+ * Programmiersprache | C++
+ * Framework | Arduino
+ * 
+ * carDect1  == CarDetection Einfahrtsschiene
+ * carDect2  == CarDetection Ausfahrtsschiene
+ * 
  * @version 0.1
  * @date 2024-12-28
  * 
- * @copyright Copyright (c) 2024
+ * @copyright Copyright (c) 2025
  * 
  */
 
-#include <Arduino.h>
-#include <Definitions.h>
-#include <CommunicationSPS.h>
-#include <CarDetection.h>
-#include <CarreraControll.h>
-#include <FastLED.h>
-#include <OTA.h>
+//##########################################################################################//
+
+//Includes
+#include <Arduino.h>                //Arduino Framework
+#include <Definitions.h>            //Hardwarespezifische Definitionen
+#include <CommunicationSPS.h>       //Kommunikation mit SPS
+#include <CarDetection.h>           //Fahrzeugerkennung
+#include <CarreraControll.h>        //Bahnsteuerung
+#include <FastLED.h>                //Ansteuerung der Debug-RGB-LED
+#include <OTA.h>                    //Over-the-Air-Flashing, Telnet-Debugging
 
 
-//carDect1  == CarDetection EntryLane
-//carDect2  == CarDetection ExitLane
-
-
-//Functions
-
+//Funktionsdeklarationen
 void request(byte * buffer);
 void programCar(byte * buffer);
 void driveCar(byte * buffer);
 void lightBarrier(byte * buffer);
-void mcReady (byte * buffer);
-void comSPS_protocol();
 
+///@name Variablen
+///@{
+bool carOnPickingPlace = false;     ///<Fahrzeug auf Greifplatz
+uint8_t lastProgrammedCar = 0;      ///<Zuletzt programmiertes Fahrzeug
+uint32_t SPS_lastLifeSignal = 0;    ///<Zeitpunkt des letzten von der SPS empfangenen Polling-/Syncsignals
+///@}
 
-//Variables
-
-bool carOnPickingPlace = false;     //Is car standing on
-uint8_t entryLaneQueue = 99;         // waiting car - id for putting in to storage
-uint8_t lastProgrammedCar = 0;   
-uint32_t SPS_lastLifeSignal = 0; 
-
-//Objects
-
-CarreraControll laneControl;
-CRGB led [1];
-
+///@name Objekte
+///@{
+CarreraControll laneControl;        ///<Bahnsteuerung
+CRGB led [1];                       ///<Config-Strukur für Debug-RGB-LED
+///@}
 
 
 void setup() {
@@ -80,7 +87,6 @@ void setup() {
     comSPS_addCommand(1, programCar);
     comSPS_addCommand(2, lightBarrier);
     comSPS_addCommand(5, driveCar);
-    comSPS_addCommand(6, mcReady);
 
     comSPS_init();      //Initialize Serial Instance for Communication with SPS
     comSPS_sync();      //Sync µC with SPS
@@ -136,13 +142,26 @@ void loop() {
 
 }
 
-//Answer to request from SPS
+/**
+ * @brief Auszuführende Funktion für Befehlspaket "Polling-/Syncsignal" von der SPS
+ * 
+ * Antwortet auf das Life-/Polling-Signal der SPS. 
+ * Wenn zu übremittelnde Daten im Puffer vorhanden sind, werden diese gesendet, ansonsten wird mit dem Life-Siganl geantwortet.
+ * 
+ * @param buffer Datenpaket das von der SPS empfangen wurde
+ */
 void request(byte * buffer){
     SPS_lastLifeSignal = millis();
     comSPS_sendDataPacket();
 }
 
-//Program id to car
+/**
+ * @brief Auszuführende Funktion für das Befehlspaket "Fahrzeug programmieren" von der SPS
+ * 
+ * Programmieren eines Fahrzeugs auf eine ID, Maximalgeschwindigkeit, Bremskraft und Treibstoffverhalten
+ * 
+ * @param buffer Datenpaket das von der SPS empfangen wurde
+ */
 void programCar(byte * buffer){
     comSPS_send2(C_MC_OK(buffer [C_SPS_PROGRAM_ID]));
     digitalWrite(RELAY_EntryLane_p, LOW);
@@ -155,7 +174,14 @@ void programCar(byte * buffer){
     
 }
 
-//Drive car to exit the box
+/**
+ * @brief Auszuführende Funktion für das Befehlspaket "Fahrzeug ausfahren" von der SPS
+ * 
+ * Schaltet die Einfahrtsschiene aus und die Ausfahrtsschiene ein und lässt anschließend das Fahrzeug mit der übermittelten Reglernummer ausfahren
+ * Nach einer 
+ * 
+ * @param buffer Datenpaket das von der SPS empfangen wurde
+ */
 void driveCar(byte * buffer){
     comSPS_send2(C_MC_OK(buffer [C_SPS_PROGRAM_ID]));
     digitalWrite(RELAY_EntryLane_p, LOW);
@@ -170,6 +196,13 @@ void driveCar(byte * buffer){
     }
 }
 
+/**
+ * @brief Auszuführende Funktion für das Befehlspaket "Lichtschranke" von der SPS
+ * 
+ * Schaltet die Einfahrtsschiene aus, wenn ein Fahrzeug auf dem Greiferplatz steht. Wenn der Greiferplatz frei ist, wird die Einfahrtsschiene eingeschaltet und die Ausfahrtsschiene ausgeschaltet.
+ * 
+ * @param buffer Datenpaket das von der SPS empfangen wurde
+ */
 void lightBarrier(byte * buffer){
     if(buffer[1] == 0xff) {
         comSPS_send2(C_MC_OK(0xff));
@@ -185,8 +218,4 @@ void lightBarrier(byte * buffer){
         laneControl.driveAll(VEL_CarEntry);
         DEBUG(Light Barrier: Picking Place is free.)
     }
-}
-
-void mcReady (byte * buffer){
-    comSPS_send2(C_MC_OK(6));
 }
