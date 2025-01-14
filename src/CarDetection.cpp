@@ -43,6 +43,7 @@ uint8_t carDect1_execute(){    //to be executed in program loop, calculates car 
 }
 /// [carDect1_exec]
 
+/// [carDect1_isr]
 void IRAM_ATTR carDect1_isr(){
     if(!carDect1_detecting){
         carDect1_firstTime =micros();
@@ -55,6 +56,7 @@ void IRAM_ATTR carDect1_isr(){
         detachInterrupt(carDect1_pin);
     }
 }
+/// [carDect1_isr]
 
 //##########################################################
 //CarDetection 2//

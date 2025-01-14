@@ -16,13 +16,15 @@
  *       Pacecar  | 1,953                 | 512
  * 
  * 
- * Das Modul CarDetection dient zur Erkennung der entsprechenden Reglernummer anhand der Periodendauer. 
+ * Das Modul @ref CarDetection.h "CarDetection" dient zur Erkennung der entsprechenden Reglernummer anhand der Periodendauer. 
  * 
  * ### Funktionsweise
  * Ein Impuls am deklarierten Pin löst eine Interrupt-Routine aus. Diese speichert die aktuelle Systemzeit ab. Beim nächsten Interrupt, wird ebenfalls die Systemzeit abgespeichert und der Interrupt deaktiviert. 
  * Der Interrupt wird erst wieder reaktiviert, wenn die Zeitdifferenz durch die Funktion `carDectx_Execute()`ausgewertet wurde und das Mindestintervall zwischen zwei durchfahrenden Fahrzeugen gewährleistet wurde.
  * Aufgrund von Zeitmangel wurden die Funktionen für die zwei Infrarot-Sensoren einfach kopiert und tragen jeweils das Präfix carDect1... bzw. carDect2... . 
  * Eine Möglichkeit der Weiterentwicklung bestände darin, eine Struktur zu entwerfen, in der jeweils die Parameter, der Sensorik hinterlegt ist, so dass beide Sensoren mit der gleichen Funktion bedient werden könnten.
+ * 
+ * @snippet {lineno} ./CarDetection.cpp carDect1_isr
  * 
  * Genaueres zur Verwendung der Funktionen ist in der Dokumentation zu CarDetection.h zu finden.
  * 
