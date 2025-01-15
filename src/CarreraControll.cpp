@@ -268,12 +268,13 @@ void CarreraControll::driveAll(int speed){
 
 
 void CarreraControll::program(int carNr, int maxSpeed, int brake, int fuel){
-  changeList(0, maxSpeed, carNr);
-  changeList(1, brake, carNr);
-  changeList(2, fuel, carNr);
-  setID(carNr);
-  programmed=false;
-  
+  if (programmed){
+    changeList(0, maxSpeed, carNr);
+    changeList(1, brake, carNr);
+    changeList(2, fuel, carNr);
+    setID(carNr);
+    programmed=false;
+  }
   
 
 }
@@ -292,8 +293,6 @@ void CarreraControll::changeList(int Nr, int value, int carNr){ //0 ist speed 1 
   values[Nr] |= (reverseBits(value,4) << 8);
   values[Nr] &= ~(0b111 << 0);
   values[Nr] |= (reverseBits(carNr,3) << 0);
-
-
 }
 
 int CarreraControll::reverseBits(int value, int length) { 

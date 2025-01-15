@@ -76,7 +76,9 @@
 
 \end{DoxyCodeInclude}
  Hier werden die Variablen für die \doxylink{class_carrera_controll}{Carrera\+Controll} Klasse definiert. \begin{DoxyWarning}{Warnung}
-Achtung hier gibt es einige Flaggs die villeicht 
+Achtung hier gibt es einige Flaggs die villeicht
+\end{DoxyWarning}
+
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_carrera_controll_adc0737662be788d394b87463ad383acc}{CarreraControll::cycle}}()\ \{}
 \DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}(normalMode)\{}
@@ -88,26 +90,18 @@ Achtung hier gibt es einige Flaggs die villeicht
 \DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(statesInt);}
 \DoxyCodeLine{\ \ \ \ \ \ \}}
 \DoxyCodeLine{\ \ \ \ \}}
-\DoxyCodeLine{\ \ \ \ }
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ }
 \DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{else}\{}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(flashCount==-\/1||flashCount==-\/2)\{}
 \DoxyCodeLine{\ \ \ \ \ \ changeBits(flashCar,0,5,0b1);}
 \DoxyCodeLine{\ \ \ \ \ \ pushWord(Cpin);\ \ }
-\DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ \ \ }
 \DoxyCodeLine{\ \ \ \ \ \}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(flashCount==0||flashCount==1||flashCount\ ==4||flashCount==5||flashCount==13||flashCount==12||flashCount\ ==17||flashCount==16)\{}
 \DoxyCodeLine{\ \ \ \ \ \ changeBits(flashCar,1,5,0b1);}
 \DoxyCodeLine{\ \ \ \ \ \ pushWord(Cpin);\ }
-\DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \ \ \}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(flashCount\ ==2||flashCount\ ==3||flashCount\ ==6||flashCount==7||flashCount\ ==11||flashCount==10||flashCount\ ==15||flashCount==14||flashCount\ ==\ 18)\{}
 \DoxyCodeLine{\ \ \ \ \ \ \ changeBits(flashCar,0,5,0b1);\ \ }
 \DoxyCodeLine{\ \ \ \ \ \ \ pushWord(Cpin);}
-\DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \ \ \}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(flashCount\ ==\ 8)\{}
 \DoxyCodeLine{\ \ \ \ \ \ cycleAllowed\ =\ \textcolor{keyword}{false};}
@@ -122,7 +116,6 @@ Achtung hier gibt es einige Flaggs die villeicht
 \DoxyCodeLine{\ \ \ \ \ \ \ \ cycleAllowed=\textcolor{keyword}{true};}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ CycleCount\ =\ 0;}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ doneProtProgramming\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \ \ \ \}}
 \DoxyCodeLine{\ \ \ \ \ \}}
 \DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (doneProtCH\ \&\ cycleAllowed\ \&\ flashCount\ !=\ 8\ \&\ flashCount\ !=\ 9)\{}
@@ -144,5 +137,3 @@ Achtung hier gibt es einige Flaggs die villeicht
 \DoxyCodeLine{\}}
 
 \end{DoxyCodeInclude}
-
-\end{DoxyWarning}

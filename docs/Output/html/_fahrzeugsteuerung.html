@@ -173,7 +173,8 @@ Initalisierung</h1>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">bool</span> programmed = <span class="keyword">true</span>;</div>
 <div class="line"><span class="keywordtype">int</span> pCount = 0; <span class="comment">//which programming word is chosen</span></div>
-</div><!-- fragment --><p> Hier werden die Variablen für die <a class="el" href="class_carrera_controll.html" title="Die Klasse CarreraControll übernimmt alle ansteuerungs Funktionen der Carrera Autos Die Klasse wird m...">CarreraControll</a> Klasse definiert. </p><dl class="section warning"><dt>Warnung</dt><dd>Achtung hier gibt es einige Flaggs die villeicht <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="class_carrera_controll.html#adc0737662be788d394b87463ad383acc">CarreraControll::cycle</a>() {</div>
+</div><!-- fragment --><p> Hier werden die Variablen für die <a class="el" href="class_carrera_controll.html" title="Die Klasse CarreraControll übernimmt alle ansteuerungs Funktionen der Carrera Autos Die Klasse wird m...">CarreraControll</a> Klasse definiert. </p><dl class="section warning"><dt>Warnung</dt><dd>Achtung hier gibt es einige Flaggs die villeicht</dd></dl>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="class_carrera_controll.html#adc0737662be788d394b87463ad383acc">CarreraControll::cycle</a>() {</div>
 <div class="line">    <span class="keywordflow">if</span>(normalMode){</div>
 <div class="line">    pushWord(Cpin);</div>
 <div class="line">      <span class="keywordflow">if</span> (doneCycle){</div>
@@ -183,26 +184,18 @@ Initalisierung</h1>
 <div class="line">        Serial.print(statesInt);</div>
 <div class="line">      }</div>
 <div class="line">    }</div>
-<div class="line">    </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">    </div>
 <div class="line">    <span class="keywordflow">else</span>{</div>
 <div class="line">           <span class="keywordflow">if</span>(flashCount==-1||flashCount==-2){</div>
 <div class="line">      changeBits(flashCar,0,5,0b1);</div>
 <div class="line">      pushWord(Cpin);  </div>
-<div class="line"> </div>
-<div class="line">      </div>
 <div class="line">     }</div>
 <div class="line">     <span class="keywordflow">if</span>(flashCount==0||flashCount==1||flashCount ==4||flashCount==5||flashCount==13||flashCount==12||flashCount ==17||flashCount==16){</div>
 <div class="line">      changeBits(flashCar,1,5,0b1);</div>
 <div class="line">      pushWord(Cpin); </div>
-<div class="line"> </div>
 <div class="line">     }</div>
 <div class="line">     <span class="keywordflow">if</span>(flashCount ==2||flashCount ==3||flashCount ==6||flashCount==7||flashCount ==11||flashCount==10||flashCount ==15||flashCount==14||flashCount == 18){</div>
 <div class="line">       changeBits(flashCar,0,5,0b1);  </div>
 <div class="line">       pushWord(Cpin);</div>
-<div class="line"> </div>
 <div class="line">     }</div>
 <div class="line">     <span class="keywordflow">if</span>(flashCount == 8){</div>
 <div class="line">      cycleAllowed = <span class="keyword">false</span>;</div>
@@ -217,7 +210,6 @@ Initalisierung</h1>
 <div class="line">        cycleAllowed=<span class="keyword">true</span>;</div>
 <div class="line">        CycleCount = 0;</div>
 <div class="line">        doneProtProgramming = <span class="keyword">true</span>;</div>
-<div class="line"> </div>
 <div class="line">      }</div>
 <div class="line">     }</div>
 <div class="line">  <span class="keywordflow">if</span> (doneProtCH &amp; cycleAllowed &amp; flashCount != 8 &amp; flashCount != 9){</div>
@@ -237,8 +229,7 @@ Initalisierung</h1>
 <div class="line">   }</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --></dd></dl>
-</div></div><!-- contents -->
+</div><!-- fragment --></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
