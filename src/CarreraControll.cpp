@@ -108,7 +108,7 @@ void CarreraControll::cycle() {
         flashCount++;
         cycleAllowed=true;
         CycleCount = 0;
-        doneProtProgramming = true;
+        
       }
      }
   if (doneProtCH & cycleAllowed & flashCount != 8 & flashCount != 9){
@@ -125,6 +125,8 @@ void CarreraControll::cycle() {
     normalMode = true;
     flashCount = -2;
     digitalWrite(10,!digitalRead(10));
+    doneProtProgramming = true;
+
    }
   }
 }

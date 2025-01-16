@@ -34,6 +34,7 @@
 #include <CarreraControll.h>        //Bahnsteuerung
 #include <FastLED.h>                //Ansteuerung der Debug-RGB-LED
 #include <OTA.h>                    //Over-the-Air-Flashing, Telnet-Debugging
+#include <smartdelay.h>
 
 
 //Funktionsdeklarationen
@@ -45,7 +46,7 @@ void lightBarrier(byte * buffer);
 ///@name Variablen
 ///@{
 bool carOnPickingPlace = false;     ///<Fahrzeug auf Greifplatz
-uint8_t lastProgrammedCar = 0;      ///<Zuletzt programmiertes Fahrzeug
+uint8_t lastProgrammedCar [SPS_UART_RxPacketLength]= {0};      ///<Zuletzt programmiertes Fahrzeug
 uint32_t SPS_lastLifeSignal = 0;    ///<Zeitpunkt des letzten von der SPS empfangenen Polling-/Syncsignals
 ///@}
 
@@ -53,11 +54,14 @@ uint32_t SPS_lastLifeSignal = 0;    ///<Zeitpunkt des letzten von der SPS empfan
 ///@{
 CarreraControll laneControl;        ///<Bahnsteuerung
 CRGB led [1];                       ///<Config-Strukur für Debug-RGB-LED
+smartdelay_t drivingOutDelay;
+smartdelay_t carProgrammingActive;
 ///@}
 
 
 void setup() {
-    drivingOutDelay.delayTime_ms = 2000;
+    drivingOutDelay.delayTime_us = 2000000;
+    carProgrammingActive.delayTime_us = 2000000;
     FastLED.addLeds<NEOPIXEL, RGB_LED>(led, 1);
     FastLED.setBrightness(DEBUG_RGB_BRIGHTNESS);
     led [0] = CRGB::Red;
@@ -136,20 +140,30 @@ void loop() {
             laneControl.drive(carId, VEL_CarEntry_brake);
         } else {
             laneControl.driveAll(0);
-            entryLaneQueue = carId;
         }
     }
-    if((carId = carDect2_execute()) < 99) {           //report to SPS: Car is exiting
-        DEBUGF("Car out - ID: %d\n", carId);
-        comSPS_writeData(C_MC_CarOUT(carId));
-        //laneControl.driveAll(0);
-        digitalWrite(RELAY_ExitLane_p, LOW);
-    }
+    
            
     if(laneControl.program()) {
-        comSPS_writeData(C_MC_CarPROGRAMMED(lastProgrammedCar));  //report to SPS: Car was programmed successfull
-        digitalWrite(RELAY_EntryLane_p, HIGH);
-        DEBUG(Programmieren fertig.);
+        laneControl.drive(lastProgrammedCar [C_SPS_PROGRAM_ID], VEL_CarExit);
+        smartdelay(&carProgrammingActive);
+    }
+    if ((carId = carDect2_execute()) <99)
+        { // report to SPS: Car is exiting
+            DEBUGF("Car out - ID: %d\n", carId);
+            if (carId == lastProgrammedCar [C_SPS_PROGRAM_ID])
+            {
+                comSPS_writeData(C_MC_CarPROGRAMMED(lastProgrammedCar [C_SPS_PROGRAM_ID]));
+                laneControl.driveAll(0);
+                carProgrammingActive.active = false;
+            }
+            comSPS_writeData(C_MC_CarOUT(carId));
+        }
+
+    if (smartdelay_check(&carProgrammingActive))
+    {
+        laneControl.driveAll(0);
+        laneControl.program(lastProgrammedCar [C_SPS_PROGRAM_ID], lastProgrammedCar [C_SPS_PROGRAM_VMAX], lastProgrammedCar [C_SPS_PROGRAM_BRAKE], lastProgrammedCar [C_SPS_PROGRAM_FUEL]);
     }
     comSPS_execute();   //Execute Commands received from SPS
 
@@ -182,8 +196,9 @@ void programCar(byte * buffer){
     laneControl.driveAll(0);
     laneControl.program(buffer [C_SPS_PROGRAM_ID], buffer [C_SPS_PROGRAM_VMAX], buffer [C_SPS_PROGRAM_BRAKE], buffer [C_SPS_PROGRAM_FUEL]);
     DEBUGF("Programming: ID: %d, V: %d, B: %d, F: %d\n", buffer [C_SPS_PROGRAM_ID], buffer [C_SPS_PROGRAM_VMAX], buffer [C_SPS_PROGRAM_BRAKE], buffer [C_SPS_PROGRAM_FUEL]);
-    lastProgrammedCar = buffer [C_SPS_PROGRAM_ID];
-    DEBUGF("EntryLaneQueue: %d \n", entryLaneQueue);
+    for (int i = 0; i<SPS_UART_RxPacketLength; i++) {
+        lastProgrammedCar [i] = buffer [i];
+    }
     
 }
 
@@ -201,12 +216,7 @@ void driveCar(byte * buffer){
     digitalWrite(RELAY_ExitLane_p, HIGH);
     laneControl.drive(buffer [1], VEL_CarExit);
     DEBUGF("driveCar ID: %d, Vel: %d\n", buffer [1], VEL_CarExit);
-    delay(2000);
-    digitalWrite(RELAY_ExitLane_p, LOW);
-    if (!carOnPickingPlace) {
-        digitalWrite(RELAY_EntryLane_p, HIGH);
-        laneControl.driveAll(VEL_CarEntry);
-    }
+    smartdelay(&drivingOutDelay);
 }
 
 /**
